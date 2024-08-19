@@ -1,0 +1,20 @@
+#send-btn{
+    color: gainsboro;
+    background:linear-gradient(135deg, #0a87a9, #065f78);
+}
+#send-btn:hover {
+  background: #0a87a9;
+  transform: scale(1.05);
+}
+.lightbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, .85);
+} 

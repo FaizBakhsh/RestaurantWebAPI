@@ -1,0 +1,111 @@
+<div class="container-fluid page">
+    <div class="d-flex page_box p-3 mt-2  header-sticky" position="sticky">
+        <div *ngIf="Add">Manage AssignAccount
+        </div>
+        <div *ngIf="Edit">Edit AssignAccount
+        </div>
+    </div>
+    <div class="page_content shadow p-3 position-relative">
+        <form #userForm="ngForm">
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <div fxLayout="row" fxLayoutAlign="space-between" fxFlex="48%">
+                    <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                        <mat-label> Select Account Type</mat-label>
+                        <mat-select name="accountTypeId" matNativeControl #accountTypeId="ngModel"
+                            [(ngModel)]="selectedAssignAccount.accountTypeId">
+                            <mat-option [value]="0">--Please Select--</mat-option>
+                            <mat-option *ngFor="let pt of Accounts" [value]=" pt.id">
+                                {{ pt.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                        <mat-label> Select Account </mat-label>
+                        <mat-select name="accountId" matNativeControl [(ngModel)]="selectedAssignAccount.accountId">
+                            <mat-option [value]="0">--Please Select--</mat-option>
+                            <mat-option *ngFor="let pt of Accounts" [value]=" pt.id">
+                                {{ pt.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                    <mat-label> Select Branch</mat-label>
+                    <mat-select name="branchId" matNativeControl #branchId="ngModel"
+                        [(ngModel)]="selectedAssignAccount.branchId">
+                        <mat-option [value]="0">--Please Select--</mat-option>
+                        <mat-option *ngFor="let pt of Branches" [value]=" pt.id">
+                            {{ pt.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxLayoutAlign="end end">
+                <c-spinner *ngIf="proccessing" style="height: 50px;width: 50px;color: rgb(3, 71, 102);"></c-spinner>
+                <div style="margin-top: 10px;" *ngIf="!proccessing">
+                    <button *ngIf="Add" cButton class="me-1" style="background-color:#1e293b ;" type="submit"
+                        (click)="SaveAssignAccount();">
+                        Assign
+                    </button>
+                    <button *ngIf="Edit" cButton class="me-1" style="background-color:#1e293b ;" type="submit"
+                        (click)="UpdateAssignAccount()">
+                        Update
+                    </button>
+                </div>
+                <div>
+                    <button mat-icon-button mat-sm-button color="primary" cTooltip="Refresh" cTooltipPlacement="top"
+                        (click)="ngOnInit()">
+                        <mat-icon>autorenew</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <c-card style="padding: 10px; margin-top: 30px;" class="mat-elevation-z8">
+            <h5 cCardTitle>AssignAccount List</h5>
+            <c-card-body style="padding: 10px;background-color: rgb(2, 42, 75);margin: 5px;border-radius: 10px;">
+                <div class="example-table-container">
+                    <section class="example-container mat-elevation-z8" tabindex="0" style="border-radius: 5px;">
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                            <ng-container matColumnDef="Id">
+                                <th mat-header-cell *matHeaderCellDef> Sr No </th>
+                                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Account">
+                                <th mat-header-cell *matHeaderCellDef> Account </th>
+                                <td mat-cell *matCellDef="let element"> {{element.account}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="AccountType">
+                                <th mat-header-cell *matHeaderCellDef> Account Type</th>
+                                <td mat-cell *matCellDef="let element"> {{element.accountType}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Branch">
+                                <th mat-header-cell *matHeaderCellDef> Branch </th>
+                                <td mat-cell *matCellDef="let element"> {{element.branch}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="actions" stickyEnd="true">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <p style="font-size: 14px;text-align: center;">Actions</p>
+                                </th>
+                                <td mat-cell *matCellDef="let row">
+                                    <div style="text-align: center;">
+                                        <button mat-icon-button mat-sm-button style=" color:#1e293b ; "
+                                            cTooltip=" Edit AssignAccount" (click)="GetAssignAccountForEdit(row.id)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+
+                                        <button mat-icon-button mat-sm-button color="warn"
+                                            cTooltip="Delete AssignAccount" (click)="DeleteAssignAccount(row.id)">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </section>
+                </div>
+            </c-card-body>
+        </c-card>
+    </div>
+</div>

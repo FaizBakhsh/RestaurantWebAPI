@@ -1,0 +1,25 @@
+﻿<Controls:MetroWindow x:Class="Restaurant.WPF.Views.AssignRider"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Restaurant.WPF.Views"
+        mc:Ignorable="d"
+        Title="AssignRider" WindowStartupLocation="CenterScreen" Width="550" Height="250">
+    <Grid>
+        <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <WrapPanel Orientation="Vertical">
+                <ComboBox Width="400" SelectionChanged="RiderCheck"  Height="40"  Name="riderCombo"  
+                                      DisplayMemberPath="Name"
+                                      SelectedValuePath="Id">
+                </ComboBox>
+                <TextBlock Visibility="Hidden" Text="Its Required" Foreground="Red" Name="RiderValidation"></TextBlock>
+            </WrapPanel>
+            <WrapPanel >
+                <Button Click="Assign" Width="195" Height="35" Name="riderBtn">AssignRider</Button>
+                <Button  Width="195" Height="35"  Click="Exit">Exit</Button>
+            </WrapPanel>
+        </WrapPanel>
+    </Grid>
+</Controls:MetroWindow>

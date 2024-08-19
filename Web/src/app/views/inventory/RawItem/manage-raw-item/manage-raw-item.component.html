@@ -1,0 +1,141 @@
+<div class="container-fluid page">
+    <div class="d-flex page_box p-3 mt-2  header-sticky" position="sticky">
+        <div *ngIf="Add">Manage Raw Item
+        </div>
+        <div *ngIf="Edit">Edit Raw Item
+        </div>
+    </div>
+    <div class="page_content shadow p-3 position-relative" fxLayout="column">
+        <form #userForm="ngForm" fxLayout="column" fxFlex [validated]="validFields" novalidate cForm>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                    <mat-label> Select Group</mat-label>
+                    <mat-select name="groupId" matNativeControl #groupId="ngModel" [(ngModel)]="selectedItem.groupId"
+                        required>
+                        <mat-option [value]="0">--Please Select--</mat-option>
+                        <mat-option *ngFor="let pt of Groups" [value]=" pt.id" (click)="SearchCategory()">
+                            {{ pt.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                    <mat-label> Select Category</mat-label>
+                    <mat-select name="categoryId" matNativeControl #categoryId="ngModel"
+                        [(ngModel)]="selectedItem.categoryId" required>
+                        <mat-option [value]="0">--Please Select--</mat-option>
+                        <mat-option *ngFor="let pt of Category" [value]=" pt.id" (click)="SearchSubCategory()">
+                            {{ pt.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                    <mat-label> Select SubCategory</mat-label>
+                    <mat-select name="SubCategoryId" matNativeControl #subCategoryId="ngModel"
+                        [(ngModel)]="selectedItem.subCategoryId">
+                        <mat-option [value]="0">--Please Select--</mat-option>
+                        <mat-option *ngFor="let pt of SubCategory" [value]=" pt.id">
+                            {{ pt.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                    <mat-label> Select UOM</mat-label>
+                    <mat-select name="uomId" matNativeControl #uomId="ngModel" [(ngModel)]="selectedItem.uomId"
+                        required="true">
+                        <mat-option [value]="0">--Please Select--</mat-option>
+                        <mat-option *ngFor="let pt of UOMs" [value]=" pt.id">
+                            {{ pt.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                    <mat-label>Item Name</mat-label>
+                    <input matInput required #ItemName="ngModel" name="itemName" (input)="TextChangeEvent($event)"
+                        [(ngModel)]="selectedItem.itemName" />
+                </mat-form-field>
+                <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                    <mat-label>Item Code</mat-label>
+                    <input matInput required #ItemCode="ngModel" name="itemCode" [(ngModel)]="selectedItem.itemCode" />
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                    <mat-label>Item Price</mat-label>
+                    <input matInput required placeholder="price" type="number" min="0"
+                        oninput="validity.valid||(value='')" #Price="ngModel" name="price"
+                        [(ngModel)]="selectedItem.price" />
+                </mat-form-field>
+                <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                    <mat-label>Description</mat-label>
+                    <textarea matInput #Description="ngModel" name="description" rows="1"
+                        [(ngModel)]="selectedItem.description"></textarea>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                    <mat-label> Select Supplier</mat-label>
+                    <mat-select name="supplierId" matNativeControl #supplierId="ngModel"
+                        [(ngModel)]="selectedItem.supplierId">
+                        <mat-option [value]="0">--Please Select--</mat-option>
+                        <mat-option *ngFor="let pt of Vendors" [value]=" pt.id">
+                            {{ pt.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                    <mat-label>Loose/Packing Quantity</mat-label>
+                    <input matInput #packingQty="ngModel" type="number" min="0" oninput="validity.valid||(value='')"
+                        name="packingQty" [(ngModel)]="selectedItem.packingQty" />
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                    <mat-label>Mininum Order Level</mat-label>
+                    <input matInput #minOrderLevel="ngModel" name="minOrderLevel"
+                        [(ngModel)]="selectedItem.minOrderLevel" />
+                </mat-form-field>
+                <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                    <mat-label>Maximum Order Level</mat-label>
+                    <input matInput #maxOrderLevel="ngModel" name="maxOrderLevel"
+                        [(ngModel)]="selectedItem.maxOrderLevel" />
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                    <mat-label>Packing Name</mat-label>
+                    <input matInput #packingName="ngModel" name="packingName" [(ngModel)]="selectedItem.packingName" />
+                </mat-form-field>
+                <mat-checkbox name="isCritical" [(ngModel)]="selectedItem.isCritical">
+                    Is Critical?
+                </mat-checkbox>
+                <mat-checkbox name="isActive" [(ngModel)]="selectedItem.isActive">
+                    Is Active
+                </mat-checkbox>
+            </div>
+            <div fxLayoutAlign="end end" style="margin-top: 30px;margin-bottom: 30px;">
+                <div [ngClass]="{disabledDiv:isReadOnly}">
+                    <button *ngIf="Add" size="sm" [ngClass]="{disabledBtn:isReadOnly}" class="bttn" 
+                        style="background-color:#1e293b ;margin-right:5px" type="submit" (click)="SaveItems()">
+                        Add Item
+                    </button>
+                    <button *ngIf="!Add" size="sm" [ngClass]="{disabledBtn:isReadOnly}" class="bttn" 
+                        style="background-color:#1e293b ;margin-right:5px" type="submit" (click)="SaveItems()">
+                        Update
+                    </button>
+                </div>
+                <button mat-raised-button color="warn" (click)="Back()" style="margin-left: 5px; margin-top: 20x;">Back
+                </button>
+                <div>
+                    <button *ngIf="Add" mat-icon-button mat-sm-button color="primary" cTooltip="Refresh"
+                        cTooltipPlacement="top" (click)="ngOnInit()">
+                        <mat-icon>autorenew</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+2024-08-18 13:25:00.7986 ERROR MySql.Data.MySqlClient.MySqlException: PROCEDURE restaurant.INV_Search_RN does not exist
+2024-08-18 17:43:23.5424 ERROR MySql.Data.MySqlClient.MySqlException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')
+   where 1=1 AND RNId=1  AND ClientId = 1 AND IsActive =True' at line 20
+2024-08-18 17:43:44.8253 ERROR MySql.Data.MySqlClient.MySqlException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Group
+					 ,category.Name as Category
+					 ,subCategory.Name as Type
+      ' at line 8
+2024-08-18 17:50:20.1518 ERROR MySql.Data.MySqlClient.MySqlException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Group
+					 ,category.Name as Category
+					 ,subCategory.Name as Type
+      ' at line 8
+2024-08-18 17:52:24.2597 ERROR MySql.Data.MySqlClient.MySqlException: Unknown column 'line.ClientId' in 'field list'
+2024-08-18 17:53:38.0968 ERROR MySql.Data.MySqlClient.MySqlException: Unknown column 'item.Name' in 'field list'
+2024-08-18 17:54:41.5400 ERROR MySql.Data.MySqlClient.MySqlException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Group
+					 ,category.Name as Category
+					 ,subCategory.Name as Type
+      ' at line 8
+2024-08-18 17:55:09.5459 ERROR MySql.Data.MySqlClient.MySqlException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Group
+					 ,category.Name as Category
+					 ,subCategory.Name as Types
+     ' at line 8
+2024-08-18 18:08:09.2539 ERROR MySql.Data.MySqlClient.MySqlException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group ON (group.Id = item.GroupId 
+													AND  group.ClientId = line.Clie' at line 19

@@ -1,0 +1,141 @@
+<div class="container-fluid page">
+    <div class="d-flex page_box p-3 mt-2  header-sticky" position="sticky">
+        <div>Attach SubItem
+        </div>
+        <!-- <div *ngIf="Edit">Edit AttachSubItem
+        </div> -->
+    </div>
+    <div class="page_content shadow p-3 position-relative">
+        <form #userForm="ngForm" [validated]="validFields" novalidate cForm>
+            <div fxLayout="row">
+                <mat-form-field fxFlex="50%" appearance="outline" class="form-group" appearance="outline">
+                    <mat-label> Select Group</mat-label>
+                    <mat-select name="groupId" matNativeControl #groupId="ngModel" required
+                        [(ngModel)]="selectedAttachSubItem.groupId">
+                        <mat-option (click)="GetItems()" [value]="0">--Please Select--</mat-option>
+                        <mat-option *ngFor="let pt of Groups" [value]=" pt.id" (click)="SearchItem()">
+                            {{ pt.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field fxFlex="50%" appearance="outline" class="form-group" appearance="outline">
+                    <mat-label> Select Item</mat-label>
+                    <mat-select name="itemId" matNativeControl #itemId="ngModel"
+                        [(ngModel)]="selectedAttachSubItem.itemId" required="true">
+                        <mat-option [value]="0" (click)="RuntimeModifiers=[];AttachSubItems=[]">--Please Select--
+                        </mat-option>
+                        <mat-option *ngFor="let pt of Items" [value]=" pt.id" (click)="Search(pt)">
+                            {{ pt.itemName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field fxFlex="50%" appearance="outline" *ngIf="RuntimeModifiers.length>0" class="form-group"
+                    appearance="outline">
+                    <mat-label> Select RuntimeModifier</mat-label>
+                    <mat-select [required]="isRuntimeModifierRequired" name="modifierId" matNativeControl
+                        #modifierId="ngModel" [(ngModel)]="selectedAttachSubItem.modifierId">
+                        <mat-option [value]="0" (click)="GetRecipeByItem()">--Please Select--</mat-option>
+                        <mat-option *ngFor="let pt of RuntimeModifiers" [value]=" pt.id"
+                            (click)="GetRecipeByRuntimeModifier()">
+                            {{ pt.modifierName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field fxFlex="50%" appearance="outline" class="form-group" appearance="outline">
+                    <mat-label>QTY</mat-label>
+                    <input matInput #qty="ngModel" name="qty" [(ngModel)]="selectedAttachSubItem.qty" type="number"
+                        min="0" oninput="validity.valid||(value='')" required="true" />
+                </mat-form-field>
+                <mat-form-field fxFlex="50%" appearance="outline" class="form-group" appearance="outline">
+                    <mat-label> Select SubItem</mat-label>
+                    <mat-select name="subItemId" matNativeControl #subItemId="ngModel"
+                        [(ngModel)]="selectedAttachSubItem.subItemId" required="true">
+                        <mat-option [value]="0">--Please Select--</mat-option>
+                        <mat-option *ngFor="let pt of SubItems" [value]=" pt.id">
+                            {{ pt.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxLayoutAlign="end end">
+                <c-spinner *ngIf="proccessing" style="height: 50px;width: 50px;color: rgb(3, 71, 102);"></c-spinner>
+                <div style="margin-top: 10px;" *ngIf="!proccessing">
+                    <button *ngIf="Add" cButton class="me-1" style="background-color:#1e293b ;" type="submit"
+                        (click)="SaveAttachSubItem();">
+                        Save
+                    </button>
+                    <button *ngIf="Edit" cButton class="me-1" style="background-color:#1e293b ;" type="submit"
+                        (click)="SaveAttachSubItem()">
+                        Update
+                    </button>
+                    <button cButton class="me-1" color="dark" (click)="Back()">
+                        Back
+                    </button>
+                </div>
+                <div>
+                    <button mat-icon-button mat-sm-button color="primary" cTooltip="Refresh" cTooltipPlacement="top"
+                        (click)="ngOnInit()">
+                        <mat-icon>autorenew</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <c-card style="padding: 10px; margin-top: 30px;" class="mat-elevation-z8" *ngIf="AttachSubItems.length>0">
+            <h5 cCardTitle>AttachSubItem List</h5>
+            <c-card-body style="padding: 10px;background-color: rgb(2, 42, 75);margin: 5px;border-radius: 10px;">
+                <div class="example-table-container">
+                    <section class="example-container mat-elevation-z8" tabindex="0" style="border-radius: 5px;">
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                            <ng-container matColumnDef="Id">
+                                <th mat-header-cell *matHeaderCellDef> Sr No </th>
+                                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="group">
+                                <th mat-header-cell *matHeaderCellDef> Group </th>
+                                <td mat-cell *matCellDef="let element"> {{element.group}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="item">
+                                <th mat-header-cell *matHeaderCellDef> Item </th>
+                                <td mat-cell *matCellDef="let element"> {{element.item}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="subItem">
+                                <th mat-header-cell *matHeaderCellDef>Sub Item</th>
+                                <td mat-cell *matCellDef="let element"> {{element.subItem}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="RuntimeModifier">
+                                <th mat-header-cell *matHeaderCellDef> Modifier</th>
+                                <td mat-cell *matCellDef="let element"> {{element.modifier}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="qty">
+                                <th mat-header-cell *matHeaderCellDef> QTY </th>
+                                <td mat-cell *matCellDef="let element"> {{element.qty}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="actions" stickyEnd="true">
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center;">
+                                    <p style="font-size: 14px;">Action</p>
+                                </th>
+                                <td mat-cell *matCellDef="let row" style="text-align: center;">
+                                    <div>
+                                        <button mat-icon-button mat-sm-button style=" color:#1e293b ; "
+                                            cTooltip=" Edit AttachSubItem" (click)="GetAttachSubItemForEdit(row.id)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+
+                                        <!-- <button mat-icon-button mat-sm-button color="warn"
+                                            cTooltip="Delete AttachSubItem" (click)="DeleteAttachSubItem(row.id)">
+                                            <mat-icon>delete</mat-icon>
+                                        </button> -->
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </section>
+                </div>
+            </c-card-body>
+        </c-card>
+    </div>
+</div>

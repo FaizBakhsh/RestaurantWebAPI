@@ -1,0 +1,116 @@
+<div class="container-fluid page">
+    <div class="d-flex page_box p-3 mt-2  header-sticky" position="sticky">
+        <div *ngIf="Add">Manage LoyaltyCard
+        </div>
+        <div *ngIf="Edit">Edit LoyaltyCard
+        </div>
+    </div>
+    <div class="page_content shadow p-3 position-relative">
+        <form name="eventForm" #userForm="ngForm">
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                    <mat-label>Enter Card no</mat-label>
+                    <input matInput #cardNo="ngModel" maxlength="500" name="CardNo" type="text" required="true" [disabled]="Edit"
+                        [(ngModel)]="selectedLoyaltyCard.cardNo">
+                </mat-form-field>
+                <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                    <mat-label>Enter Discount Percentage</mat-label>
+                    <input matInput #discountPercentage="ngModel" maxlength="100" name="DiscountPercentage" type="text"
+                        [(ngModel)]="selectedLoyaltyCard.discountPercentage" required="true">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field fxFlex="48%" appearance="outline">
+                    <mat-label>Enter Phone No</mat-label>
+                    <input type="tel" #PhoneNo="ngModel" maxlength="255" matInput placeholder="Phone No" name="phoneNo"
+                        [(ngModel)]="selectedLoyaltyCard.phoneNo" required="true">
+                </mat-form-field>
+                <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                    <mat-label>Enter Name</mat-label>
+                    <input matInput #name="ngModel" maxlength="255" name="Name" type="text" required="true"
+                        [(ngModel)]="selectedLoyaltyCard.name" placeholder="LoyaltyCard Name" required>
+                </mat-form-field>
+            </div>
+            <div fxLayoutAlign="end end">
+                <mat-checkbox #isActive="ngModel" name="isActive" [(ngModel)]="selectedLoyaltyCard.isActive">
+                    IsActive
+                </mat-checkbox>
+            </div>
+            <div fxLayoutAlign="end end">
+                <div style="margin-top: 10px;">
+                    <button *ngIf="Add" [ngClass]="{disabledBtn:isReadOnly}" class="bttn" type="submit"
+                        (click)="SaveLoyaltyCard();">
+                        Save
+                    </button>
+                    <button *ngIf="Edit" [ngClass]="{disabledBtn:isReadOnly}" class="bttn" type="submit"
+                        (click)="SaveLoyaltyCard()">
+                        Update
+                    </button>
+                </div>
+                <div>
+                    <button mat-icon-button mat-sm-button color="primary" cTooltip="Go Back " cTooltipPlacement="top"
+                        (click)="Refresh()">
+                        <mat-icon>autorenew</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <c-card style="padding: 10px; margin-top: 30px;" class="mat-elevation-z8">
+            <h5 cCardTitle>Loyalty Crad List</h5>
+            <c-card-body style="padding: 10px;background-color: rgb(2, 42, 75);margin: 5px;border-radius: 10px;">
+                <div class="example-table-container">
+                    <section class="example-container mat-elevation-z8" tabindex="0" style="border-radius: 5px;">
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                            <ng-container matColumnDef="Id">
+                                <th mat-header-cell *matHeaderCellDef> Sr No </th>
+                                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="isActive">
+                                <th mat-header-cell *matHeaderCellDef>IsActive </th>
+                                <td mat-cell *matCellDef="let element"> {{element.isActive?'Yes':'No'}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="cardNo">
+                                <th mat-header-cell *matHeaderCellDef> Card No </th>
+                                <td mat-cell *matCellDef="let element"> {{element.cardNo}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="discountPercentage">
+                                <th mat-header-cell *matHeaderCellDef style="min-width: 200px;"> Discount Percentage
+                                </th>
+                                <td mat-cell *matCellDef="let element" style="min-width: 200px;">
+                                    {{element.discountPercentage}}
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="name">
+                                <th mat-header-cell *matHeaderCellDef> Name </th>
+                                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="pnoneNo">
+                                <th mat-header-cell *matHeaderCellDef> Pnone No </th>
+                                <td mat-cell *matCellDef="let element"> {{element.phoneNo}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="actions" stickyEnd="true">
+                                <th mat-header-cell *matHeaderCellDef style="min-width: 150px; text-align: center;">
+                                    <p style="font-size: 14px;">Action</p>
+                                </th>
+                                <td mat-cell *matCellDef="let row" style="min-width: 150px;text-align: center;">
+                                    <div [ngClass]="{disabledDiv:isReadOnly}">
+                                        <button mat-icon-button mat-sm-button style="color:#1e293b ; "
+                                            cTooltip="Edit Vouchers Discount" (click)="GetLoyaltyCardForEdit(row.id)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <!-- <button mat-icon-button mat-sm-button color="warn"
+                                            cTooltip="Delete Vouchers Discount" (click)="DeleteLoyaltyCard(row.id)">
+                                            <mat-icon>delete</mat-icon>
+                                        </button> -->
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </section>
+                </div>
+            </c-card-body>
+        </c-card>
+    </div>
+</div>

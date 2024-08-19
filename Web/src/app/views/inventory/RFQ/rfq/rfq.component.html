@@ -1,0 +1,192 @@
+<div class="container-fluid page">
+  <div class="d-flex page_box p-3 mt-2  header-sticky" position="sticky">
+    <div *ngIf="Add">Manage RFQ
+    </div>
+    <div *ngIf="Edit">Edit RFQ
+    </div>
+  </div>
+  <div class="page_content shadow p-3 position-relative">
+    <form #userForm="ngForm" (keydown.enter)="$event.preventDefault()">
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="45%" appearance="outline" class="form-group">
+          <mat-label>Title</mat-label>
+          <input matInput #title="ngModel" name="title" required="true" [(ngModel)]="selectedRFQ.title" />
+          </mat-form-field>
+          <mat-form-field fxFlex="45%" appearance="outline" class="form-group">
+            <mat-label>Request Note No</mat-label>
+          <input matInput required #requestNoteNo="ngModel" name="requestNoteNo" [(ngModel)]="selectedRFQ.requestNoteNo"
+            type="number" />
+          </mat-form-field>
+          <mat-form-field fxFlex="45%" appearance="outline" class="form-group">
+            <mat-label> Select Status</mat-label>
+          <mat-select required="true" name="statusId" #statusId="ngModel" [(ngModel)]="selectedRFQ.statusId">
+            <mat-option [value]="0">--Please Select--</mat-option>
+            <mat-option *ngFor="let type of Statuses" [value]=" type.id">
+              {{ type.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="49%" appearance="outline">
+          <mat-label>rfqValidity</mat-label>
+          <input required matInput [matDatepicker]="picker1" name="rfqValidity" #rfqValidity="ngModel"
+            [(ngModel)]="selectedRFQ.rfqValidity" />
+
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1 [enableMeridian]="true"></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field fxFlex="49%" appearance="outline">
+            <mat-label>DeliveryDate</mat-label>
+          <input matInput [matDatepicker]="picker" required="true" name="deliveryDate" #deliveryDate="ngModel"
+            [(ngModel)]="selectedRFQ.deliveryDate" />
+
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker [enableMeridian]="true"></mat-datepicker>
+          </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between">
+          
+            <mat-form-field fxFlex="100%" appearance="outline" class="form-group">
+              <mat-label>Description</mat-label>
+          <textarea matInput #description="ngModel" name="description" [(ngModel)]="selectedRFQ.description"></textarea>
+          </mat-form-field>
+          </div>
+      <mat-checkbox name="isActive" [(ngModel)]="selectedRFQ.isReference">Is Reference</mat-checkbox>
+
+
+      <p style="font-size:20px; font-weight: bolder; color: #04415e;margin-top: 30px;">RFQ Line</p>
+      <c-card style=" margin-top: 10px; background:  rgb(209, 238, 243);padding: 20px;" class="mat-elevation-z8">
+        <form #RFQDetailForm="ngForm" (keydown.enter)="$event.preventDefault()">
+          <Row>
+            <div fxLayout="row" fxFlex="100%">
+      
+              <mat-form-field appearance="outline" class="form-group" fxFlex="50%">
+                <mat-label> Select Item</mat-label>
+                <mat-select name="itemId" #itemId="ngModel" required="true" [(ngModel)]="selectedRFQLine.itemId">
+                  <mat-option [value]="0" (click)="GetItems()">--Please Select--</mat-option>
+                  <mat-option *ngFor="let pt of Items" [value]=" pt.id" (click)="OnSelectItem(pt)">
+                    {{ pt.itemName}}
+                  </mat-option>
+                </mat-select>
+                </mat-form-field>
+              <mat-form-field appearance="outline" class="form-group" fxFlex="50%">
+                <mat-label>Type</mat-label>
+                <input matInput #type="ngModel" name="type" readonly="true" [(ngModel)]="selectedRFQLine.type" />
+                </mat-form-field>
+              <mat-form-field appearance="outline" class="form-group" fxFlex="50%">
+                <mat-label>Group</mat-label>
+                <input matInput #group="ngModel" name="group" readonly="true" [(ngModel)]="selectedRFQLine.group" />
+                </mat-form-field>
+              <mat-form-field appearance="outline" class="form-group" fxFlex="50%">
+                <mat-label>Category</mat-label>
+                <input matInput #category="ngModel" name="category" readonly="true" [(ngModel)]="selectedRFQLine.category" />
+              </mat-form-field>
+              </div>
+              
+              </Row>
+              <Row>
+              
+                <div fxLayout="row" fxLayoutAlign="space-around" fxFlex="50%">
+                  <div>
+                    <button type="submit" mat-icon-button mat-sm-button style="color: rgb(97, 48, 48);" cTooltip="Add to the List"
+                      cTooltipPlacement="top" (click)="AddLinetoList()">
+                      <mat-icon>add</mat-icon>
+                    </button>
+                <button type="button" mat-icon-button mat-sm-button color="primary" cTooltip="Refresh" cTooltipPlacement="top"
+                  (click)="RefreshLine()">
+                  <mat-icon>autorenew</mat-icon>
+                </button>
+                </div>
+                </div>
+                
+                </Row>
+                </form>
+                </c-card>
+                <c-card style="padding: 10px; margin-top: 30px;" class="mat-elevation-z8">
+                  <h5 style="font-size:20px;  color: #04415e;margin: 20px;">RFQ Detail </h5>
+                  <c-card-body
+                    style="padding: 10px;background-image: linear-gradient(to bottom, rgb(2, 33, 58), rgb(7, 95, 122));margin: 5px;border-radius: 10px;">
+                    <div class="example-table-container">
+                      <section class="example-container mat-elevation-z8" tabindex="0" style="border-radius: 5px;">
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                          <ng-container matColumnDef="item">
+                            <th mat-header-cell *matHeaderCellDef>
+                              <div>Item</div>
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                              <div>{{element.item}}</div>
+                            </td>
+                          </ng-container>
+                          <ng-container matColumnDef="type">
+                            <th mat-header-cell *matHeaderCellDef>
+                              <div style="width: 200px">Type</div>
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                              <div style="width: 200px">{{ element.type }}</div>
+                            </td>
+                          </ng-container>
+                          <ng-container matColumnDef="group">
+                            <th mat-header-cell *matHeaderCellDef>
+                              <div style="width: 200px">Group</div>
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                              <div style="width: 200px">{{ element.group }}</div>
+                            </td>
+                          </ng-container>
+                <ng-container matColumnDef="category">
+                  <th mat-header-cell *matHeaderCellDef>
+                    <div style="width: 200px">category</div>
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                    <div style="width: 200px">{{ element.category }}</div>
+                    </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="actions" stickyEnd>
+                      <th mat-header-cell *matHeaderCellDef style="width: 100px; text-align: center;">
+                        <div style="width: 100px; text-align: center;">Actions</div>
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        <div style="width: 100px; text-align: center;">
+                      <button mat-icon-button mat-sm-button style="color:#1e293b ; " (click)="edit(row)" cTooltip="Edit Settings ">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                      <button mat-icon-button mat-sm-button color="waRFQ" cTooltip="Delete Settings " (click)="delete(row)"
+                        [disabled]="row.isSystemDefined">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                      </div>
+                      </td>
+                      </ng-container>
+                      <tr mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                      </tr>
+                      </table>
+                      </section>
+                      </div>
+                      </c-card-body>
+                      </c-card>
+                      <div fxLayoutAlign="end end">
+                        <c-spinner *ngIf="proccessing" style="height: 50px;width: 50px;color: rgb(3, 71, 102);"></c-spinner>
+                        <div style="margin-top: 10px;" *ngIf="!proccessing">
+          <button *ngIf="Add" cButton class="me-1" style="background-color:#1e293b ;width: 100px;" type="submit"
+            (click)="Submit();">
+            Submit
+          </button>
+          <button *ngIf="Edit" cButton class="me-1" style="background-color:#1e293b ;width: 100px;" type="submit"
+            (click)="Submit()">
+            Update
+          </button>
+          <button cButton class="me-1" style="background-color:#7b7c7e ;width: 100px;" (click)="Back()">
+            Go Back
+          </button>
+          <button mat-icon-button mat-sm-button color="primary" cTooltip="Refresh" cTooltipPlacement="top" (click)="Refresh()"
+            *ngIf="Add">
+            <mat-icon>autorenew</mat-icon>
+          </button>
+          </div>
+          </div>
+          </form>
+  </div>
+</div>

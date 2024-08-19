@@ -1,0 +1,27 @@
+﻿<Controls:MetroWindow x:Class="Restaurant.WPF.Views.Cash"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Restaurant.WPF.Views"
+        mc:Ignorable="d"
+        Title="Cash" WindowStartupLocation="CenterScreen" Width="550" Height="250">
+    <Grid Background="{DynamicResource MahApps.Brushes.Highlight}"  >
+        <WrapPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Vertical">
+            <WrapPanel >
+                <WrapPanel  Margin="10" Orientation="Vertical">
+                    <TextBlock FontSize="20" Foreground="White">Total Amount:</TextBlock>
+                    <TextBlock FontSize="20" Foreground="White">Amount Received:</TextBlock>
+                    <TextBlock FontSize="20" Foreground="White">Change:</TextBlock>
+                </WrapPanel>
+                <WrapPanel Margin="10" Orientation="Vertical">
+                    <TextBlock Name="totalAmount"  FontSize="20" Foreground="White"></TextBlock>
+                    <TextBlock Name="amountReceived"  FontSize="20" Foreground="White"></TextBlock>
+                    <TextBlock Name="Change"  FontSize="20" Foreground="White"></TextBlock>
+                </WrapPanel>
+            </WrapPanel>
+            <Button  Margin="10" Padding="10, 10" Width="60" Click="Ok">Ok</Button>
+        </WrapPanel>
+    </Grid>
+</Controls:MetroWindow>

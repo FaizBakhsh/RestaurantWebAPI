@@ -1,0 +1,152 @@
+<div class="container-fluid page">
+  <div class="d-flex page_box p-3 mt-2  header-sticky" position="sticky">
+    <div fxLayout="row" fxLayoutAlign="space-between" fxFlex="100%">
+      <div *ngIf="Add">Manage User
+      </div>
+      <div *ngIf="Edit">Edit User
+      </div>
+      <div fxFlex="7%" >
+        <button mat-icon-button fxLayoutAlign="end end" (click)="dialogRef.close()" style="color: white">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="page_content shadow p-3 position-relative">
+    <form name="form" style="margin-top: 20px;padding: 10px;" #userForm="ngForm" fxFlex>
+      <div fxLayout="row wrap" fxLayout.lt-sm="column">
+        <div fxLayout="row" fxLayoutAlign="space-between" fxFlex="100%" class="form-group">
+          <mat-form-field fxFlex="50% " appearance="outline">
+            <mat-label>Name</mat-label>
+            <input class="form-control" matInput name="firstName" #firstName="ngModel"
+              [(ngModel)]="selectedUser.firstName" required>
+          </mat-form-field>
+          <mat-form-field fxFlex="50% " appearance="outline">
+            <mat-label>Father Name</mat-label>
+            <input class="form-control" matInput name="fatherName" #fatherName="ngModel"
+              [(ngModel)]="selectedUser.fatherName">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between" fxFlex="100%" class="form-group">
+          <mat-form-field fxFlex="50% " appearance="outline">
+            <mat-label>Phone No</mat-label>
+            <!-- <span matPrefix>+1 &nbsp;</span> -->
+            <input type="tel" #phoneNumber="ngModel" matInput placeholder="Cell Number" required name="phoneNumber"
+              [(ngModel)]="selectedUser.phoneNumber">
+          </mat-form-field>
+          <mat-form-field fxFlex="50% " appearance="outline">
+            <mat-label>Email</mat-label>
+            <input class="form-control" matInput name="email" #email="ngModel" [(ngModel)]="selectedUser.email"
+              [ngClass]="{ 'is-invalid': userForm.submitted && email.invalid }" placeholder="Email" required email>
+            <mat-error *ngIf="userForm.controls['email']?.errors?.['email']">
+              Email is not valid.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <!-- <div *ngIf="userForm.submitted && email.invalid" class="invalid-feedback">
+          <div style="color: rgb(223, 24, 24);  margin-left: 320px;" *ngIf="['email']"><strong>Must be a valid
+              email address</strong> </div>
+        </div> -->
+        <div  fxLayout="row" fxLayoutAlign="space-between" fxFlex="100%" class="form-group">
+          <mat-form-field  *ngIf="shouldShowRoles" fxFlex="100% " appearance="outline">
+            <mat-label>Select Role</mat-label>
+            <mat-select  [disabled]="isRoleDisabled" matNativeControl name="roleId" #roleId="ngModel" required="true"
+              [(ngModel)]="selectedUser.roleId">
+              <mat-option [value]="0">--Please Select--</mat-option>
+              <mat-option *ngFor="let u of roles" [value]="u.id">
+                {{u.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field fxFlex="100% " appearance="outline">
+            <mat-label>CNIC</mat-label>
+            <input class="form-control" matInput name="cnic" #cnic="ngModel" [(ngModel)]="selectedUser.cnic" >
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between" fxFlex="100%" class="form-group">
+          <mat-form-field fxFlex="50% " appearance="outline">
+            <mat-label>User Name</mat-label>
+            <input class="form-control" matInput name="Name" #name="ngModel" [(ngModel)]="selectedUser.name"
+              [ngClass]="{ 'is-invalid': userForm.submitted && name.invalid }" placeholder="Name" required>
+          </mat-form-field>
+          <mat-form-field fxFlex="50% " appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput name="userPassword" userPassword #userPassword="ngModel" minlength="4"
+              [type]="hide ? 'password' : 'text'" (keypress)="validateNo($event)"
+              [(ngModel)]="selectedUser.userPassword" required>
+            <mat-icon style="color: rgb(32, 10, 66);" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off'
+              :
+              'visibility'}}
+            </mat-icon>
+            <mat-error class="form-text text-danger"
+              *ngIf="userForm.controls['userPassword']?.hasError || userForm.controls['userPassword']?.errors?.['minlength']">
+              Password is required to be at least 4 characters.
+            </mat-error>
+            <!-- <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+            <mat-hint>Enter your password</mat-hint> -->
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="space-between" fxFlex="100%" class="form-group">
+          <mat-form-field fxFlex="50% " appearance="outline">
+            <mat-label>MS Card No</mat-label>
+            <input class="form-control" matInput name="msCardNo" #msCardNo="ngModel"
+              [(ngModel)]="selectedUser.msCardNo">
+          </mat-form-field>
+          <mat-form-field fxFlex="50% " appearance="outline">
+            <mat-label>Designation</mat-label>
+            <input class="form-control" matInput name="designation" #designation="ngModel"
+              [(ngModel)]="selectedUser.designation">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between" fxFlex="100%" class="form-group">
+          <mat-form-field fxFlex="50% " appearance="outline">
+            <mat-label>Address</mat-label>
+            <input class="form-control" matInput name="address" #address="ngModel" [(ngModel)]="selectedUser.address">
+          </mat-form-field>
+          <mat-form-field fxFlex="50% " appearance="outline">
+            <mat-label>Discount Limit %</mat-label>
+            <input class="form-control" matInput name="discountLimit" #discountLimit="ngModel"
+              [(ngModel)]="selectedUser.discountLimit">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between" fxFlex="100%" class="form-group">
+          <mat-form-field fxFlex="50% " appearance="outline">
+            <mat-label>Select Branch</mat-label>
+            <mat-select matNativeControl name="branchId" #branchId="ngModel" [(ngModel)]="selectedUser.branchId">
+              <mat-option [value]="0">--Please Select--</mat-option>
+              <mat-option *ngFor="let u of branches" [value]="u.id">
+                {{u.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayoutAlign="space-between">
+        <mat-checkbox #isActive="ngModel" name="isActive" [(ngModel)]="selectedUser.isActive">
+          IsActive
+        </mat-checkbox>
+      </div>
+      <div *ngIf="messagebox"
+        style="background-color: rgb(212, 245, 234); color:rgb(218, 17, 17); padding: 15px;margin: 10px;width: 680; text-align: center; justify-content: center;">
+        <tbody>
+          <tr *ngFor="let msg of message">
+            <td><strong>{{msg.description}}</strong></td>
+          </tr>
+        </tbody>
+      </div>
+      <div fxLayoutAlign="end end">
+        <button mat-raised-button *ngIf=" !Edit" type="submit" style="background-color:  #1e293b;color:white"
+          aria-label="SUBMIT" (click)="SaveUser()">
+          Submit
+        </button>
+        <button mat-raised-button (click)="SaveUser()" *ngIf=" !Add" type="submit"
+          style="background-color: #1e293b;color:white" aria-label="Update">
+          Update
+        </button>
+        <button mat-raised-button color="warn" (click)="dialogRef.close()" style="margin-left: 5px; margin-top: 20x;">Cancle
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

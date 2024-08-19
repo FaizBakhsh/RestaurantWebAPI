@@ -1,0 +1,211 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:markup="clr-namespace:MahApps.Metro.Markup;assembly=MahApps.Metro"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:options="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    mc:Ignorable="options">
+    <ResourceDictionary.MergedDictionaries>
+   
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" >
+            <!--  ACCENT COLORS  -->
+
+            <!--<Color x:Key="MahApps.Colors.HighContrastBlack" >DynamicResource MahApps.Colors.Accent</Color>-->
+            <!--<Color x:Key="MahApps.Colors.HighContrastYellow">{DynamicResource MahApps.Colors.Accent}</Color>
+            <Color x:Key="MahApps.Colors.HighContrastOrange">{DynamicResource MahApps.Colors.Accent}</Color>
+            <Color x:Key="MahApps.Colors.HighContrastBlue">{DynamicResource MahApps.Colors.Accent}</Color>
+            <Color x:Key="MahApps.Colors.HighContrastGray">{DynamicResource MahApps.Colors.Accent}</Color>
+            <Color x:Key="MahApps.Colors.HighContrastRed">{DynamicResource MahApps.Colors.Accent}</Color>
+            <Color x:Key="MahApps.Colors.HighContrastPurple">{DynamicResource MahApps.Colors.Accent}</Color>
+            <Color x:Key="MahApps.Colors.HighContrastCrimson">{DynamicResource MahApps.Colors.Accent}</Color>
+            <Color x:Key="MahApps.Colors.HighContrastBrown">{DynamicResource MahApps.Colors.Accent}</Color>
+            <Color x:Key="MahApps.Colors.HighContrastTeal">{DynamicResource MahApps.Colors.Accent}</Color>
+            <Color x:Key="MahApps.Colors.HighContrastGreen">{DynamicResource MahApps.Colors.Accent}</Color>
+            <Color x:Key="MahApps.Colors.HighContrastCobalt">{DynamicResource MahApps.Colors.Accent}</Color>-->
+
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastBlack" Color="{DynamicResource MahApps.Colors.Accent}"  />
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastYellow" Color="{DynamicResource MahApps.Colors.Accent}"  />
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastOrange" Color="{DynamicResource MahApps.Colors.Accent}"  />
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastBlue" Color="{DynamicResource MahApps.Colors.Accent}"  />
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastGray" Color="{DynamicResource MahApps.Colors.Accent}"  />
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastRed" Color="{DynamicResource MahApps.Colors.Accent}"  />
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastPurple" Color="{DynamicResource MahApps.Colors.Accent}"  />
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastCrimson" Color="{DynamicResource MahApps.Colors.Accent}"  />
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastBrown" Color="{DynamicResource MahApps.Colors.Accent}"  />
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastTeal" Color="{DynamicResource MahApps.Colors.Accent}"  />
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastGreen" Color="{DynamicResource MahApps.Colors.Accent}"  />
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastLightCoral" Color="{DynamicResource MahApps.Colors.Accent}"  />
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastSkyBlue" Color="{DynamicResource MahApps.Colors.Accent}"  />
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastCyan" Color="{DynamicResource MahApps.Colors.Accent}"  />
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastSteel" Color="{DynamicResource MahApps.Colors.Accent}"  />
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastMediumOrchid" Color="{DynamicResource MahApps.Colors.Accent}"  />
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastRosyBrown" Color="{DynamicResource MahApps.Colors.Accent}"  />
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastSienna" Color="{DynamicResource MahApps.Colors.Accent}"  />
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastLime" Color="{DynamicResource MahApps.Colors.Accent}"  />
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastLemonChiffon" Color="{DynamicResource MahApps.Colors.Accent}"  />
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastCornflowerBlue" Color="{DynamicResource MahApps.Colors.Accent}"  />
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastPink" Color="{DynamicResource MahApps.Colors.Accent}"  />
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastIndigo" Color="{DynamicResource MahApps.Colors.Accent}"  />
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastLightGray" Color="{DynamicResource MahApps.Colors.Accent}"  />
+            <SolidColorBrush x:Key="MahApps.Brushes.HighContrastLightSteelBlue" Color="{DynamicResource MahApps.Colors.Accent}"  />
+
+            <Style TargetType="{x:Type Button}"  >
+                <Setter Property="Margin" Value="1"></Setter>
+                <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Badged.Foreground}" />
+                <Setter Property="Background"  >
+                    <Setter.Value>
+                        <LinearGradientBrush  >
+                            <GradientStop Color="{DynamicResource MahApps.Colors.Accent}" Offset="1"/>
+                            <GradientStop Color="{DynamicResource MahApps.Colors.Accent2}" Offset="0"/>
+                            <GradientStop Color="{DynamicResource MahApps.Colors.Accent}" Offset="1"/>
+
+                            <!--<GradientStop Offset="0.0" Color="{DynamicResource MahApps.Colors.Accent4}"/>
+                                    <GradientStop Offset="2" Color="{DynamicResource MahApps.Colors.Accent}"/>
+                                    <GradientStop Color="{DynamicResource MahApps.Colors.Accent}" Offset="0"/>
+                                    <GradientStop Color="{DynamicResource MahApps.Colors.Accent2}" Offset="0.445"/>
+                                    <GradientStop Color="{DynamicResource MahApps.Colors.Accent}" Offset="0.53"/>-->
+
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" >
+
+                </Setter>
+
+
+
+            </Style>
+            <Style TargetType="{x:Type DataGrid}">
+                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent2}" />
+
+            </Style>
+            <Style TargetType="{x:Type Border}">
+
+                <Setter Property="BorderBrush" Value="{DynamicResource MahApps.Brushes.Accent}" />
+                <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Accent4}" />
+            </Style>
+           
+            <!--<Style x:Key="{x:Type RadioButton}"
+       TargetType="{x:Type RadioButton}">
+                        <Setter Property="SnapsToDevicePixels"
+          Value="true" />
+                        <Setter Property="OverridesDefaultStyle"
+          Value="true" />
+                        <Setter Property="FocusVisualStyle"
+          Value="{DynamicResource RadioButtonFocusVisual}" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type RadioButton}">
+                                    <BulletDecorator Background="{DynamicResource MahApps.Brushes.Accent2}">
+                                        <BulletDecorator.Bullet>
+                                            <Grid Width="15" 
+                  Height="15">
+                                                <Ellipse x:Name="Border"
+                       StrokeThickness="1">
+                                                    <Ellipse.Stroke>
+                                                        <LinearGradientBrush EndPoint="0.5,1"
+                                       StartPoint="0.5,0">
+                                                            <GradientStop Color="Brown"
+                                  Offset="0" />
+                                                            <GradientStop Color="Purple"
+                                  Offset="1" />
+                                                        </LinearGradientBrush>
+                                                    </Ellipse.Stroke>
+                                                    <Ellipse.Fill>
+                                                        <LinearGradientBrush StartPoint="0,0"
+                                       EndPoint="0,1">
+                                                            <LinearGradientBrush.GradientStops>
+                                                                <GradientStopCollection>
+                                                                    <GradientStop Color="{DynamicResource MahApps.Colors.Accent4}" />
+                                                                    <GradientStop Color="{DynamicResource MahApps.Colors.Accent}"
+                                      Offset="1.0" />
+                                                                </GradientStopCollection>
+                                                            </LinearGradientBrush.GradientStops>
+                                                        </LinearGradientBrush>
+                                                    </Ellipse.Fill>
+                                                </Ellipse>
+                                                <Ellipse x:Name="CheckMark"
+                       Margin="4"
+                       Visibility="Collapsed">
+                                                    <Ellipse.Fill>
+                                                        <SolidColorBrush Color="{DynamicResource MahApps.Colors.Accent4}" />
+                                                    </Ellipse.Fill>
+                                                </Ellipse>
+                                            </Grid>
+                                        </BulletDecorator.Bullet>
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="CommonStates">
+                                                <VisualState x:Name="Normal" />
+                                                <VisualState x:Name="MouseOver">
+                                                    <Storyboard>
+                                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Shape.Fill).
+                    (GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                                            <EasingColorKeyFrame KeyTime="0"
+                                         Value="Yellow" />
+                                                        </ColorAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="Pressed">
+                                                    <Storyboard>
+                                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Shape.Fill).
+                    (GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                                            <EasingColorKeyFrame KeyTime="0"
+                                         Value="Blue" />
+                                                        </ColorAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="Disabled">
+                                                    <Storyboard>
+                                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Shape.Fill).
+                    (GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                                            <EasingColorKeyFrame KeyTime="0"
+                                         Value="{DynamicResource MahApps.Colors.Accent4}" />
+                                                        </ColorAnimationUsingKeyFrames>
+                                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Shape.Stroke).
+                    (GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                                                            <EasingColorKeyFrame KeyTime="0"
+                                         Value="#40000000" />
+                                                        </ColorAnimationUsingKeyFrames>
+                                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="Border"
+                                                Storyboard.TargetProperty="(Shape.Stroke).
+                    (GradientBrush.GradientStops)[0].(GradientStop.Color)">
+                                                            <EasingColorKeyFrame KeyTime="0"
+                                         Value="#40000000" />
+                                                        </ColorAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                            <VisualStateGroup x:Name="CheckStates">
+                                                <VisualState x:Name="Checked">
+                                                    <Storyboard>
+                                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                 Storyboard.TargetName="CheckMark">
+                                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                            Value="{x:Static Visibility.Visible}" />
+                                                        </ObjectAnimationUsingKeyFrames>
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState x:Name="Unchecked" />
+                                                <VisualState x:Name="Indeterminate" />
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <ContentPresenter Margin="4,0,0,0"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Left"
+                            RecognizesAccessKey="True" />
+                                    </BulletDecorator>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                      
+                    </Style>-->
+          
+        </ResourceDictionary>
+       
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

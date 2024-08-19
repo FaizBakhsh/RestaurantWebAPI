@@ -1,0 +1,107 @@
+<div class="container-fluid page">
+  <div class="d-flex page_box p-3 mt-2  header-sticky" position="sticky">
+    <div *ngIf="Add"> Manage Staff
+    </div>
+    <div *ngIf="Edit">Edit Staff
+    </div>
+  </div>
+  <div class="page_content shadow p-3 position-relative">
+    <form #userForm="ngForm">
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="49%" appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput name="name" maxlength="45" [(ngModel)]="selectedStaff.name" required="true">
+        </mat-form-field>
+        <mat-form-field fxFlex="49%" appearance="outline">
+          <mat-label>Father Name</mat-label>
+          <input matInput name="fatherName" maxlength="45" [(ngModel)]="selectedStaff.fatherName">
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="49%" appearance="outline">
+          <mat-label>Type</mat-label>
+          <mat-select name="typeId" [(ngModel)]="selectedStaff.typeId" required="true">
+            <mat-option [value]="0">--Please Select--</mat-option>
+            <mat-option *ngFor="let val of Type" [value]="val.id">
+              {{ val.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div>
+          <mat-checkbox #isActive="ngModel" name="isActive" [(ngModel)]="selectedStaff.isActive">
+            IsActive
+          </mat-checkbox>
+        </div>
+      </div>
+      <div fxLayoutAlign="end end">
+        <c-spinner *ngIf="proccessing" style="height: 50px;width: 50px;color: rgb(3, 71, 102);"></c-spinner>
+        <div style="margin-top: 10px;" *ngIf="!proccessing">
+          <button *ngIf="Add" [ngClass]="{disabledBtn:isReadOnly}" class="bttn" type="submit"
+            (click)="SaveStaff()">
+            Save
+          </button>
+          <button *ngIf="Edit" [ngClass]="{disabledBtn:isReadOnly}" class="bttn" (click)="SaveStaff()"
+            type="submit">
+            Update
+          </button>
+        </div>
+        <div *ngIf="!proccessing">
+          <button mat-icon-button mat-sm-button color="primary" (click)="ngOnInit()" cTooltip="Refresh"
+            cTooltipPlacement="top">
+            <mat-icon>autorenew</mat-icon>
+          </button>
+        </div>
+      </div>
+    </form>
+    <c-card style="padding: 10px; margin-top: 30px;" class="mat-elevation-z8">
+      <h5 cCardTitle>Staff</h5>
+      <c-card-body style="padding: 10px;background-color: rgb(2, 42, 75);margin: 5px;border-radius: 10px;">
+        <div class="example-table-container">
+          <section class="example-container mat-elevation-z8" tabindex="0" style="border-radius: 5px;">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+              <ng-container matColumnDef="Id">
+                <th mat-header-cell *matHeaderCellDef> Sr No </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+              </ng-container>
+              <ng-container matColumnDef="isActive">
+                <th mat-header-cell *matHeaderCellDef>IsActive </th>
+                <td mat-cell *matCellDef="let element"> {{element.isActive?'Yes':'No'}} </td>
+              </ng-container>
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              </ng-container>
+              <ng-container matColumnDef="fatherName">
+                <th mat-header-cell *matHeaderCellDef>Father Name</th>
+                <td mat-cell *matCellDef="let element"> {{element.fatherName}} </td>
+              </ng-container>
+              <ng-container matColumnDef="type">
+                <th mat-header-cell *matHeaderCellDef> Type </th>
+                <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+              </ng-container>
+              <ng-container matColumnDef="actions" stickyEnd="true">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;">
+                  <p style="font-size: 18px;">Action</p>
+                </th>
+                <td mat-cell *matCellDef="let row">
+                  <div fxLayoutAlign="center" [ngClass]="{disabledDiv:isReadOnly}">
+                    <button mat-icon-button mat-sm-button style=" color:#1e293b;" (click)="EditStaff(row)"
+                      cTooltip=" Edit">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+
+                    <!-- <button mat-icon-button mat-sm-button color="warn" (click)="DeleteStaff(row)" cTooltip="Delete">
+                      <mat-icon>delete</mat-icon>
+                    </button> -->
+                  </div>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </section>
+        </div>
+      </c-card-body>
+    </c-card>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+﻿<Controls:MetroWindow  x:Class="Restaurant.WPF.Theme"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        
+        xmlns:local="clr-namespace:Restaurant.WPF"
+                     
+        mc:Ignorable="d"
+        Title="Theme" Height="250" Width="650" MinHeight="250" MinWidth="650" WindowState="Normal" ResizeMode="CanResize">
+
+    <Grid Width="Auto" MinWidth="650">
+
+        <Grid.RowDefinitions  >
+            <RowDefinition  ></RowDefinition>
+            <RowDefinition ></RowDefinition>
+            <RowDefinition ></RowDefinition>
+            <RowDefinition Height="35" ></RowDefinition>
+
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions  >
+            <ColumnDefinition  ></ColumnDefinition>
+            <ColumnDefinition  ></ColumnDefinition>
+            <ColumnDefinition  ></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Label Content="Select Theme" 
+           Margin="0" 
+           Padding="5,5,5,1" />
+            <ComboBox x:Name="ComboTheme"    >
+                <ComboBox.Items >
+                    <TextBlock FontWeight="Bold">Light</TextBlock>
+                    <TextBlock FontWeight="Bold">Dark</TextBlock>
+                </ComboBox.Items>
+            </ComboBox>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+            <Label Content="Select Accent" 
+           Margin="0" 
+           Padding="5,5,5,1" />
+            <ComboBox  x:Name="ComboAccent"   >
+                <ComboBox.Items   >
+                    <TextBlock FontWeight="Bold">Yellow</TextBlock>
+                    <TextBlock FontWeight="Bold">Red</TextBlock>
+                    <TextBlock FontWeight="Bold">Brown</TextBlock>
+                    <TextBlock FontWeight="Bold">Crimson</TextBlock>
+                    <TextBlock FontWeight="Bold">Blue</TextBlock>
+                    <TextBlock FontWeight="Bold">Purple</TextBlock>
+                    <TextBlock FontWeight="Bold">Orange</TextBlock>
+                    <TextBlock FontWeight="Bold">Cyan</TextBlock>
+                    <TextBlock FontWeight="Bold">Teal</TextBlock>
+                    <TextBlock FontWeight="Bold">Lime</TextBlock>
+                    <TextBlock FontWeight="Bold">Green</TextBlock>
+                    <TextBlock FontWeight="Bold">Pink</TextBlock>
+                    <TextBlock FontWeight="Bold">Cobalt</TextBlock>
+
+                </ComboBox.Items>
+            </ComboBox>
+        </StackPanel>
+        <!--<ComboBox x:Name="ComboAccent" Grid.Column="1" >
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Fill="Red" Width="16" Height="16" Margin="0,2,5,2" />
+                        <TextBlock Text="Red" />
+                        
+                    </StackPanel>
+                </DataTemplate>
+             
+            </ComboBox.ItemTemplate>
+        </ComboBox>-->
+        <Button x:Name="BtnSetAppTheme" Grid.Column="1" Grid.Row="2" Height="27" Margin="0,21,0,0"  Content="Set Theme" Click="SetAppTheme_click" VerticalAlignment="Center" />
+        <!--<Button  Height="1" Width="100" Content="Go Back" Margin="0,0,0,20" Grid.Column="1" Grid.Row="2" Click="Back_click" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />-->
+        <StackPanel Height="40" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Background="{DynamicResource MahApps.Brushes.Accent}" Grid.Row="4" Grid.ColumnSpan="3"></StackPanel>
+        <CheckBox Grid.Column="2" x:Name="CustomTheme" Foreground="{DynamicResource MahApps.Brushes.Text}" Content="Use Custom Theme" HorizontalAlignment="Center" Height="23" Margin="0,21,0,0" VerticalAlignment="Top" Width="142"/>
+    </Grid>
+
+</Controls:MetroWindow>

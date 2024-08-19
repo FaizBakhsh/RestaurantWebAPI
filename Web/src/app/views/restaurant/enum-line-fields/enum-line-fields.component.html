@@ -1,0 +1,254 @@
+<div class="container-fluid page">
+    <div class="d-flex page_box p-3 mt-2  header-sticky" position="sticky">
+        <div *ngIf="Add">Manage {{Heading}}
+        </div>
+        <div *ngIf="Edit">Edit {{Heading}}
+        </div>
+    </div>
+    <div class="page_content shadow p-3 position-relative">
+        <form name="userForm" #userForm="ngForm" (ngSubmit)="userForm.form.valid  " novalidate class="event-form">
+            <div fxLayout="row" fxLayoutAlign="space-between" style="margin:10px">
+                <mat-form-field fxFlex="49%" appearance="outline" class="form-group">
+                    <mat-label>Enter Name</mat-label>
+                    <input matInput #name="ngModel" name="Name" maxlength="1000" type="text" required="true"
+                        [(ngModel)]="selectedSettings.name">
+                </mat-form-field>
+                <mat-form-field fxFlex="49%" appearance="outline">
+                    <mat-label>Enter Description</mat-label>
+                    <textarea #Description="ngModel" matInput maxlength="2000" name="description" rows="1"
+                        [(ngModel)]="selectedSettings.description"></textarea>
+                </mat-form-field>
+            </div>
+            <div class="container">
+                <div class="row courses-row">
+                    <div class="col-lg-6" *ngFor="let formData of fields" [formGroup]="group" [ngSwitch]="true">
+                        <div *ngSwitchCase="formData.keyCode === 'DropDownList'">
+                            <mat-form-field class="demo-full-width margin-top" appearance="outline" fxFlex="100%">
+                                <mat-label>{{formData.name}}</mat-label>
+                                <mat-select [placeholder]="formData.name" name="formData.name"
+                                    [formControlName]="formData.name">
+                                    <mat-option *ngFor="let item of formData.settings" [value]="item.name">{{
+                                        item.name
+                                        }}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div *ngSwitchCase="formData.keyCode === 'DatePicker'">
+                            <mat-form-field class="demo-full-width margin-top" fxFlex="100%" appearance="outline">
+                                <input matInput name="formData.name" [matDatepicker]="picker"
+                                    [formControlName]="formData.name" [placeholder]="formData.name" />
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                                <mat-hint></mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <div *ngSwitchCase="formData.keyCode === 'TextArea'">
+                            <mat-form-field class="demo-full-width" fxFlex="100%" appearance="outline">
+                                <mat-label>{{formData.name}}</mat-label>
+                                <textarea name="formData.name" matInput [formControlName]="formData.name"
+                                    [placeholder]="formData.name"></textarea>
+                            </mat-form-field>
+                        </div>
+                        <div *ngSwitchCase="formData.keyCode === 'TextBox'">
+                            <mat-form-field class="demo-full-width margin-top" appearance="outline" fxFlex="100%">
+                                <mat-label>{{formData.name}}</mat-label>
+                                <input matInput [formControlName]="formData.name" name="formData.name"
+                                    [placeholder]="formData.name" />
+                                <!-- <ng-container>
+                                                        <mat-error *ngIf="group.get(formData.name).hasError(formData.isRequired)">Its
+                                                            Required</mat-error>
+                                                    </ng-container> -->
+                            </mat-form-field>
+                        </div>
+                        <div *ngSwitchCase="formData.keyCode === 'RadioButton'">
+                            <mat-radio-group [formControlName]="formData.name" name="formData.name"
+                                appearance="outline">
+                                <mat-radio-label>{{formData.name}}:</mat-radio-label>
+                                <!-- <mat-radio-button style="margin-left:30px" *ngFor="let item of formData.fpv" [value]="item.fieldValue">{{
+                            item.fieldValue }}</mat-radio-button> -->
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div fxLayoutAlign="end end" style="margin: 10px;">
+                <mat-checkbox name="isActive" [(ngModel)]="selectedSettings.isActive">Is Active</mat-checkbox>
+            </div>
+            <div fxLayoutAlign="end end">
+                <div style="margin-top: 10px;">
+                    <button *ngIf="Add" cButton class="me-1" style="background-color:#1e293b ;" type="submit"
+                        (click)="Submit();">
+                        Save
+                    </button>
+                    <button *ngIf="Edit" cButton class="me-1" style="background-color:#1e293b ;" type="submit"
+                        (click)="Submit()">
+                        Update
+                    </button>
+                </div>
+                <div>
+                    <button mat-icon-button mat-sm-button color="primary" cTooltip="Refresh " cTooltipPlacement="top"
+                        (click)="Refresh()">
+                        <mat-icon>autorenew</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <c-card style="padding: 10px; margin-top: 30px;" class="mat-elevation-z8">
+            <h5 cCardTitle> {{Heading}} List</h5>
+            <c-card-body style="padding: 10px;background-color: rgb(2, 42, 75);margin: 5px;border-radius: 10px;">
+                <div class="example-table-container">
+                    <section class="example-container mat-elevation-z8" tabindex="0" style="border-radius: 5px;">
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                            <ng-container matColumnDef="Id">
+                                <th mat-header-cell *matHeaderCellDef> Sr No </th>
+                                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="name">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width:150px"> Name</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width:150px"> {{element.name}} </div>
+                                </td>
+                            </ng-container>
+                            <div>
+                                <ng-container matColumnDef="eLFData">
+                                    <th mat-header-cell *matHeaderCellDef="let element" style="min-width:10000px">
+                                        <div *ngFor="let fld of fields" style="display:inline-block;min-width: 200px;">
+                                            <div>{{fld?.name}}</div>
+                                        </div>
+                                    </th>
+                                    <td mat-cell *matCellDef="let element" style="min-width:1000px">
+                                        <div *ngFor="let ifd of element.eLFData "
+                                            style="display:inline-block;min-width: 200px;">
+                                            <div>{{ifd?.fieldValue}}</div>
+                                        </div>
+                                    </td>
+                                </ng-container>
+                            </div>
+                            <ng-container matColumnDef="isActive">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div>IsActive</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div>{{element.isActive?'Yes':'No'}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="description">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div>Description</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div>{{element.description}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="actions" stickyEnd>
+                                <th mat-header-cell *matHeaderCellDef style="width: 100px; text-align: center;"> Action
+                                </th>
+                                <td mat-cell *matCellDef="let row" style="width: 100px;text-align: center;">
+                                    <div>
+                                        <button mat-icon-button mat-sm-button style="color:#1e293b ; " cTooltip="Edit  "
+                                            (click)="GetForEdit(row)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <!-- <button mat-icon-button mat-sm-button color="warn" cTooltip="Delete  "
+                                            (click)="Delete(row.id)">
+                                            <mat-icon>delete</mat-icon>
+                                        </button> -->
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </section>
+                </div>
+            </c-card-body>
+        </c-card>
+        <!-- <c-card style="padding: 10px; margin-top: 30px;" class="mat-elevation-z8">
+                    <h5 cCardTitle> {{Heading}} List</h5>
+                    <c-card-body style="padding: 10px;background-color: rgb(2, 42, 75);margin: 5px;border-radius: 10px;">
+                        <div class="example-table-container">
+                            <section class="example-container mat-elevation-z8" tabindex="0" style="border-radius: 5px;">
+                                <table mat-table [dataSource]="datasource" class="mat-elevation-z8">
+                                    <ng-container matColumnDef="Id">
+                                        <th mat-header-cell *matHeaderCellDef> Sr No </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="name">
+                                        <th mat-header-cell *matHeaderCellDef>
+                                            <div style="min-width:150px"> Name</div>
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <div style="min-width:150px"> {{element.name}} </div>
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="isActive">
+                                        <th mat-header-cell *matHeaderCellDef>
+                                            <div>IsActive</div>
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <div>{{element.isActive?'Yes':'No'}}</div>
+                                        </td>
+                                    </ng-container>
+                                    <ng-container *ngFor="let columnName of columnnames" [matColumnDef]="columnName">
+                                        <th mat-header-cell *matHeaderCellDef>{{ capitalize(columnName) }}</th>
+                                        <td mat-cell *matCellDef="let row">{{ row[columnName]}}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="description">
+                                        <th mat-header-cell *matHeaderCellDef>
+                                            <div>Description</div>
+                                        </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <div>{{element.description}}</div>
+                                        </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="actions" stickyEnd>
+                                        <th mat-header-cell *matHeaderCellDef style="width: 100px; text-align: center;"> Action
+                                        </th>
+                                        <td mat-cell *matCellDef="let row" style="width: 100px;text-align: center;">
+                                            <div>
+                                                <button mat-icon-button mat-sm-button style="color:#1e293b ; " cTooltip="Edit  "
+                                                    (click)="GetForEdit(row)">
+                                                    <mat-icon>edit</mat-icon>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayedcolumns sticky: true"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedcolumns;"></tr>
+                                </table>
+                            </section>
+                        </div>
+                    </c-card-body>
+                </c-card>
+                <c-card style="padding: 10px; margin-top: 30px;" class="mat-elevation-z8">
+                    <c-card-body style="padding: 10px;background-color: rgb(2, 42, 75);margin: 5px;border-radius: 10px;">
+                        <div class="example-table-container">
+                            <section class="example-container mat-elevation-z8" tabindex="0" style="border-radius: 5px;">
+                                <table mat-table [dataSource]="DataSource" class="mat-elevation-z8">
+                                    <ng-container *ngFor="let columnName of columnNames" [matColumnDef]="columnName">
+                                        <th mat-header-cell *matHeaderCellDef>{{ capitalize(columnName) }}</th>
+                                        <td mat-cell *matCellDef="let row">{{ row[columnName] }}</td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="actions" stickyEnd>
+                                        <th mat-header-cell *matHeaderCellDef style="width: 100px; text-align: center;"> Action
+                                        </th>
+                                        <td mat-cell *matCellDef="let row " style="width: 100px;text-align: center;">
+                                            <div>
+                                                <button mat-icon-button mat-sm-button style="color:#1e293b ; " cTooltip="Edit  "
+                                                    (click)="GetForEdits(row)">
+                                                    <mat-icon>edit</mat-icon>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: columns"></tr>
+                                </table>
+                            </section>
+                        </div>
+                    </c-card-body>
+                </c-card> -->
+    </div>
+</div>

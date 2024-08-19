@@ -1,0 +1,95 @@
+<div class="container-fluid page">
+    <div class="d-flex page_box p-3 mt-2  header-sticky" position="sticky">
+        <div *ngIf="Add">Manage Rider
+        </div>
+        <div *ngIf="Edit">Edit Rider
+        </div>
+    </div>
+    <div class="page_content shadow p-3 position-relative">
+        <form name="eventForm" #userForm="ngForm">
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                    <mat-label>Enter Name</mat-label>
+                    <input matInput #name="ngModel" name="Name" maxlength="255" type="text" [(ngModel)]="selectedRider.name"
+                        placeholder="Rider Name" required>
+                </mat-form-field>
+                <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                    <mat-label>Enter Email</mat-label>
+                    <input matInput #email="ngModel" name="Email" maxlength="1000" type="text" [(ngModel)]="selectedRider.email"
+                        placeholder="Rider Email">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field fxFlex="48%" appearance="outline">
+                    <mat-label>Enter Phone No</mat-label>
+                    <input type="tel" #PhoneNo="ngModel" maxlength="255" matInput placeholder="Phone No" name="phoneNo"
+                        [(ngModel)]="selectedRider.phoneNo" required="true">
+                </mat-form-field>
+            </div>
+            <div fxLayoutAlign="end end">
+                <div style="margin-top: 10px;">
+                    <button *ngIf="Add" cButton class="me-1" style="background-color:#1e293b ;" type="submit"
+                        (click)="SaveRider();">
+                        Save
+                    </button>
+                    <button *ngIf="Edit" cButton class="me-1" style="background-color:#1e293b ;" type="submit"
+                        (click)="UpdateRider()">
+                        Update
+                    </button>
+                </div>
+                <div>
+                    <button mat-icon-button mat-sm-button color="primary" cTooltip="Go Back " cTooltipPlacement="top"
+                        (click)="Refresh()">
+                        <mat-icon>autorenew</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <c-card style="padding: 10px; margin-top: 30px;" class="mat-elevation-z8">
+            <h5 cCardTitle>Rider List</h5>
+            <c-card-body style="padding: 10px;background-color: rgb(2, 42, 75);margin: 5px;border-radius: 10px;">
+                <div class="example-table-container">
+                    <section class="example-container mat-elevation-z8" tabindex="0" style="border-radius: 5px;">
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                            <ng-container matColumnDef="Id">
+                                <th mat-header-cell *matHeaderCellDef style="width: 25%;"> Sr No </th>
+                                <td mat-cell *matCellDef="let element" style="width: 25%;"> {{element.id}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="name">
+                                <th mat-header-cell *matHeaderCellDef style="width: 25%;"> Name </th>
+                                <td mat-cell *matCellDef="let element" style="width: 25%;"> {{element.name}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="email">
+                                <th mat-header-cell *matHeaderCellDef style="width: 25%;"> Email </th>
+                                <td mat-cell *matCellDef="let element" style="width: 25%;"> {{element.email}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="phoneNo">
+                                <th mat-header-cell *matHeaderCellDef style="width: 30%;"> Phone No </th>
+                                <td mat-cell *matCellDef="let element" style="width: 30%;"> {{element.phoneNo}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="actions" stickyEnd="true">
+                                <th mat-header-cell *matHeaderCellDef style="width: 20%;">
+                                    <p style="font-size: 14px; text-align: center;">Actions</p>
+                                </th>
+                                <td mat-cell *matCellDef="let row" style="width: 20%;">
+                                    <div style="text-align: center;">
+                                        <button mat-icon-button mat-sm-button style="color:#1e293b ; "
+                                            cTooltip="Edit Rider" (click)="GetRiderForEdit(row.id)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <button mat-icon-button mat-sm-button color="warn" cTooltip="Delete Rider"
+                                            (click)="DeleteRider(row.id)">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </section>
+                </div>
+            </c-card-body>
+        </c-card>
+    </div>
+</div>

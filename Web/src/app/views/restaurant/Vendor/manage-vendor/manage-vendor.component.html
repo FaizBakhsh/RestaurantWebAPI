@@ -1,0 +1,82 @@
+<div class="container-fluid page">
+    <div class="d-flex page_box p-3 mt-2  header-sticky" position="sticky">
+        <div *ngIf="Add">Manage Vendor
+        </div>
+        <div *ngIf="Edit">Edit Vendor
+        </div>
+    </div>
+    <div class="page_content shadow p-3 position-relative">
+        <mat-card style="padding: 10px;">
+            <form name="eventForm" #userForm="ngForm">
+                <div fxLayout="row" fxLayoutAlign="space-between">
+                    <mat-form-field fxFlex="48%" class="form-group">
+                        <mat-label>Enter Name</mat-label>
+                        <input matInput #name="ngModel" name="Name" type="text" [(ngModel)]="resSvc.selectedVendor.name"
+                            placeholder="Vendor Name" required>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="48%" class="form-group">
+                        <mat-label>Enter Email</mat-label>
+                        <input matInput #email="ngModel" name="Email" type="text"
+                            [(ngModel)]="resSvc.selectedVendor.email" placeholder="Vendor Email">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between">
+                    <mat-form-field fxFlex="48%" class="form-group">
+                        <mat-label>Enter Code</mat-label>
+                        <input matInput #code="ngModel" name="Code" type="text"
+                            [(ngModel)]="resSvc.selectedVendor.code">
+                    </mat-form-field>
+                    <mat-form-field fxFlex="48%" class="form-group">
+                        <mat-label> Area</mat-label>
+                        <input matInput #area="ngModel" name="area" type="text" [(ngModel)]="resSvc.selectedVendor.area"
+                            placeholder="Vendor Email">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between">
+                    <mat-form-field fxFlex="48% ">
+                        <mat-label>Enter Phone No</mat-label>
+                        <input type="tel" #Phone="ngModel" matInput placeholder="Phone No" name="phone"
+                            [(ngModel)]="resSvc.selectedVendor.phone" required="true">
+                    </mat-form-field>
+                    <mat-form-field fxFlex="48%" class="form-group">
+                        <mat-label>Enter Adrress</mat-label>
+                        <input matInput #address="ngModel" name="Address" type="text"
+                            [(ngModel)]="resSvc.selectedVendor.address" placeholder="Address">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between">
+                    <mat-form-field fxFlex="48% ">
+                        <mat-label>Enter CNIC</mat-label>
+                        <input type="text" #CNIC="ngModel" matInput placeholder="CNIC" name="CNIC"
+                            [(ngModel)]="resSvc.selectedVendor.cnic">
+                    </mat-form-field>
+                    <mat-form-field fxFlex="48%" class="form-group">
+                        <mat-label>Enter City</mat-label>
+                        <input matInput #city="ngModel" name="City" type="text" [(ngModel)]="resSvc.selectedVendor.city"
+                            placeholder="City">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between">
+                    <mat-form-field fxFlex="48%" class="form-group">
+                        <mat-label> Select Account</mat-label>
+                        <mat-select name="accountId" matNativeControl #accountId="ngModel"
+                            [(ngModel)]="resSvc.selectedVendor.accountId">
+                            <mat-option [value]="0">--Please Select--</mat-option>
+                            <!-- <mat-option *ngFor="let pt of uom" [value]=" pt.id">
+                                                {{ pt.name}}
+                                            </mat-option> -->
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayoutAlign="end end">
+                    <button mat-raised-button color="primary" *ngIf=" !Edit" [disabled]="userForm.invalid"
+                        style=" margin-top: 20px;" (click)="SaveVendor()">Submit </button>
+                    <button mat-raised-button color="primary" *ngIf="!Add" [disabled]="userForm.invalid"
+                        style=" margin-top: 20px;" (click)="SaveVendor()">Update </button>
+                    <button mat-raised-button color="warn" [routerLink]="['/restaurant/VendorList']"
+                        style="margin-left: 5px; margin-top: 20x;">Back </button>
+                </div>
+            </form>
+        </mat-card>
+    </div>
+</div>

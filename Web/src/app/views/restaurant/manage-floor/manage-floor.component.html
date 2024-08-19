@@ -1,0 +1,80 @@
+<div class="container-fluid page">
+    <div class="d-flex page_box p-3 mt-2  header-sticky" position="sticky">
+        <div *ngIf="Add">Manage Floor
+        </div>
+        <div *ngIf="Edit">Edit Floor
+        </div>
+    </div>
+    <div class="page_content shadow p-3 position-relative">
+        <form #userForm="ngForm" [validated]="validFields" novalidate cForm>
+            <c-row>
+                <c-col [xs]>
+                    <div [cFormFloating]="true">
+                        <input cFormControl required id="floatingInput" placeholder="Floor" #name="ngModel" name="name"
+                            [(ngModel)]="resSvc.selectedFloor.name" />
+                        <label cLabel for="floatingInput">Enter Floor Name</label>
+                        <c-form-feedback [valid]="false">Please provide Floor Name.</c-form-feedback>
+                    </div>
+                </c-col>
+                <c-col [xs]>
+                    <div fxLayout="row">
+                        <div style="margin-top: 10px;">
+                            <button *ngIf="Add" size="sm" cButton class="me-1" style="background-color:#1e293b ;"
+                                type="submit" (click)="SaveFloor();">
+                                Add Floor
+                            </button>
+                            <button *ngIf="Edit" size="sm" cButton class="me-1" style="background-color:#1e293b ;"
+                                type="submit" (click)="UpdateFloor()">
+                                Update
+                            </button>
+                        </div>
+                        <div>
+                            <button mat-icon-button mat-sm-button color="primary" cTooltip="Refresh "
+                                cTooltipPlacement="right" *ngIf="Edit" (click)="Refresh()">
+                                <mat-icon>autorenew</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </c-col>
+            </c-row>
+        </form>
+        <c-card style="padding: 10px; margin-top: 30px;">
+            <h5 cCardTitle>Floor List</h5>
+            <c-card-body>
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;">
+                    <ng-container matColumnDef="Id">
+                        <th mat-header-cell *matHeaderCellDef> Sr No </th>
+                        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="FloorName">
+                        <th mat-header-cell *matHeaderCellDef style="width: 70%;"> Floor Name </th>
+                        <td mat-cell *matCellDef="let element" style="width: 70%;"> {{element.name}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef style="width: 30%;">
+                            <p style="font-size: 14px;text-align: center;">Actions</p>
+                        </th>
+                        <td mat-cell *matCellDef="let row" style="width: 30%; text-align: center;">
+                            <div>
+                                <button mat-icon-button mat-sm-button style="color:#1e293b ; " cTooltip="Edit Floor"
+                                    (click)="GetFloorForEdit(row.id)">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                                <button mat-icon-button mat-sm-button style="color: rgb(236, 143, 2);"
+                                    cTooltip="Floor Possible Values" (click)="FPValue(row)">
+                                    <mat-icon>more</mat-icon>
+                                </button>
+                                <button mat-icon-button mat-sm-button color="warn" cTooltip="Delete"
+                                    (click)="DeleteFloor(row.id)">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </div>
+                        </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </c-card-body>
+        </c-card>
+    </div>
+</div>

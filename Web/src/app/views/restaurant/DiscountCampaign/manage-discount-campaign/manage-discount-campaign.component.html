@@ -1,0 +1,115 @@
+<div class="container-fluid page">
+    <div class="d-flex page_box p-3 mt-2  header-sticky" position="sticky">
+        <div *ngIf="Add">Manage Discount Campaign
+        </div>
+        <div *ngIf="Edit">Edit Discount Campaign
+        </div>
+    </div>
+    <div class="page_content shadow p-3 position-relative">
+        <mat-card style="padding: 10px;">
+            <form name="eventForm" #userForm="ngForm">
+                <div fxLayout="row" fxLayoutAlign="space-between">
+                    <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                        <mat-label>Enter Name</mat-label>
+                        <input matInput name="ngModel" maxlength="200" minlength="5" name="name" type="text" #name
+                            [(ngModel)]="discountCampaign.name" required>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                        <mat-label>Discount %</mat-label>
+                        <input matInput #discount="ngModel" name="discount" type="number" min="0" required="true"
+                            oninput="validity.valid||(value='')" [(ngModel)]="discountCampaign.discount" required>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row">
+                    <mat-form-field fxFlex="100%" appearance="outline">
+                        <mat-label> Select Days</mat-label>
+                        <mat-select name="weekDaysIds" multiple [(ngModel)]="discountCampaign.weekDaysIds">
+                            <mat-option *ngFor="let pt of days" [value]=" pt.id">
+                                {{ pt.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between">
+                    <mat-form-field fxFlex="48%" appearance="outline">
+                        <mat-label>Start Time</mat-label>
+                        <input matInput [(ngModel)]="discountCampaign.startTime" maxlength="200" name="startTime"
+                            [ngxTimepicker]="start" required readonly [format]="24" />
+                        <ngx-material-timepicker [appendToInput]="true" [disableAnimation]="true"
+                            [timepickerClass]="'custome-class'" #start></ngx-material-timepicker>
+                    </mat-form-field>
+                    <div fxFlex="48%" fxLayout="row" fxLayoutAlign="space-between">
+                        <mat-checkbox #tillDayEnd="ngModel" (click)="tillDayEndClick()" name="tillDayEnd"
+                            [(ngModel)]="discountCampaign.tillDayEnd">
+                            Till End of Day</mat-checkbox>
+                        <mat-form-field fxFlex="65%" appearance="outline">
+                            <mat-label>End Time</mat-label>
+                            <input matInput [required]="isEndTimeRequired" [(ngModel)]="discountCampaign.endTime"
+                                maxlength="200" name="endTime" readonly [disabled]="discountCampaign.tillDayEnd"
+                                [ngxTimepicker]="end" [format]="24" />
+                            <ngx-material-timepicker [timepickerClass]="'custome-class'" #end></ngx-material-timepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between">
+                    <mat-form-field fxFlex="48%" appearance="outline">
+                        <mat-label>Start Date</mat-label>
+                        <input matInput [matDatepicker]="pickerFrom" name="startDate" #startDate="ngModel"
+                            [(ngModel)]="discountCampaign.startDate" />
+                        <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerFrom [enableMeridian]="true" id="my-time-picker"></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="48%" appearance="outline">
+                        <mat-label>End Date</mat-label>
+                        <input matInput [matDatepicker]="pickerTo" name="endDate" #endDate="ngModel"
+                            [(ngModel)]="discountCampaign.endDate" [min]="discountCampaign.startDate">
+                        <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerTo [enableMeridian]="true"></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between">
+                    <mat-form-field fxFlex="48%" appearance="outline">
+                        <mat-label> Select Type</mat-label>
+                        <mat-select name="typeId" [(ngModel)]="discountCampaign.typeId" required>
+                            <mat-option [value]="0">--Please Select--</mat-option>
+                            <mat-option *ngFor="let pt of types" [value]=" pt.id" (click)="onSelectType()">
+                                {{ pt.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="48%" appearance="outline">
+                        <mat-label> Select Group</mat-label>
+                        <mat-select name="menuGroupId" [(ngModel)]="discountCampaign.menuGroupId"
+                            [required]="isGroupRequired">
+                            <mat-option [value]="0">--Please Select--</mat-option>
+                            <mat-option *ngFor="let pt of groups" [value]=" pt.id">
+                                {{ pt.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayoutAlign="end end">
+                    <mat-checkbox #isActive="ngModel" name="isActive" [(ngModel)]="discountCampaign.isActive">
+                        IsActive
+                    </mat-checkbox>
+                </div>
+                <div fxLayoutAlign="end end">
+                    <c-spinner *ngIf="proccessing" style="height: 50px;width: 50px;color: rgb(3, 71, 102);"></c-spinner>
+                </div>
+                <div style="margin-top: 10px;" *ngIf="!proccessing" fxLayoutAlign="end end">
+                    <button  *ngIf=" !Edit"
+                       [ngClass]="{disabledBtn:isReadOnly}" class="bttn"
+                        (click)="SaveDiscountCampaign()">Submit
+                    </button>
+                    <button  *ngIf="!Add"
+                       [ngClass]="{disabledBtn:isReadOnly}" class="bttn"
+                        (click)="SaveDiscountCampaign()">Update
+                    </button>
+                    <button mat-raised-button (click)="Back()"
+                        style="margin-left: 5px; margin-top: 20x;background-color:  rgb(74, 76, 78);color: white;">Go to
+                        List </button>
+                </div>
+            </form>
+        </mat-card>
+    </div>
+</div>

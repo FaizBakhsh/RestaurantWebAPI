@@ -1,0 +1,69 @@
+<div class="container-fluid page">
+  <div class="d-flex page_box p-3 mt-2  header-sticky" position="sticky">
+    <div *ngIf="Add">Manage Employee
+    </div>
+    <div *ngIf="Edit">Edit Employee
+    </div>
+  </div>
+  <div class="page_content shadow p-3 position-relative">
+    <mat-card style="padding: 10px;">
+      <form name="eventForm" #userForm="ngForm">
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+            <mat-label>Enter Name</mat-label>
+            <input matInput #name="ngModel" maxlength="100" name="Name" type="text" [(ngModel)]="selectedEmployee.name"
+              placeholder="Employee Name" required>
+          </mat-form-field>
+          <mat-form-field fxFlex="48%" appearance="outline">
+            <mat-label> Joining Date</mat-label>
+            <input matInput [matDatepicker]="picker" placeholder="Joining Date" required name="JoiningDate"
+              [(ngModel)]="selectedEmployee.joiningDate" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <mat-form-field fxFlex="48%" appearance="outline">
+            <mat-label>Enter Phone No</mat-label>
+            <input type="tel" #PrimaryCellNo="ngModel" maxlength="100" matInput placeholder="Phone No" required
+              name="phone" [(ngModel)]="selectedEmployee.phone">
+          </mat-form-field>
+          <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+            <mat-label>Enter Designation</mat-label>
+            <input matInput #Designation="ngModel" maxlength="100" name="Designation" type="text"
+              [(ngModel)]="selectedEmployee.designation" placeholder="Designation">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <mat-form-field fxFlex="48%" appearance="outline">
+            <mat-label> Select Branch</mat-label>
+            <mat-select name="branchId" [(ngModel)]="selectedEmployee.branchId">
+              <mat-option *ngFor="let pt of branch" [value]=" pt.id">
+                {{ pt.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-radio-group name="gender" aria-label="Select Gender" fxFlex="48%" appearance="outline"
+            [(ngModel)]="selectedEmployee.gender" maxlength="45" #Gender="ngModel" [value]="selectedEmployee.gender">
+            <mat-label>Gender : </mat-label>
+            <mat-radio-button value="Male">Male</mat-radio-button>
+            <mat-radio-button value="FeMale">FeMale</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div fxLayoutAlign="end end">
+          <mat-checkbox #isActive="ngModel" name="isActive" [(ngModel)]="selectedEmployee.isActive">
+            IsActive
+          </mat-checkbox>
+        </div>
+        <div fxLayoutAlign="end end">
+          <button [ngClass]="{disabledBtn:isReadOnly}" class="bttn"  *ngIf=" !Edit" [disabled]="userForm.invalid"
+            style=" margin-top: 20px;" (click)="SaveEmployee()">Submit </button>
+          <button [ngClass]="{disabledBtn:isReadOnly}" class="bttn" *ngIf="!Add" [disabled]="userForm.invalid"
+            style=" margin-top: 20px;" (click)="SaveEmployee()">Update </button>
+          <button mat-raised-button color="warn" (click)="Back()" style="margin-left: 5px; margin-top: 20x;">Back
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

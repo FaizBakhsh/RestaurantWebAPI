@@ -1,0 +1,229 @@
+<div class="container-fluid page">
+  <div class="d-flex page_box p-3 mt-2">Purchase Item List</div>
+  <div class="page_content shadow p-3 position-relative">
+    <div class="pull-right" style="text-align:end; margin-top: 20px;">
+      <button mat-raised-button color="primary" [routerLink]="['/inventory/purchaseitem']">Add New</button>
+    </div>
+    <c-card style="padding: 10px; margin-top: 30px;" class="mat-elevation-z8">
+      <c-card-body
+        style="padding: 10px;background-image: linear-gradient(to bottom, rgb(2, 33, 58), rgb(7, 95, 122));margin: 5px;border-radius: 10px;">
+        <div class="example-table-container">
+          <section class="example-container mat-elevation-z8" tabindex="0" style="border-radius: 5px; width: 100%;">
+            <table id="myTable" mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+              <ng-container matColumnDef="expand">
+                <th mat-header-cell *matHeaderCellDef aria-label="row actions">
+                  <div>&nbsp;</div>
+                </th>
+                <td mat-cell *matCellDef="let element">
+                  <div>
+                    <button mat-icon-button aria-label="expand row"
+                      (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation();highlight(element)">
+                      <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
+                      <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
+                    </button>
+                  </div>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="Id">
+                <th mat-header-cell *matHeaderCellDef> Sr No </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+              </ng-container>
+              <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef> Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.date|date:'yyyy-MM-dd'}} </td>
+              </ng-container>
+              <ng-container matColumnDef="grn">
+                <th mat-header-cell *matHeaderCellDef> GRN No </th>
+                <td mat-cell *matCellDef="let element"> {{element.grn}} </td>
+              </ng-container>
+              <ng-container matColumnDef="branch">
+                <th mat-header-cell *matHeaderCellDef> Branch </th>
+                <td mat-cell *matCellDef="let element"> {{element.branch}} </td>
+              </ng-container>
+              <ng-container matColumnDef="store">
+                <th mat-header-cell *matHeaderCellDef> Store </th>
+                <td mat-cell *matCellDef="let element"> {{element.store}} </td>
+              </ng-container>
+              <ng-container matColumnDef="supplier">
+                <th mat-header-cell *matHeaderCellDef> Supplier </th>
+                <td mat-cell *matCellDef="let element"> {{element.supplier}} </td>
+              </ng-container>
+              <ng-container matColumnDef="group">
+                <th mat-header-cell *matHeaderCellDef> Group </th>
+                <td mat-cell *matCellDef="let element"> {{element.group}} </td>
+              </ng-container>
+              <ng-container matColumnDef="item">
+                <th mat-header-cell *matHeaderCellDef>Item </th>
+                <td mat-cell *matCellDef="let element"> {{element.item}} </td>
+              </ng-container>
+              <ng-container matColumnDef="itemsPerPkg">
+                <th mat-header-cell *matHeaderCellDef> Items/Package </th>
+                <td mat-cell *matCellDef="let element"> {{element.itemsPerPkg}} </td>
+              </ng-container>
+              <ng-container matColumnDef="noOfPkg">
+                <th mat-header-cell *matHeaderCellDef> No Of Packages </th>
+                <td mat-cell *matCellDef="let element"> {{element.noOfPkg}} </td>
+              </ng-container>
+              <ng-container matColumnDef="totalQty">
+                <th mat-header-cell *matHeaderCellDef> Total Quantity </th>
+                <td mat-cell *matCellDef="let element"> {{element.totalQty}} </td>
+              </ng-container>
+              <ng-container matColumnDef="pricePerPkg">
+                <th mat-header-cell *matHeaderCellDef> Price/Packages </th>
+                <td mat-cell *matCellDef="let element"> {{element.pricePerPkg}} </td>
+              </ng-container>
+              <ng-container matColumnDef="totalAmount">
+                <th mat-header-cell *matHeaderCellDef> TotalAmount </th>
+                <td mat-cell *matCellDef="let element"> {{element.totalAmount}} </td>
+              </ng-container>
+              <ng-container matColumnDef="pricePerItem">
+                <th mat-header-cell *matHeaderCellDef> Price/Item </th>
+                <td mat-cell *matCellDef="let element"> {{element.pricePerItem}} </td>
+              </ng-container>
+              <ng-container matColumnDef="purchaseTypes">
+                <th mat-header-cell *matHeaderCellDef> Purchase Type </th>
+                <td mat-cell *matCellDef="let element"> {{element.purchaseTypes}} </td>
+              </ng-container>
+              <ng-container matColumnDef="invoiceNo">
+                <th mat-header-cell *matHeaderCellDef> Invoice No </th>
+                <td mat-cell *matCellDef="let element"> {{element.invoiceNo}} </td>
+              </ng-container>
+              <ng-container matColumnDef="poNo">
+                <th mat-header-cell *matHeaderCellDef> Po No </th>
+                <td mat-cell *matCellDef="let element"> {{element.poNo}} </td>
+              </ng-container>
+              <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef> Description </th>
+                <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+              </ng-container>
+              <ng-container matColumnDef="ttlAmount">
+                <th mat-header-cell *matHeaderCellDef> Total Amount </th>
+                <td mat-cell *matCellDef="let element"> {{element.ttlAmount}} </td>
+              </ng-container>
+              <ng-container matColumnDef="expiryDate">
+                <th mat-header-cell *matHeaderCellDef> Expiry </th>
+                <td mat-cell *matCellDef="let element"> {{element.expiryDate|date:'yyyy-MM-dd'}} </td>
+              </ng-container>
+              <ng-container matColumnDef="actions" stickyEnd="true">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;">
+                  <p style="font-size: 18px;">Actions</p>
+                </th>
+                <td mat-cell *matCellDef="let purchItem">
+                  <div style="width: 100px;text-align: center;">
+                    <button mat-icon-button mat-sm-button color="primary" (click)="EditPurchaseItem(purchItem)"
+                      matTooltip="Edit" style="cursor: pointer;"><mat-icon>edit</mat-icon></button>
+                    <button mat-icon-button mat-sm-button color="warn" matTooltip="Delete"
+                      (click)="DeletePurchaseItem(purchItem.id)"><mat-icon>delete</mat-icon></button>
+                  </div>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
+                  <div class="example-element-detail" *ngIf="element.piLines" style="width: 100%;border-radius: 30px;"
+                    [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                    <div *ngIf="expandedElement">
+                      <section class="example-container mat-elevation-z8" tabindex="0"
+                        style="margin: 50px;border-radius: 30px;max-width: 47%;">
+                        <table #innerTables mat-table [dataSource]="element.poLines" class="mat-elevation-z8">
+                          <ng-container matColumnDef="rawItemId">
+                            <th mat-header-cell *matHeaderCellDef>
+                              <div>RawItem</div>
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                              <div>{{element.rawItemId}}</div>
+                            </td>
+                          </ng-container>
+                          <ng-container matColumnDef="package">
+                            <th mat-header-cell *matHeaderCellDef>
+                              <div> Package</div>
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                              <div>{{element.package}}</div>
+                            </td>
+                          </ng-container>
+                          <ng-container matColumnDef="packageItems">
+                            <th mat-header-cell *matHeaderCellDef>
+                              <div> PackageItems</div>
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                              <div>{{element.packageItems}}</div>
+                            </td>
+                          </ng-container>
+                          <ng-container matColumnDef="totalItems">
+                            <th mat-header-cell *matHeaderCellDef>
+                              <div> Total Items</div>
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                              <div>{{element.totalItems}}</div>
+                            </td>
+                          </ng-container>
+                          <ng-container matColumnDef="price">
+                            <th mat-header-cell *matHeaderCellDef>
+                              <div> Price</div>
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                              <div>{{element.price}}</div>
+                            </td>
+                          </ng-container>
+                          <ng-container matColumnDef="pricePerItem">
+                            <th mat-header-cell *matHeaderCellDef>
+                              <div> PricePerItem</div>
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                              <div>{{element.pricePerItem}}</div>
+                            </td>
+                          </ng-container>
+                          <ng-container matColumnDef="totalAmount">
+                            <th mat-header-cell *matHeaderCellDef>
+                              <div> Total Amount </div>
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                              <div>{{element.totalAmount}}</div>
+                            </td>
+                          </ng-container>
+                          <ng-container matColumnDef="branchId">
+                            <th mat-header-cell *matHeaderCellDef>
+                              <div> Branch </div>
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                              <div>{{element.branchId}}</div>
+                            </td>
+                          </ng-container>
+                          <ng-container matColumnDef="description">
+                            <th mat-header-cell *matHeaderCellDef>
+                              <div> Description</div>
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                              <div>{{element.description}}</div>
+                            </td>
+                          </ng-container>
+                          <ng-container matColumnDef="expiry">
+                            <th mat-header-cell *matHeaderCellDef>
+                              <div> Expiry </div>
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                              <div>{{element.expiry}}</div>
+                            </td>
+                          </ng-container>
+                          <tr mat-header-row *matHeaderRowDef="innerDisplayedColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: innerDisplayedColumns;">
+                          </tr>
+                        </table>
+                      </section>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+              <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="example-element-row"
+                [class.example-expanded-row]="expandedElement === element">
+              </tr>
+              <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row">
+              </tr>
+            </table>
+          </section>
+        </div>
+      </c-card-body>
+    </c-card>
+  </div>
+</div>

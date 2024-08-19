@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
+<jasperReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="VoucherList" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20"
+              topMargin="20" bottomMargin="20" uuid="a7a5991d-bdb1-4f19-a959-d304ebca176c">
+    <parameter name="FromDate" class="java.lang.String"/>
+    <parameter name="ToDate" class="java.lang.String"/>
+    <parameter name="VoucherRpt" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="vchRptParams" class="java.util.Map"/>
+    <queryString>
+        <![CDATA[]]>
+    </queryString>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="304" splitType="Stretch">
+            <frame>
+                <reportElement mode="Opaque" x="-20" y="25" width="595" height="60" backcolor="#044F78"
+                               uuid="b960ac9e-e4c7-45cb-9e91-122908225f12"/>
+                <staticText>
+                    <reportElement x="0" y="0" width="595" height="60" forecolor="#FFFFFF"
+                                   uuid="446216b6-6921-45b8-9d53-be763aa366de"/>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font size="34" isBold="true"/>
+                    </textElement>
+                    <text><![CDATA[Vouchers]]></text>
+                </staticText>
+            </frame>
+            <rectangle>
+                <reportElement x="-20" y="5" width="595" height="20" backcolor="#D9D9D9"
+                               uuid="b9ea52d8-5a3e-45c2-87da-2fb509b0b132"/>
+            </rectangle>
+            <subreport>
+                <reportElement x="0" y="170" width="555" height="110" uuid="a54add35-6e60-44b1-9a41-1a7dc8bb6a6a"/>
+                <parametersMapExpression><![CDATA[$P{vchRptParams}]]></parametersMapExpression>
+                <dataSourceExpression><![CDATA[new JREmptyDataSource()]]></dataSourceExpression>
+                <subreportExpression><![CDATA[$P{VoucherRpt}]]></subreportExpression>
+            </subreport>
+            <staticText>
+                <reportElement x="120" y="100" width="50" height="30" uuid="d75886f9-871f-4a06-b354-bde5c84c44ae"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="14" isBold="true"/>
+                </textElement>
+                <text><![CDATA[From :]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="280" y="100" width="30" height="30" uuid="5ca51350-9ad3-4dab-9ff5-48a4f60d204d"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="14" isBold="true"/>
+                </textElement>
+                <text><![CDATA[To :]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="170" y="100" width="100" height="30" uuid="2dd194da-da4c-4696-a6d6-6e8bdb500cba"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="12"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{FromDate}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="310" y="100" width="100" height="30" uuid="e2df4245-afa7-4a12-8024-cdd7f2775fc4"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="12"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{ToDate}]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+    <pageHeader>
+        <band height="63" splitType="Stretch">
+            <printWhenExpression><![CDATA[$V{PAGE_NUMBER} == 1]]></printWhenExpression>
+        </band>
+    </pageHeader>
+    <columnHeader>
+        <band splitType="Stretch"/>
+    </columnHeader>
+    <detail>
+        <band height="120" splitType="Stretch"/>
+    </detail>
+    <columnFooter>
+        <band splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band/>
+    </pageFooter>
+    <summary>
+        <band height="42" splitType="Stretch"/>
+    </summary>
+</jasperReport>

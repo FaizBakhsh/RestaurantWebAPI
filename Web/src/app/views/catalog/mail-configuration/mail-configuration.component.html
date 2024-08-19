@@ -1,0 +1,40 @@
+<div fxLayout="column">
+    <mat-toolbar style="background-image:linear-gradient(135deg, #065f78, #0a87a9);">
+        <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title"
+                style="color:white;margin: 10px 10px;font-size: 20px;margin-left: 5px;">{{ dialogTitle }}</span>
+            <button mat-icon-button (click)="dialogref.close()" style="color: white">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </mat-toolbar>
+    <c-card style="padding: 10px;">
+        <c-card-body>
+            <div class="email-form-container">
+                <form #emailForm="ngForm">
+                    <div fxLayout="column">
+                        <label>Recipient's Email:</label>
+                        <mat-form-field style="margin-top: 5px;">
+                            <!-- <mat-label>Recipient's Email</mat-label> -->
+                            <input placeholder="Email" email matInput type="email"
+                                [(ngModel)]="selectedMail.receiverMail" name="receiverMail" required>
+                            <mat-error *ngIf="emailForm.controls['receiverMail']?.errors?.['email']">
+                                Email is not valid.
+                            </mat-error>
+                        </mat-form-field>
+                        <div fxLayoutAlign="end end">
+                            <button id="send-btn" type="submit" mat-mini-fab (click)="sendMail()">
+                                <i class="material-icons">send</i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </c-card-body>
+    </c-card>
+</div>
+<div>
+    <div *ngIf="isLoading" class="lightbox">
+        <c-spinner style="height: 100px;width: 100px;color: white;"></c-spinner>
+    </div>
+</div>

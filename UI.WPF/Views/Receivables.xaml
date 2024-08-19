@@ -1,0 +1,26 @@
+﻿<Controls:MetroWindow x:Class="Restaurant.WPF.Views.Receivables"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Restaurant.WPF.Views"
+        mc:Ignorable="d"
+        Title="Receivables"  WindowStartupLocation="CenterScreen" Width="550" Height="250">
+    <Grid>
+        <WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <WrapPanel Orientation="Vertical">
+                <TextBlock>Select Customer</TextBlock>
+                <ComboBox Width="400" SelectionChanged="CustomerCheck"  Height="40"  Name="CustomerCombo"  
+                                      DisplayMemberPath="Name"
+                                      SelectedValuePath="Id">
+                </ComboBox>
+                <TextBlock Visibility="Hidden" Text="Its Required" Foreground="Red" Name="CustomerValidation"></TextBlock>
+            </WrapPanel>
+            <WrapPanel >
+                <Button Click="Submit" Width="195" Height="35" Name="submitBtn" Focusable="False">Submit</Button>
+                <Button Click="Cancel" Width="195" Height="35" Name="cancelBtn" Focusable="False">Cancel</Button>
+            </WrapPanel>
+        </WrapPanel>
+    </Grid>
+</Controls:MetroWindow>

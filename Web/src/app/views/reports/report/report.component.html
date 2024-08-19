@@ -1,0 +1,98 @@
+<div class="container-fluid page">
+  <div class="d-flex page_box p-3 mt-2  header-sticky" position="sticky">
+    <div>{{ pageTitle }}
+    </div>
+    </div>
+  <div class="page_content shadow p-3 position-relative">
+    <mat-card style="padding: 10px;">
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="100%" appearance="outline" *ngIf="showDate">
+          <mat-label> Date</mat-label>
+          <input matInput [matDatepicker]="picker" name="date" [(ngModel)]="searchCriteria.date" #startDateInput="ngModel" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field fxFlex="49%" appearance="outline" *ngIf="showStartDate">
+            <mat-label>Start Date</mat-label>
+          <input matInput [matDatepicker]="pickerFrom" name="startDate" [(ngModel)]="searchCriteria.startDate"
+            #startDateInput="ngModel" />
+          <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+          <mat-datepicker #pickerFrom></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field fxFlex="49%" appearance="outline" *ngIf="showEndDate">
+            <mat-label>End Date</mat-label>
+            <input matInput [matDatepicker]="pickerTo" name="endDate" [(ngModel)]="searchCriteria.endDate"
+              [min]="searchCriteria.startDate" #endDateInput="ngModel" />
+            <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+            <mat-datepicker #pickerTo></mat-datepicker>
+          </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between" fxFlex="100%">
+        <mat-form-field fxFlex="100%" appearance="outline" *ngIf="showUsers">
+          <mat-label>Select User</mat-label>
+          <mat-select matNativeControl name="userId" #userId="ngModel" [(ngModel)]="searchCriteria.userId">
+            <mat-option value="">--Please select--</mat-option>
+            <mat-option *ngFor="let u of users" [value]="u.id">
+              {{ u.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field fxFlex="100%" appearance="outline" *ngIf="shifts.length>0">
+          <mat-label>Select Shift</mat-label>
+          <mat-select matNativeControl name="shiftId" #userId="ngModel" [(ngModel)]="searchCriteria.shiftId">
+            <mat-option [value]=0>--Please select--</mat-option>
+            <mat-option *ngFor="let u of shifts; let i = index" [value]="u.id">
+              {{u.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field fxFlex="100%" appearance="outline" *ngIf="refundTypes.length>0">
+          <mat-label>Select Type</mat-label>
+          <mat-select matNativeControl name="refundTypeId" #userId="ngModel" [(ngModel)]="searchCriteria.refundTypeId">
+            <mat-option [value]=0>--Please select--</mat-option>
+            <mat-option *ngFor="let u of refundTypes; let i = index" [value]="u.id">
+              {{ u.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field fxFlex="100%" appearance="outline" *ngIf="discountKeys.length>0">
+          <mat-label>Select Type</mat-label>
+          <mat-select matNativeControl name="discountKeyId" #userId="ngModel" [(ngModel)]="searchCriteria.discountKeyId">
+            <mat-option [value]=0>--Please select--</mat-option>
+            <mat-option *ngFor="let u of discountKeys; let i = index" [value]="u.id">
+              {{ u.discountKey }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxLayoutAlign="end end">
+        <div fxLayout="row">
+          <button class="icon-button" [ngClass]="{ disIconBtn: isReadOnly }" mat-fab extended (click)="getRecords()">
+            <mat-icon>check_circle</mat-icon> Display Records
+          </button>
+        </div>
+      </div>
+      </mat-card>
+      <mat-card *ngIf="pdfIsBlank" class="message-card">
+        <mat-card-header>
+          <div class="icon-container">
+            <mat-icon>info</mat-icon>
+          </div>
+          <!-- <mat-card-title>No Data Available</mat-card-title> -->
+        </mat-card-header>
+        <mat-card-content>
+          <p>The PDF is blank. There is no data to display.</p>
+        </mat-card-content>
+      </mat-card>
+
+    <div *ngIf="!pdfIsBlank">
+      <iframe id="pdfFrame" width="100%" height="600px"></iframe>
+    </div>
+  </div>
+</div>
+<div>
+  <div *ngIf="isLoading" class="spinnerBox">
+    <mat-spinner style="height: 100px; width: 100px; color: white"></mat-spinner>
+    <p class="loadingText">Please Wait, Working...</p>
+  </div>
+</div>

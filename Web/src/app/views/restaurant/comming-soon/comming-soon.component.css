@@ -1,0 +1,21 @@
+html,
+body {
+    height: 100%;
+    margin: 0
+}
+
+.full-height {
+    height: 80vh;
+    width: 100%;
+    background-image: linear-gradient(to bottom right, rgb(4, 48, 78), rgb(20, 63, 83), rgb(4, 53, 82));
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.text:hover {
+    transform: scale(1.5);
+    color: aqua;
+    cursor: pointer;
+}

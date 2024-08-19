@@ -1,0 +1,145 @@
+<div class="container-fluid page">
+    <div class="d-flex page_box p-3 mt-2">Size List</div>
+    <div class="page_content shadow p-3 position-relative">
+        <div class="pull-right" style="text-align:end; margin-top: 20px;">
+            <Row>
+                <button cButton color="dark" [routerLink]="['/restaurant/sale/Size']">Add
+                    New</button>
+                <button cButton color="dark" style="margin-left: 10px;"
+                    [routerLink]="['/restaurant/sale/itemList']">Item
+                    List
+                </button>
+            </Row>
+        </div>
+        <div style="padding: 20px; margin-bottom: -20px;">
+            <mat-form-field fxFlex="100%">
+                <mat-label>Search</mat-label>
+                <input matInput (keyup)="applyFilter($event)" #input>
+            </mat-form-field>
+        </div>
+        <c-card style="padding: 10px; margin-top: 30px;" class="mat-elevation-z8">
+            <c-card-body style="padding: 10px;background-color: rgb(2, 42, 75);margin: 5px;border-radius: 10px;">
+                <div class="example-table-container">
+                    <section class="example-container mat-elevation-z8" tabindex="0" style="border-radius: 5px;">
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                            <ng-container matColumnDef="Id">
+                                <th mat-header-cell *matHeaderCellDef> Sr No </th>
+                                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="isActive">
+                                <th mat-header-cell *matHeaderCellDef>IsActive</th>
+                                <td mat-cell *matCellDef="let element"> {{element.isActive}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Group">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;"> Group </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;"> {{element.group}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Item">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Item</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;"> {{element.item}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="SizeName">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;"> Size Name </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.sizeName}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="KDS">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;"> KDS </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.kds}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Price">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;"> Price</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;"> {{element.price}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="ActualPrice">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Actual Price</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.actualPrice}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Tax">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Tax</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.tax}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Cost">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Cost</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.cost}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="SuggestedPrice">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Suggested Price</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.suggestedPrice}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="CurrentMargin">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Current Margin</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.currentMargin}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="SuggestedMargin">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Suggested Margin</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.suggestedMargin}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Action" stickyEnd="true">
+                                <th mat-header-cell *matHeaderCellDef style="width: 20%;text-align: center;">
+                                    <p style="font-size: 14px;">Action
+                                    </p>
+                                </th>
+                                <td mat-cell *matCellDef="let cust" style="width: 20%;text-align: center;">
+                                    <div>
+                                        <button mat-icon-button mat-sm-button color="primary" (click)="EditSize(cust)"
+                                            matTooltip="Edit" style="cursor: pointer;">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <!-- <button mat-icon-button mat-sm-button color="warn" matTooltip="Delete"
+                                            (click)="DeleteSize(cust.id)"><mat-icon>delete</mat-icon></button> -->
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </section>
+                </div>
+            </c-card-body>
+        </c-card>
+    </div>
+</div>

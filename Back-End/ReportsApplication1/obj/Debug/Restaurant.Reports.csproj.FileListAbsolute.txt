@@ -1,0 +1,5 @@
+E:\New Folder\QST\Projects\trunk\Back-End\ReportsApplication1\obj\Debug\Restaurant.Reports.csproj.AssemblyReference.cache
+E:\New Folder\QST\Projects\trunk\Back-End\ReportsApplication1\obj\Debug\Restaurant.Reports.csproj.SuggestedBindingRedirects.cache
+E:\New Folder\QST\Projects\trunk\Back-End\ReportsApplication1\obj\Debug\ReportsApplication1.Properties.Resources.resources
+E:\New Folder\QST\Projects\trunk\Back-End\ReportsApplication1\obj\Debug\Restaurant.Reports.csproj.GenerateResource.cache
+E:\New Folder\QST\Projects\trunk\Back-End\ReportsApplication1\obj\Debug\Restaurant.Reports.csproj.CoreCompileInputs.cache

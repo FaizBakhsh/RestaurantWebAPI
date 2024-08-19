@@ -1,0 +1,75 @@
+<div class="container-fluid page">
+  <div class="d-flex page_box p-3 mt-2">Employee List</div>
+  <div class="page_content shadow p-3 position-relative">
+    <div class="pull-right" style="text-align:end; margin-top: 20px;">
+      <button [ngClass]="{disabledBtn:isReadOnly}" class="bttn"  [routerLink]="['/restaurant/empManagement/manageEmployee']">Add New</button>
+    </div>
+    <c-card style="padding: 10px; margin-top: 50px;" class="mat-elevation-z8">
+      <c-card-body style="padding: 10px;background-color: rgb(2, 42, 75);margin: 5px;border-radius: 10px;">
+        <div class="example-table-container">
+          <section class="example-container mat-elevation-z8" tabindex="0" style="border-radius: 5px;">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+              <ng-container matColumnDef="Id">
+                <th mat-header-cell *matHeaderCellDef style="min-width: 150px;text-align: center;"> Sr No </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+              </ng-container>
+              <ng-container matColumnDef="isActive">
+                <th mat-header-cell *matHeaderCellDef style="min-width: 150px;text-align: center;"> IsActive </th>
+                <td mat-cell *matCellDef="let element" style="min-width: 150px;text-align: center;">
+                  {{element.isActive}} </td>
+              </ng-container>
+              <ng-container matColumnDef="Name">
+                <th mat-header-cell *matHeaderCellDef style="min-width: 150px;text-align: center;"> Name </th>
+                <td mat-cell *matCellDef="let element" style="min-width: 150px;text-align: center;"> {{element.name}}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="Branch">
+                <th mat-header-cell *matHeaderCellDef style="min-width: 150px;text-align: center;"> Branch Name </th>
+                <td mat-cell *matCellDef="let element" style="min-width: 150px;text-align: center;">
+                  {{element.branchName}} </td>
+              </ng-container>
+              <ng-container matColumnDef="Phone">
+                <th mat-header-cell *matHeaderCellDef style="min-width: 150px;text-align: center;"> Phone </th>
+                <td mat-cell *matCellDef="let element" style="min-width: 150px;text-align: center;">
+                  <div fxLayout="column">
+                    <div>{{element.phone}}</div>
+                  </div>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="Designation">
+                <th mat-header-cell *matHeaderCellDef style="min-width: 150px;text-align: center;"> Designation </th>
+                <td mat-cell *matCellDef="let element" style="min-width: 150px;text-align: center;">
+                  {{element.designation}} </td>
+              </ng-container>
+              <ng-container matColumnDef="Gender">
+                <th mat-header-cell *matHeaderCellDef style="min-width: 150px;text-align: center;"> Gender </th>
+                <td mat-cell *matCellDef="let element" style="min-width: 150px;text-align: center;"> {{element.gender}}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="JoiningDate">
+                <th mat-header-cell *matHeaderCellDef style="min-width: 150px;text-align: center;"> Joining Date </th>
+                <td mat-cell *matCellDef="let element" style="min-width: 150px;text-align: center;">
+                  {{element.joiningDate|date:"dd/MM/yyyy"}} </td>
+              </ng-container>]
+              <ng-container matColumnDef="Action" stickyEnd="true">
+                <th mat-header-cell *matHeaderCellDef style="min-width: 150px;text-align: center;">
+                  <p style="font-size: 14px;">Action</p>
+                </th>
+                <td mat-cell *matCellDef="let cust" style="min-width: 150px;text-align: center;">
+                  <div [ngClass]="{disabledDiv:isReadOnly}">
+                    <button mat-icon-button mat-sm-button color="primary" (click)="EditEmployee(cust)" matTooltip="Edit"
+                      style="cursor: pointer;"><mat-icon>edit</mat-icon></button>
+                    <!-- <button mat-icon-button mat-sm-button color="warn" matTooltip="Delete"
+                      (click)="DeleteEmployee(cust.id)"><mat-icon>delete</mat-icon></button> -->
+                  </div>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </section>
+        </div>
+      </c-card-body>
+    </c-card>
+  </div>
+</div>

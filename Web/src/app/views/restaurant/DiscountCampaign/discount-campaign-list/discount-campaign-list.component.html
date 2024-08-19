@@ -1,0 +1,174 @@
+<div class="container-fluid page">
+    <div class="d-flex page_box p-3 mt-2">DiscountCampaign List</div>
+    <div class="page_content shadow p-3 position-relative">
+        <div class="pull-right" style="text-align:end; margin-top: 20px;">
+            <button [ngClass]="{disabledBtn:isReadOnly}" class="bttn"
+                [routerLink]="['/restaurant/sale/discountCampaign']">Add
+                New</button>
+        </div>
+        <c-card style="padding: 10px; margin-top: 30px;" class="mat-elevation-z8">
+            <c-card-body style="padding: 10px;background-color: rgb(2, 42, 75);margin: 5px;border-radius: 10px;">
+                <div class="example-table-container">
+                    <section class="example-container mat-elevation-z8" tabindex="0" style="border-radius: 5px;">
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                            <ng-container matColumnDef="Id">
+                                <th mat-header-cell *matHeaderCellDef> Sr No </th>
+                                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="isActive">
+                                <th mat-header-cell *matHeaderCellDef> IsActive </th>
+                                <td mat-cell *matCellDef="let element"> {{element.isActive?'Yes':'No'}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Name">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;"> Name </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;"> {{element.name}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Days">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;"> Days </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;"> {{element.days}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Discount">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Discount</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;"> {{element.discount}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Type">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;"> Type </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.type}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Group">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;"> Group </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.group}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="StartTime">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;"> Start Time</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;"> {{element.startTime}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="EndTime">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">End Time</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.endTime}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Sunday">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Sunady</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.sunday}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Saturday">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Saturday</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.saturday}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Friday">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Friday</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.friday}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Thursday">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Thursday</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.thursday}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Wednesday">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Wednesday</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.wednesday}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Tuesday">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Tuesday</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.tuesday}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Monday">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Monday</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.monday}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="EndDate">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">End Date</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.endDate|date:'yyyy-MM-dd'}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="StartDate">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Start Date</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.startDate|date:'yyyy-MM-dd'}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Action" stickyEnd="true">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <p style="font-size: 14px;margin-left: 27px;width: 100px;">Action</p>
+                                </th>
+                                <td mat-cell *matCellDef="let cust">
+                                    <div style="width: 100px;text-align: center;" [ngClass]="{disabledDiv:isReadOnly}">
+                                        <button mat-icon-button mat-sm-button color="primary"
+                                            (click)="EditDiscountCampaign(cust)" matTooltip="Edit"
+                                            style="cursor: pointer;">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <!-- <button mat-icon-button mat-sm-button color="warn" matTooltip="Delete"
+                                            (click)="DeleteDiscountCampaign(cust.id)"><mat-icon>delete</mat-icon></button> -->
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </section>
+                </div>
+            </c-card-body>
+        </c-card>
+    </div>
+</div>

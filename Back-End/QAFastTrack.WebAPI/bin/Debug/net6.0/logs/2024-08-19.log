@@ -1,0 +1,5 @@
+2024-08-19 12:10:51.3636 ERROR System.ArgumentException: Parameter 'reasonId' not found in the collection.
+2024-08-19 12:27:31.8340 ERROR System.ArgumentException: Parameter 'reasonId' not found in the collection.
+2024-08-19 12:28:19.9137 ERROR System.ArgumentException: Parameter 'reasonId' not found in the collection.
+2024-08-19 12:29:08.7602 ERROR System.ArgumentException: Parameter 'reasonId' not found in the collection.
+2024-08-19 12:36:03.6195 ERROR MySql.Data.MySqlClient.MySqlException: Table 'restaurant.enum' doesn't exist

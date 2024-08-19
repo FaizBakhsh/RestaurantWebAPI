@@ -1,0 +1,104 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0": {
+      "Microsoft.SyncFramework/2.1.0.2": {
+        "type": "package"
+      }
+    }
+  },
+  "libraries": {
+    "Microsoft.SyncFramework/2.1.0.2": {
+      "sha512": "fXmk34v+Tct4c/9GvLcCA88ARsyQQzN7+TbfE++6eqXOQ4LwKIOZ91HP54STjF8VPBAcUld5c5tqylQSlj629Q==",
+      "type": "package",
+      "path": "microsoft.syncframework/2.1.0.2",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "microsoft.syncframework.2.1.0.2.nupkg.sha512",
+        "microsoft.syncframework.nuspec",
+        "tools/commands.psm1",
+        "tools/init.ps1",
+        "tools/install.ps1",
+        "tools/uninstall.ps1",
+        "tools/x64/Synchronization-v2.1-x64-ENU.msi",
+        "tools/x86/Synchronization-v2.1-x86-ENU.msi"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net6.0": [
+      "Microsoft.SyncFramework >= 2.1.0.2"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\AU TRADERS\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\QST\\Projects\\Git\\Restaurant\\Back-End\\QST.Sync\\QST.Sync.csproj",
+      "projectName": "QST.Sync",
+      "projectPath": "D:\\QST\\Projects\\Git\\Restaurant\\Back-End\\QST.Sync\\QST.Sync.csproj",
+      "packagesPath": "C:\\Users\\AU TRADERS\\.nuget\\packages\\",
+      "outputPath": "D:\\QST\\Projects\\Git\\Restaurant\\Back-End\\QST.Sync\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\AU TRADERS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net6.0": {
+        "targetAlias": "net6.0",
+        "dependencies": {
+          "Microsoft.SyncFramework": {
+            "target": "Package",
+            "version": "[2.1.0.2, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

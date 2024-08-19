@@ -1,0 +1,296 @@
+<div class="container-fluid page">
+    <div class="d-flex page_box p-3 mt-2  header-sticky" position="sticky">
+        <div>Manage Item Recipe
+        </div>
+        <!-- <div *ngIf="Edit">Edit Item Recipe
+        </div> -->
+    </div>
+    <div class="page_content shadow p-3 position-relative">
+        <form #recipeForm="ngForm">
+            <mat-card style="padding: 10px;">
+                <div fxLayout="row">
+                    <mat-form-field appearance="outline" style="width: 100%;">
+                        <mat-label> Select Group</mat-label>
+                        <mat-select name="groupId" #groupId="ngModel" [(ngModel)]="selectedRecipe.groupId" required>
+                            <mat-option>
+                                <ngx-mat-select-search (ngModelChange)="SearchinGroup($event)" [(ngModel)]="searchGroup"
+                                    name="searchGroup" [noEntriesFoundLabel]="'No Matching Found'"
+                                    [hideClearSearchButton]=true placeholderLabel="Search Group..."
+                                    [clearSearchInput]=false (blur)="SearchinGroup($event)">
+                                </ngx-mat-select-search>
+                            </mat-option>
+                            <mat-option (click)="GetItems()" [value]="0">--Please Select--</mat-option>
+                            <mat-option *ngFor="let pt of filteredGroup" [value]=" pt.id" (click)="SearchItem()">
+                                {{ pt.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <!-- <mat-form-field appearance="outline" style="width: 25%;">
+                                        <mat-label>Select a country</mat-label>
+                                        <mat-select #countrySelect>
+                                            <mat-select-trigger>{{countrySelect.value}}</mat-select-trigger>
+                                            <mat-option>
+                                                <lib-mat-select-search [list]="data" [searchProperties]="['itemName']"
+                                                    (filtered)="filteredData = $event">
+                                                </lib-mat-select-search>
+                                            </mat-option>
+                                            <mat-option [value]="0" (click)="ngOnInit()">--Please Select--</mat-option>
+                                            <mat-option *ngFor="let pt of filteredData" [value]=" pt.id"
+                                                (click)="ChangeInItemDropDown(pt)">
+                                                {{ pt.itemName}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field> -->
+                    <!-- <mat-form-field appearance="outline" style="width: 25%;">
+                                        <mat-label> Select Item</mat-label>
+                                        <mat-select name="entityId" matNativeControl #entityId="ngModel"
+                                            [(ngModel)]="selectedRecipe.entityId" [required]="itemDropDown">
+                                            <mat-option>
+                                                <ngx-mat-select-search (input)="AutoCompleteSearch()" [(ngModel)]="searchValue"
+                                                    name="searchValue" noEntriesFoundLabel="'No Matching Found'"
+                                                    placeholderLabel="Search Item..." (blur)="AutoCompleteSearch()">
+                                                </ngx-mat-select-search>
+                                            </mat-option>
+                                            <mat-option [value]="0">--Please Select--</mat-option>
+                                            <mat-option *ngFor="let pt of filteredData" [value]=" pt.id"
+                                                (click)="ChangeInItemDropDown(pt)">
+                                                {{ pt.itemName}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field> -->
+                    <mat-form-field appearance="outline" style="width: 100%;">
+                        <mat-label> Select Item</mat-label>
+                        <mat-select name="entityId" matNativeControl #entityId="ngModel"
+                            [(ngModel)]="selectedRecipe.entityId" [required]="itemDropDown">
+                            <mat-option>
+                                <ngx-mat-select-search (ngModelChange)="SearchinItem($event)" [(ngModel)]="searchItem"
+                                    name="searchItem" [noEntriesFoundLabel]="'No Matching Found'"
+                                    [hideClearSearchButton]=true placeholderLabel="Search Item..."
+                                    [clearSearchInput]=false (blur)="SearchinItem($event)">
+                                </ngx-mat-select-search>
+                            </mat-option>
+                            <mat-option [value]="0" (click)="Sizes=[];ItemRecipe=[]">--Please Select--
+                            </mat-option>
+                            <mat-option *ngFor="let pt of filteredItem" [value]=" pt.id"
+                                (click)="ChangeInItemDropDown(pt)">
+                                {{ pt.itemName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" style="width: 100%;" *ngIf="Sizes.length>0">
+                        <mat-label> Select Size</mat-label>
+                        <mat-select name="sizeId" #sizeId="ngModel" [(ngModel)]="selectedRecipe.sizeId"
+                            [required]="isSizeRequired">
+                            <mat-option [value]="0" (click)="GetRecipeByItem()">--Please Select--</mat-option>
+                            <mat-option *ngFor="let pt of Sizes" [value]=" pt.id" (click)="GetRecipeBySize()">
+                                {{ pt.attributeValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" style="width: 100%;">
+                        <mat-label> Select Type</mat-label>
+                        <mat-select name="orderTypeId" matNativeControl #orderTypeId="ngModel"
+                            [(ngModel)]="selectedRecipe.orderTypeId" [required]="true">
+                            <mat-option [value]="0">--Please Select--</mat-option>
+                            <mat-option *ngFor="let pt of OrderTypes" [value]=" pt.id">
+                                {{ pt.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayoutAlign="end end">
+                    <mat-checkbox name="isActive" [(ngModel)]="selectedRecipe.isActive">
+                        IsActive
+                    </mat-checkbox>
+                </div>
+            </mat-card>
+            <h5 cCardTitle style="margin-top: 50px;">Recipe</h5>
+            <div style="width: 100%; background-color: rgb(209, 224, 243);margin-top: 5px; height: 100px;border-radius: 10px;
+                          padding: 20px; text-align: center;" fxLayoutAlign="space-around">
+                <mat-form-field appearance="outline" style="width: 35%;">
+                    <mat-label> Select RawItem</mat-label>
+                    <mat-select name="rawItemId" matNativeControl #rawItemId="ngModel"
+                        [(ngModel)]="selectedRecipe.rawItemId" required>
+                        <mat-option>
+                            <ngx-mat-select-search (ngModelChange)="SearchinRawItem($event)" [(ngModel)]="searchRawItem"
+                                name="searchItem" [noEntriesFoundLabel]="'No Matching Found'"
+                                [hideClearSearchButton]=true placeholderLabel="Search Raw Item..."
+                                [clearSearchInput]=false (blur)="SearchinRawItem($event)">
+                            </ngx-mat-select-search>
+                        </mat-option>
+                        <mat-option [value]="0">--Please Select--</mat-option>
+                        <mat-option *ngFor="let pt of filterRawItem" [value]=" pt.id"
+                            (click)=" SearchSelectedRawItem(pt.id)">
+                            {{ pt.itemName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" style="width: 35%;">
+                    <mat-label>UOM</mat-label>
+                    <input matInput #uom="ngModel" name="uom" maxlength="300" readonly="true"
+                        [(ngModel)]="selectedRecipe.uom" />
+                </mat-form-field>
+                <div fxFlex="4%"></div>
+                <mat-form-field appearance="outline" style="width: 35%;">
+                    <mat-label>QTY</mat-label>
+                    <input matInput #qty="ngModel" name="qty" (input)="CalculateAmount()"
+                        [(ngModel)]="selectedRecipe.qty" type="number" min="0" oninput="validity.valid||(value='')"
+                        required="true" />
+                </mat-form-field>
+                <!-- <mat-form-field appearance="outline" style="width: 17%;">
+                        <mat-label>Actual Price</mat-label>
+                        <input matInput name="price" readonly="true" [(ngModel)]="selectedRecipe.price" />
+                    </mat-form-field> -->
+                <mat-form-field appearance="outline" style="width: 35%;">
+                    <mat-label>Total Amount</mat-label>
+                    <input matInput name="amount" [(ngModel)]="selectedRecipe.amount" readonly="true" />
+                </mat-form-field>
+                <div fxLayoutAlign="end end">
+                    <c-spinner *ngIf="proccessing" style="height: 50px;width: 50px;color: rgb(3, 71, 102);">
+                    </c-spinner>
+                </div>
+                <!-- <div *ngIf="!proccessing">
+                        <button mat-icon-button mat-sm-button color="primary" cTooltip="Refresh" cTooltipPlacement="top"
+                            (click)="SaveRecipe();RefreshLine()">
+                            <mat-icon>autorenew</mat-icon>
+                        </button>
+                    </div> -->
+            </div>
+            <div style="margin-top: 10px;" fxLayoutAlign="end end">
+                <button *ngIf="Add" [ngClass]="{disabledBtn:isReadOnly}" class="bttn"  type="submit"
+                    (click)="AddRecipetoList();">
+                    Save
+                </button>
+                <button *ngIf="Edit" [ngClass]="{disabledBtn:isReadOnly}" class="bttn"  type="submit"
+                    (click)="AddRecipetoList()">
+                    Update
+                </button>
+                <button [routerLink]="['/restaurant/sale/attachSubItem']" [ngClass]="{disabledBtn:isReadOnly}" class="darkBttn"  type="submit">
+                    Attach Sub Item
+                </button>
+                <button mat-icon-button mat-sm-button color="primary" cTooltip="Refresh" cTooltipPlacement="top"
+                    (click)="ngOnInit()">
+                    <mat-icon>autorenew</mat-icon>
+                </button>
+            </div>
+        </form>
+        <c-card style="padding: 10px; margin-top: 30px;" class="mat-elevation-z8" *ngIf="ItemRecipe.length>0">
+            <h5 cCardTitle>Recipe List</h5>
+            <c-card-body style="padding: 10px;background-color: rgb(2, 42, 75);margin: 5px;border-radius: 10px;">
+                <div class="example-table-container">
+                    <section class="example-container mat-elevation-z8" tabindex="0" style="border-radius: 5px;">
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                            <ng-container matColumnDef="Id">
+                                <th mat-header-cell *matHeaderCellDef> Sr No </th>
+                                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Group">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div> Group </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div> {{element.group}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="MenuItem">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div>Menu Item</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div> {{element.itemEntity}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Size">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div> Size </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div>{{element.size}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="RawItem">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div> Raw Item </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div>{{element.rawItem}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="UOM">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div> UOM</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div> {{element.uom}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="QTY">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div>QTY</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div>{{element.qty}}</div>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Price">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div>Actual Price</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div>{{element.price}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="isActive">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div>IsActive</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div>{{element.isActive?'Yes':'No'}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="OrderType">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div>Order Type</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div>{{element.orderType}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Amount">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div>Total Amount</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div>{{element.amount}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Action" stickyEnd="true">
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center;">
+                                    <p style="font-size: 14px;">Action</p>
+                                </th>
+                                <td mat-cell *matCellDef="let row" style="text-align: center;">
+                                    <div [ngClass]="{disabledDiv:isReadOnly}">
+                                        <button mat-icon-button mat-sm-button style=" color:#1e293b ; "
+                                            cTooltip=" Edit Recipe" (click)="EditRecipe(row)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+
+                                        <!-- <button mat-icon-button mat-sm-button color="warn" cTooltip="Delete Recipe"
+                                            (click)="DeleteRecipe(row)">
+                                            <mat-icon>delete</mat-icon>
+                                        </button> -->
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </section>
+                </div>
+            </c-card-body>
+        </c-card>
+        <!-- <div fxLayoutAlign="end end"><c-spinner *ngIf="proccessing"
+                    style="height: 50px;width: 50px;color: rgb(3, 71, 102);"></c-spinner></div> -->
+    </div>
+</div>

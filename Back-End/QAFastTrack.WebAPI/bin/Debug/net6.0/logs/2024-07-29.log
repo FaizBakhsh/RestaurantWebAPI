@@ -1,0 +1,1 @@
+2024-07-29 05:19:23.4508 ERROR MySql.Data.MySqlClient.MySqlException: Cannot add or update a child row: a foreign key constraint fails (`restaurant`.`saleorder`, CONSTRAINT `saleorder_ibfk_1` FOREIGN KEY (`WaiterId`) REFERENCES `aspnetusers` (`Id`))

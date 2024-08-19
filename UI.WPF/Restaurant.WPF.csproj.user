@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_LastSelectedProfileId>D:\QST\Projects\Git\Restaurant\UI.WPF\Properties\PublishProfiles\FolderProfile1.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Theme.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AssignRider.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Authentication.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\BillRecall.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\BillTransfer.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Cash.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\CashTender.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ChangeBill.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Comment.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Complimentary.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\CopyBill.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Delete.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\DeliveryStatus.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Discount.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\DiscountIndividual.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\DiscountKeys.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\EmployeeFunctions.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Expenses.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\KitchenInventry.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Login.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\LoyaltyCard.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Modify.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\OrderDispatch.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\OrderMakeStatus.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\POS.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Receivables.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ShiftEnd.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\SplitBill.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Tender.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\UserControls\POS_TopButtonsUserControl.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Visa.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\VouchersDiscount.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Dictionaries\ControlStyles.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dictionaries\DefaultColorsStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dictionaries\DifferentColorsStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Dictionaries\StylesFonts.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Theme.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AssignRider.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Authentication.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\BillRecall.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\BillTransfer.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Cash.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\CashTender.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ChangeBill.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Comment.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Complimentary.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\CopyBill.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Delete.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\DeliveryStatus.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Discount.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\DiscountIndividual.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\DiscountKeys.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\EmployeeFunctions.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Expenses.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\KitchenInventry.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Login.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\LoyaltyCard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Modify.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\OrderDispatch.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\OrderMakeStatus.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\POS.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Receivables.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ShiftEnd.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SplitBill.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Tender.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\UserControls\POS_TopButtonsUserControl.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Visa.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\VouchersDiscount.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

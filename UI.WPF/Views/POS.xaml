@@ -1,0 +1,385 @@
+﻿<Controls:MetroWindow x:Class="Restaurant.WPF.Views.POS"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Restaurant.WPF.Views"                
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:iconPak="http://metro.mahapps.com/winfx/xaml/iconpacks"
+                      mc:Ignorable="d"
+        Title="POS" WindowState="Maximized" ResizeMode="CanResizeWithGrip"  >
+    <Grid x:Name="DynamicGrid">
+        <Grid.RowDefinitions  >
+            <RowDefinition Height="55"></RowDefinition>
+            <RowDefinition  ></RowDefinition>
+            <RowDefinition Height="1"></RowDefinition>
+            <RowDefinition MinHeight="30" Height="46"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions  >
+            <ColumnDefinition Width="25" ></ColumnDefinition>
+            <ColumnDefinition Width="470" ></ColumnDefinition>
+            <ColumnDefinition  ></ColumnDefinition>
+            <ColumnDefinition Width="200" ></ColumnDefinition>
+            <ColumnDefinition Width="25"  ></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <!--#region Side Border Columns -->
+
+        <Border x:Name="BottomButtonBorder" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="5"  BorderBrush="{DynamicResource MahApps.Brushes.Accent}" HorizontalAlignment="Left"
+            VerticalAlignment="Stretch" Width="25" MinHeight="732" BorderThickness="1"
+                    Background="{DynamicResource MahApps.Brushes.Accent4}" >
+            <ToggleButton
+                    Content="Bottom Button Menu" FontSize="10"
+                Click="Bottom_Button_Visibility"
+                              BorderThickness="0" Background="Transparent" 
+                    HorizontalAlignment="Center" VerticalAlignment="Stretch"
+                              Width="130" Margin="0,230,0,0">
+                <ToggleButton.LayoutTransform >
+                    <RotateTransform Angle="-90"></RotateTransform>
+                </ToggleButton.LayoutTransform>
+            </ToggleButton>
+
+        </Border>
+        <Border x:Name="CategoryButtonBoder"  Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="5"
+                BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
+                     MinHeight="732" Width="25" BorderThickness="1" 
+                     VerticalAlignment="Stretch" HorizontalAlignment="Right"
+                    Background="{DynamicResource MahApps.Brushes.Accent4}" >
+            <ToggleButton  Content="Menu Item Group" FontSize="10" BorderThickness="0" Background="Transparent"
+                           Click="Categories_Visibility"
+                               HorizontalAlignment="Center"  Width="120" Margin="0,0,0,430">
+                <ToggleButton.LayoutTransform >
+                    <RotateTransform Angle="-90"></RotateTransform>
+                </ToggleButton.LayoutTransform>
+            </ToggleButton>
+        </Border>
+
+        <!--#endregion-->
+        <!--#region TopButtons -->
+
+        <DockPanel VerticalAlignment="Top" HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Background="{DynamicResource MahApps.Brushes.SystemControlBackgroundChromeMedium}" >
+            <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" Height="55" Width="470">
+                <WrapPanel Margin="0,2,0,0" Name="PendingOrders" Orientation="Horizontal"  >
+                </WrapPanel>
+            </ScrollViewer>
+            <Button Click="clearBtn" ToolTip="Clear Form" BorderBrush="{DynamicResource MahApps.Brushes.Accent4}" Height="32" MinWidth="95" BorderThickness="1" Margin="5,0,5,0" Background="LightGray" VerticalAlignment="Center" >
+            </Button>
+            <ScrollViewer HorizontalAlignment="Stretch" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" Height="55" >
+                <WrapPanel Margin="0,2,0,0" Name="sizes" Orientation="Horizontal"  >
+                </WrapPanel>
+            </ScrollViewer>
+            <WrapPanel Margin="0,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Right" >
+                <!--<Border BorderBrush="White" BorderThickness="1"   Height="35"   MinWidth="145" />
+                <Border BorderBrush="White" BorderThickness="1"   Height="35"   MinWidth="145" />
+                <Border BorderBrush="White" BorderThickness="1"   Height="35"   MinWidth="145" />-->
+                <Button Content="Modify" FontWeight="Bold"  Click="Modify_Click"   Height="32"   Padding="20,0,20,0"></Button>
+                <Button Content="Change Theme" FontWeight="Bold"   Click="ChangeTheme_Click"  MaxWidth="130"  Height="32"   Padding="20,0,20,0"></Button>
+
+            </WrapPanel>
+        </DockPanel>
+
+        <!--#endregion-->
+        <!--#region SaleForm -->
+        <ScrollViewer Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+
+            <Border  BorderThickness="1" MinWidth="410" Height="480" Width="1100"
+                  x:Name="SaleForm" 
+                  Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                   BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
+                 Background="{DynamicResource MahApps.Brushes.SystemControlBackgroundChromeMedium}">
+                <WrapPanel  Margin="5,15,5,5" Orientation="Vertical" HorizontalAlignment="Center" >
+                    <TextBlock  Height="20" HorizontalAlignment="Left" Foreground="White" MinWidth="80" Padding="10,2,10,0" Background="{DynamicResource MahApps.Brushes.Highlight}" Margin="6,-10,0,-3" Name="OrderName"></TextBlock>
+                    <Border  Background="{DynamicResource MahApps.Brushes.Highlight}" Grid.Row="1" MinHeight="200" Height="450" 
+                     Name="DataTable" VerticalAlignment="Top" Margin="6,0,5,0" >
+                        <DataGrid Foreground="Black" 
+                                BorderBrush="{DynamicResource MahApps.Brushes.Accent4}"
+                                CanUserDeleteRows="True"
+                             CanUserAddRows="True"
+                              Width="443" x:Name="SOLineGrid" AutoGenerateColumns="False"  BorderThickness="1" 
+                              VerticalAlignment="Stretch" Padding="2,10,2,2"  
+                            CanUserResizeColumns="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden"  
+                              CanUserSortColumns="True" Margin="10,10,10,10" >
+                            <DataGrid.Resources>
+                                <Style TargetType="DataGridRow">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsRMod}" Value="true">
+                                            <Setter Property="Background" Value="RosyBrown" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsDealItem}" Value="true">
+                                            <Setter Property="FontWeight" Value="Bold" />
+                                            <Setter Property="Background" Value="RosyBrown" />
+                                        </DataTrigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="LightBlue" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.Resources>
+                            <DataGrid.Columns   >
+                                <DataGridTemplateColumn Header="QTY"  Width="60">
+                                    <DataGridTemplateColumn.CellTemplate >
+                                        <DataTemplate >
+                                            <Label  Background="White" Foreground="Black" Content="{Binding QTY}" />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Name"  Width="180">
+                                    <DataGridTemplateColumn.CellTemplate >
+                                        <DataTemplate >
+                                            <Label  Background="White" Foreground="Black" Content="{Binding ItemName}"  />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Price"  Width="90">
+                                    <DataGridTemplateColumn.CellTemplate >
+                                        <DataTemplate >
+                                            <Label  Background="White" Foreground="Black" Content="{Binding Price}"  />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <!--<DataGridTemplateColumn Header="Code"  Width="90">
+                                <DataGridTemplateColumn.CellTemplate >
+                                    <DataTemplate >
+                                        <Label  Background="White" Foreground="Black" Content="{Binding ItemCode}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>-->
+                                <DataGridTemplateColumn Header="LineTotal"  Width="90">
+                                    <DataGridTemplateColumn.CellTemplate >
+                                        <DataTemplate >
+                                            <Label  Background="White" Foreground="Black" Content="{Binding LineTotal}"  />
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Border>
+                    <WrapPanel Orientation="Vertical" x:Name="FormField" Margin="0,100,0,0" >
+                        <DockPanel FlowDirection="LeftToRight" Height="30"  Width="470" Margin="-20,0,0,0">
+                            <Button Content="+" Click="IncreaseQty" FontSize="15" FontWeight="Bold" 
+                                Height="25" Margin="35,0,0,0"  VerticalAlignment="Center" Width="44" Name="IncreaseQty_btn"/>
+                            <Button Content="-" Click="DecreaseQty" FontSize="15" FontWeight="Bold" Name="DecreaseQty_btn"
+                                 Height="25" Margin="10,0,0,0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="43"/>
+                        </DockPanel>
+                        <DockPanel Width="470" Height="26">
+                            <Label Content="Total:" FontWeight="Bold"   HorizontalAlignment="Left" Height="45"
+                               Margin="15,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="111"/>
+                            <TextBox HorizontalAlignment="Left" Name="SumofLineTotal"  Grid.Row="1" IsReadOnly="True"
+                                 TextWrapping="Wrap" Text="0" Margin="-20,0,0,0"
+                                 VerticalAlignment="Top" Width="349" Height="22"/>
+                        </DockPanel >
+                        <DockPanel Width="470" Height="26">
+                            <Label Content="Discount:" FontWeight="Bold"   HorizontalAlignment="Left" Height="45" Margin="15,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="85"/>
+                            <TextBox  HorizontalAlignment="Left" Name="DiscountPercentage"   KeyUp="CalculateDiscount"
+                                  Margin="5,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"
+                                  Width="81"   Height="22" PreviewTextInput="PreviewTextInput"/>
+                            <Label Content="%"  HorizontalAlignment="Left"  Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="-7.164,-2.002" Height="26" Width="20"/>
+                            <TextBox HorizontalAlignment="Left" Name="DiscountValue" IsReadOnly="True" Margin="13,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="186" Height="22"/>
+                            <Button Width="32"  Height="22" Click="ClearDisc"  Grid.Row="1" VerticalAlignment="Top" Margin="5,0,0,0" HorizontalAlignment="Left"
+                                Content="X" Background="WhiteSmoke" Foreground="Red"
+                                Name="ClearDisc_btn"
+                                FontWeight="Bold"></Button>
+                        </DockPanel>
+                        <DockPanel Width="470"  Height="26">
+                            <Label Content="GST:" FontWeight="Bold"   HorizontalAlignment="Left" Height="45" Margin="15,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="80"/>
+                            <TextBox  HorizontalAlignment="Left" Name="GSTPercentage"  IsReadOnly="True" KeyUp="CalculateGST"
+                                  Margin="9,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"
+                                  Width="81"  Height="22" PreviewTextInput="PreviewTextInput"/>
+                            <Label Content="%"  HorizontalAlignment="Left"  Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Top" Height="22" Width="26" />
+                            <TextBox HorizontalAlignment="Left" IsReadOnly="True" Name="GSTValue" Margin="9,0,0,0" Grid.Row="1" 
+                                 TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="186" Height="22"/>
+                            <Button Width="32"  Height="22" Click="ClearGST" VerticalAlignment="Top" Margin="5,0,0,0" HorizontalAlignment="Left"
+                                Content="X" Background="WhiteSmoke" Foreground="Red"
+                                Name="ClearGST_btn"
+                                FontWeight="Bold"></Button>
+                        </DockPanel>
+                        <DockPanel  Width="470" Height="35">
+                            <Label Content="Srvc:" FontWeight="Bold"  HorizontalAlignment="Left" Height="44" Margin="15,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="80"/>
+                            <TextBox HorizontalAlignment="Left" Name="SrvcCharges" KeyUp="RefreshNetTotal"  
+                                 PreviewTextInput="PreviewTextInput" Margin="9,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="312" Height="22"/>
+                            <Button Width="32"  Height="22" Click="ClearSrvc" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0,0,0" Content="X" 
+                                Background="WhiteSmoke" Foreground="Red" FontWeight="Bold"  Name="ClearSvc_btn"></Button>
+                        </DockPanel>
+                        <DockPanel Width="470" Height="26">
+                            <Label Content="POSFee:" FontWeight="Bold"   HorizontalAlignment="Left" Height="45" Margin="15,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="85"/>
+                            <TextBox  HorizontalAlignment="Left" Name="POSFee"   KeyUp="RefreshNetTotal"
+                                  Margin="5,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="0" VerticalAlignment="Top"
+                                  Width="81"   Height="22" PreviewTextInput="PreviewTextInput"/>
+                            <Label Content="Delivery Charges:" FontWeight="Bold"   HorizontalAlignment="Left" Height="45" Margin="37,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="110"/>
+                            <TextBox HorizontalAlignment="Left" Name="DeliveryCharges"  Margin="13,5,0,0" KeyUp="RefreshNetTotal" Grid.Row="1" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="107" Height="20"/>
+                        </DockPanel>
+                        <DockPanel  Width="470" Height="35">
+                            <Label Content="NetTotal:" FontWeight="Bold"   HorizontalAlignment="Left" Height="26" Margin="15,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="70"/>
+                            <TextBox HorizontalAlignment="Left" Name="NetTotalValue"  IsReadOnly="True"
+                                 Margin="17,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Center"
+                                 Width="350" Height="22"/>
+                        </DockPanel>
+                        <DockPanel    Name="MOP"   >
+                            <!--<RadioButton Content="Card" Name="CardBtn" Background="{DynamicResource MahApps.Brushes.Accent}" Click="CalculateGST"
+                                     GroupName="Payment" Foreground="White"  Height="28" Margin="104,0,0,0" Grid.Row="1" Width="168" HorizontalAlignment="Left" />
+                        <RadioButton Content="Cash" Name="CashBtn"  Click="CalculateGST" Background="{DynamicResource MahApps.Brushes.Accent}" HorizontalAlignment="Left"
+                                     GroupName="Payment" IsChecked="True" Foreground="White" Height="28" Margin="10,0,0,0" Grid.Row="1"  Width="168"  />-->
+                        </DockPanel>
+                        <DockPanel  Width="470" Height="28"  >
+                            <RadioButton Content="Cash" Name="CashBtn"  Click="CalculateGST" Background="Transparent" HorizontalAlignment="Left"
+                                     GroupName="Payment" IsChecked="True"  Height="28" Margin="104,0,0,0" Grid.Row="1"   />
+                            <RadioButton Content="Card" Name="CardBtn" Background="Transparent" Click="CalculateGST"
+                                     GroupName="Payment"  Height="28" Margin="30,0,0,0" Grid.Row="1"  HorizontalAlignment="Left" />
+                        </DockPanel>
+                    </WrapPanel>
+                </WrapPanel>
+            </Border>
+        </ScrollViewer>
+        <!--#endregion-->
+        <!--#region BottomButtons -->
+        <Border Visibility="Hidden" x:Name="BottomRegion" Grid.Row="2" 
+                   Grid.Column="1" Grid.ColumnSpan="3"    VerticalAlignment="Bottom" 
+                        Margin="-1,-2,0,-18" 
+            Background="{DynamicResource MahApps.Brushes.SystemControlForegroundChromeMedium}" BorderBrush="{DynamicResource MahApps.Brushes.Accent}" 
+                 BorderThickness="1" MinWidth="1320" 
+                 HorizontalAlignment="Stretch">
+            <DockPanel Margin="-10,5,0,5" LastChildFill="True" >
+                <Button Click="clearBtn"  Background="{DynamicResource MahApps.Brushes.HighContrastCornflowerBlue}" Height="35" Margin="15,0,0,0" VerticalAlignment="Top"  Width="122">
+                    <StackPanel>
+                        <iconPak:PackIconZondicons Kind="AddSolid" ></iconPak:PackIconZondicons>
+                        <TextBlock>New Bill</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Click="BillRecall"  Background="{DynamicResource MahApps.Brushes.HighContrastRosyBrown}" VerticalAlignment="Top" Height="35" Margin="-123,42,0,0"   Width="122">
+                    <StackPanel>
+                        <iconPak:PackIconZondicons Kind="Repost" ></iconPak:PackIconZondicons>
+                        <TextBlock>Bill Recall</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button VerticalAlignment="Top" Content="Tender"  FontSize="25" Click="Tender"
+                        Background="{DynamicResource MahApps.Brushes.HighContrastOrange}" Name="TenderButton"
+                        HorizontalAlignment="Left" Height="77" Margin="5,0,0,0" Grid.RowSpan="2" Grid.Row="2"  Width="122"/>
+                <Button Click="CopyBill" VerticalAlignment="Top" Height="35" Background="{DynamicResource MahApps.Brushes.HighContrastCornflowerBlue}" Padding="15,0,15,0" Margin="5,0,0,0"   >
+                    <StackPanel>
+                        <iconPak:PackIconFontAwesome Kind="CopyRegular" ></iconPak:PackIconFontAwesome>
+                        <TextBlock>Coppy Bills</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button  Click="PrintBtn" Background="{DynamicResource MahApps.Brushes.HighContrastRosyBrown}" Height="35" Margin="-90,0,0,0"  VerticalAlignment="Bottom" Padding="30,0,30,0">
+                    <StackPanel>
+                        <iconPak:PackIconZondicons Kind="Printer" ></iconPak:PackIconZondicons>
+                        <TextBlock>Print</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Content="Discount"  Click="Discount" Background="{DynamicResource MahApps.Brushes.HighContrastCornflowerBlue}" HorizontalAlignment="Left" Height="35" Margin="5,0,0,0"  VerticalAlignment="Top"  Padding="29,0,29,0"></Button>
+                <Button Content="Previous Bill" Click="PreviousBill" Background="{DynamicResource MahApps.Brushes.HighContrastGray}"  Height="35" Margin="-106,0,0,0"  VerticalAlignment="Bottom" Padding="20,0,20,0" />
+                <Button Content="Complimentary" Click="Complimentary" Background="{DynamicResource MahApps.Brushes.HighContrastCornflowerBlue}" HorizontalAlignment="Left" Height="35" Margin="5,0,0,0"  VerticalAlignment="Top" Width="122" />
+                <Button Content="Split Bill" Click="SplitBill" Background="{DynamicResource MahApps.Brushes.HighContrastCornflowerBlue}"  Height="35" Margin="-120,0,0,0"  VerticalAlignment="Bottom" Padding="35,0,35,0"/>
+                <Button  HorizontalAlignment="Left" Focusable="False" Background="{DynamicResource MahApps.Brushes.HighContrastCornflowerBlue}" Height="35" Margin="5,0,0,0"  VerticalAlignment="Top" Padding="30,0,30,0" Click="Delete">
+                    <StackPanel>
+                        <iconPak:PackIconZondicons  Kind="Trash"></iconPak:PackIconZondicons>
+                        <TextBlock>Delete</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Content="KDS"  Background="{DynamicResource MahApps.Brushes.HighContrastBrown}" Margin="-96,0,0,0"  Height="35" VerticalAlignment="Bottom" Padding="37,0,36,0" Click="Kitchen_Inventry"  />
+                <Button Content="Discount Individual" Click="DiscountIndividual" Background="{DynamicResource MahApps.Brushes.HighContrastRosyBrown}" HorizontalAlignment="Left" Height="35" Margin="5,0,0,0"  VerticalAlignment="Top" Width="122" />
+                <Button Content="Open Items" Background="{DynamicResource MahApps.Brushes.HighContrastGray}" HorizontalAlignment="Left" Height="35" Margin="-121,42,0,0"  VerticalAlignment="Bottom" Width="122"  />
+                <Button Content="Rename" Click="Rename" HorizontalAlignment="Left" Background="{DynamicResource MahApps.Brushes.HighContrastCornflowerBlue}" Height="35" Margin="5,0,0,0" VerticalAlignment="Top" Width="122" />
+                <Button Content="Comments" Focusable="False" Click="Comment" Background="{DynamicResource MahApps.Brushes.HighContrastCornflowerBlue}" HorizontalAlignment="Left" Height="35" Margin="-121,42,0,0"  VerticalAlignment="Bottom" Width="122" />
+                <Button Content="Loyalty Card" Click="LoyalityCard"  Background="{DynamicResource MahApps.Brushes.HighContrastCornflowerBlue}" HorizontalAlignment="Left" Height="35" Margin="5,0,0,0"  VerticalAlignment="Top" Width="122" />
+                <Button Content="ReOpen" Click="ReOpen" Background="{DynamicResource MahApps.Brushes.HighContrastGreen}" HorizontalAlignment="Left" Height="35" Margin="-121,42,0,0"  VerticalAlignment="Bottom" Width="122" />
+                <Button Content="EmployeeFunctions" Background="{DynamicResource MahApps.Brushes.HighContrastCornflowerBlue}" HorizontalAlignment="Left" Height="35" Margin="5,0,0,0"  VerticalAlignment="Top" Width="148" Click="EmployeeFuctions"/>
+                <Button Content="Exit" Background="{DynamicResource MahApps.Brushes.HighContrastCornflowerBlue}" HorizontalAlignment="Left" Height="35" Margin="-147,42,0,0"  VerticalAlignment="Bottom" Width="148" Click="Exit"/>
+            </DockPanel>
+        </Border>
+        <!--#endregion-->
+        <!--#region Bottom Orientation Button Part-->
+        <Border Grid.Row="3" Grid.ColumnSpan="5"  
+                HorizontalAlignment="Stretch"
+                BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
+                 Background="Transparent"
+          VerticalAlignment="Bottom"  Height="30" BorderThickness="1" >
+            <TextBlock Margin="40,0,0,0" FontSize="13" VerticalAlignment="Center"  FontWeight="Bold"  HorizontalAlignment="Left" Name="saleDate"></TextBlock>
+        </Border>
+        <Border Grid.Row="3" Grid.ColumnSpan="5" 
+                HorizontalAlignment="Stretch"
+                BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
+                 Background="Transparent"
+          VerticalAlignment="Bottom"  Height="30" BorderThickness="1" >
+            <TextBlock Margin="0,0,50,0" FontSize="13" VerticalAlignment="Center"  FontWeight="Bold" HorizontalAlignment="Right" Name="terminalName"></TextBlock>
+        </Border>
+        <Border Grid.Row="3" Grid.ColumnSpan="5" 
+                HorizontalAlignment="Stretch"
+                BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
+                 Background="{DynamicResource MahApps.Brushes.Accent4}"
+          VerticalAlignment="Bottom"  Height="30" BorderThickness="1" >
+            <Button Click="ChangeOrientaion"   Grid.Column="2"  HorizontalAlignment="Center" VerticalAlignment="Center"  >
+                <iconPak:PackIconZondicons  Kind="Shuffle" ></iconPak:PackIconZondicons>
+            </Button>
+        </Border>
+        <!--#endregion-->
+        <!--#region Group, Items ,  Modifiers -->
+
+        <!--<DockPanel Name="itemSearchBox" Margin="10,10,10,10" Visibility="Hidden" Grid.Row="1" Grid.Column="2" Width="600"  Height="50" VerticalAlignment="Top">
+            <TextBox   Padding="5" Margin="10,10,10,10" Grid.Row="1" Grid.Column="2" VerticalAlignment="Top"/>
+            <TextBlock   IsHitTestVisible="False" Text=" Search Item ..." Grid.Row="1" Grid.Column="2" Width="600" VerticalAlignment="Top" Margin="30,17,10,10"  Foreground="DarkGray">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Text, ElementName=itemSearchBox}" Value="">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </DockPanel>-->
+        <Border Name="itemSearchBox" Background="Transparent" Margin="10,10,10,10" Visibility="Hidden" Grid.Row="1" Grid.Column="2" MaxWidth="{Binding ElementName=MyScrollViewer, Path=ViewportWidth}"  Height="50" VerticalAlignment="Top"
+            BorderThickness="2"          
+            CornerRadius="5">
+            <DockPanel Margin="5" 
+                    >
+                <iconPak:PackIconFontAwesome Kind="SearchSolid" VerticalAlignment="Center" ></iconPak:PackIconFontAwesome>
+                <TextBox  Padding="5,5,5,5" TextChanged="chnageInSearchBox" Name="searchBoxText" HorizontalAlignment="Stretch"
+                       Margin="3 3 3 3"/>
+            </DockPanel>
+        </Border>
+        <!--<TextBox  Visibility="Hidden" Name="itemSearchBox" Grid.Row="1" Grid.Column="2" Width="600" Height="30" Margin="10,10,10,10" VerticalAlignment="Top"/>
+           
+            <Label x:Name="txtSearchPlaceholder" Content="Search..." Grid.Row="1" Grid.Column="2" Background="Transparent" Opacity="0.5" IsHitTestVisible="False"/>-->
+        <Border Visibility="Hidden" Name="ItemPanel" Grid.Row="1" Grid.Column="2" Background="Transparent" BorderThickness="4" Margin="20,60,20,20">
+            <ScrollViewer  x:Name="MyScrollViewer" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <WrapPanel   HorizontalAlignment="Stretch"  Orientation="Vertical" MaxWidth="{Binding ElementName=MyScrollViewer, Path=ViewportWidth}">
+                    <!--<ScrollViewer x:Name="ScrollViewer" HorizontalScrollBarVisibility="Auto"    VerticalScrollBarVisibility="Auto">
+                <WrapPanel  HorizontalAlignment="Stretch" MinWidth="650"  Orientation="Horizontal" Width="{Binding ElementName=ScrollViewer, Path=ViewportWidth}"
+                    Name="itemSP" Background="Black" >
+                </WrapPanel >
+            </ScrollViewer>-->
+
+                    <WrapPanel HorizontalAlignment="Stretch"  Name="itemSP"  >
+                    </WrapPanel>
+
+
+                    <WrapPanel HorizontalAlignment="Stretch"  Name="runtimeModifier"  >
+                    </WrapPanel>
+
+                    <!--<WrapPanel Orientation="Horizontal"  
+                   VerticalAlignment="Top" Name="runtimeModifier" Width="650" >
+            </WrapPanel>-->
+                    <!--<WrapPanel Orientation="Horizontal"   
+                   VerticalAlignment="Top" Name="sizes" Width="650" >
+            </WrapPanel>-->
+                </WrapPanel>
+            </ScrollViewer>
+        </Border>
+        <Border Visibility="Hidden" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+                Name="GroupPanel"  HorizontalAlignment="Right" 
+                BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
+                Background="{DynamicResource MahApps.Brushes.Accent4}" BorderThickness="1" 
+                Width="200" >
+            <ScrollViewer >
+                <StackPanel Name="groupSp"  >
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <!--#endregion-->
+    </Grid>
+
+</Controls:MetroWindow>

@@ -1,0 +1,611 @@
+<div class="container-fluid page">
+  <div class="d-flex page_box p-3 mt-2 header-sticky" position="sticky">
+    <div *ngIf="Add">Manage Menu Item</div>
+    <div *ngIf="Edit">Edit Menu Item</div>
+  </div>
+  <div class="page_content shadow p-3 position-relative" fxLayout="column">
+    <form #userForm="ngForm" fxLayout="column" fxFlex>
+      <div
+        fxLayoutAlign="end end"
+        style="margin-top: 30px; margin-bottom: 30px"
+      >
+        <div>
+          <button
+            *ngIf="Add"
+            size="sm"
+            [ngClass]="{ disabledBtn: isReadOnly }"
+            class="bttn"
+            style="margin-right: 5px"
+            type="submit"
+            (click)="SaveItem()"
+          >
+            Submit
+          </button>
+          <button
+            *ngIf="!Add"
+            size="sm"
+            [ngClass]="{ disabledBtn: isReadOnly }"
+            class="bttn"
+            style="margin-right: 5px"
+            type="submit"
+            (click)="SaveItem()"
+          >
+            Update
+          </button>
+        </div>
+        <button
+          class="darkBttn"
+          (click)="Back()"
+          style="margin-left: 5px; margin-top: 20x"
+        >
+          Back
+        </button>
+        <div>
+          <button
+            *ngIf="Add"
+            mat-icon-button
+            mat-sm-button
+            color="primary"
+            cTooltip="Refresh"
+            cTooltipPlacement="top"
+            (click)="ngOnInit()"
+          >
+            <mat-icon>autorenew</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div
+        fxLayout="row"
+        fxLayoutAlign="space-between"
+        style="margin: 0px 50px"
+      >
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label> Select Group</mat-label>
+          <mat-select
+            name="groupId"
+            matNativeControl
+            #groupId="ngModel"
+            [(ngModel)]="selectedItem.groupId"
+          >
+            <mat-option>
+              <ngx-mat-select-search
+                (ngModelChange)="AutoCompleteSearch($event)"
+                [(ngModel)]="searchValue"
+                name="searchValue"
+                [noEntriesFoundLabel]="'No Matching Found'"
+                [hideClearSearchButton]="true"
+                placeholderLabel="Search Group..."
+                [clearSearchInput]="false"
+                (blur)="AutoCompleteSearch($event)"
+              >
+              </ngx-mat-select-search>
+            </mat-option>
+            <mat-option [value]="0">--Please Select--</mat-option>
+            <mat-option *ngFor="let pt of filteredData" [value]="pt.id">
+              {{ pt.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div
+        fxLayout="row"
+        fxLayoutAlign="space-between"
+        style="margin: 0px 50px"
+      >
+        <mat-form-field fxFlex="48%" appearance="outline" appearance="outline">
+          <mat-label>Item Name</mat-label>
+          <input
+            matInput
+            required
+            #ItemName="ngModel"
+            name="itemName"
+            (input)="TextChangeEvent($event)"
+            [(ngModel)]="selectedItem.itemName"
+          />
+        </mat-form-field>
+        <mat-form-field fxFlex="48%" appearance="outline">
+          <mat-label>Item Code</mat-label>
+          <input
+            matInput
+            required
+            #ItemCode="ngModel"
+            name="itemCode"
+            [(ngModel)]="selectedItem.itemCode"
+          />
+        </mat-form-field>
+      </div>
+      <mat-tab-group
+        animationDuration="500ms"
+        style="margin: 50px"
+        [(selectedIndex)]="TabIndex"
+      >
+        <mat-tab label="General Information">
+          <c-card
+            style="margin-top: 40px; padding: 40px"
+            class="mat-elevation-z8 tab"
+          >
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <div fxLayout="column" fxLayoutAlign="space-between" fxFlex="48%">
+                <div fxLayout="row" fxLayoutAlign="space-between" fxFlex="48%">
+                  <mat-checkbox
+                    fxFlex="48%"
+                    #inclusiveTax="ngModel"
+                    name="inclusiveTax"
+                    [(ngModel)]="selectedItem.inclusiveTax"
+                    >Inclusive Tax</mat-checkbox
+                  >
+                  <mat-form-field appearance="outline" fxFlex="48%">
+                    <mat-label>Price with Tax</mat-label>
+                    <input
+                      matInput
+                      required
+                      #price="ngModel"
+                      name="price"
+                      (input)="PriceChange($event)"
+                      type="number"
+                      min="0"
+                      oninput="validity.valid||(value='')"
+                      step="any"
+                      [readonly]="!selectedItem.inclusiveTax"
+                      [(ngModel)]="selectedItem.price"
+                    />
+                  </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between" fxFlex="48%">
+                  <mat-form-field appearance="outline" fxFlex="48%">
+                    <mat-label>Actual Price</mat-label>
+                    <input
+                      matInput
+                      required
+                      #actualPrice="ngModel"
+                      name="actualPrice"
+                      (input)="PriceChange($event)"
+                      type="number"
+                      min="0"
+                      oninput="validity.valid||(value='')"
+                      step="any"
+                      [readonly]="selectedItem.inclusiveTax"
+                      [(ngModel)]="selectedItem.actualPrice"
+                    />
+                  </mat-form-field>
+                  <mat-form-field appearance="outline" fxFlex="48%">
+                    <mat-label>Tax</mat-label>
+                    <input
+                      matInput
+                      #tax="ngModel"
+                      name="tax"
+                      readonly="true"
+                      [(ngModel)]="selectedItem.tax"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+              <div fxLayout="column" fxLayoutAlign="space-between" fxFlex="48%">
+                <mat-form-field fxFlex="48%" appearance="outline">
+                  <mat-label> Select KDS</mat-label>
+                  <mat-select
+                    name="kdsIds"
+                    multiple
+                    matNativeControl
+                    #kdsIds="ngModel"
+                    [(ngModel)]="selectedItem.kdsIds"
+                  >
+                    <!-- <mat-option [value]="0">--Please Select--</mat-option> -->
+                    <mat-option *ngFor="let pt of KDSs" [value]="pt.id">
+                      {{ pt.name }}
+                    </mat-option>
+                  </mat-select>
+                  <div matSuffix [ngClass]="{ disabledDiv: isReadOnly }">
+                    <button
+                      mat-icon-button
+                      style="color: #940540"
+                      (click)="OpenKDSDialog(); $event.stopPropagation()"
+                    >
+                      <mat-icon cTooltip="Explore City">add</mat-icon>
+                    </button>
+                  </div>
+                </mat-form-field>
+                <!-- <mat-form-field fxFlex="48%" appearance="outline">
+                  <mat-label> Select 2nd KDS</mat-label>
+                  <mat-select name="kdsId2" matNativeControl #kdsId2="ngModel" [(ngModel)]="selectedItem.kdsId2">
+                    <mat-option [value]="0">--Please Select--</mat-option>
+                    <mat-option *ngFor="let pt of KDSs" [value]=" pt.id">
+                      {{ pt.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field> -->
+                <mat-form-field fxFlex="48%" appearance="outline">
+                  <mat-label>Description</mat-label>
+                  <textarea
+                    matInput
+                    #Description="ngModel"
+                    name="description"
+                    rows="1"
+                    [(ngModel)]="selectedItem.description"
+                  ></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <mat-form-field fxFlex="48%" appearance="outline">
+                <mat-label>Total Items/Drinks Allowed</mat-label>
+                <input
+                  matInput
+                  #totalItemsAllowed="ngModel"
+                  name="totalItemsAllowed"
+                  type="number"
+                  min="0"
+                  oninput="validity.valid||(value='')"
+                  [(ngModel)]="selectedItem.totalItemsAllowed"
+                />
+              </mat-form-field>
+              <mat-form-field fxFlex="48%" appearance="outline">
+                <mat-label>Making Time</mat-label>
+                <input
+                  matInput
+                  #makingTime="ngModel"
+                  name="makingTime"
+                  [(ngModel)]="selectedItem.makingTime"
+                  [ngxTimepicker]="start"
+                  readonly
+                  [format]="24"
+                />
+                <ngx-material-timepicker
+                  [appendToInput]="true"
+                  [disableAnimation]="true"
+                  [timepickerClass]="'custome-class'"
+                  #start
+                >
+                </ngx-material-timepicker>
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <div fxFlex="48%">
+                <div fxLayout="row">
+                  <div class="gallery-img" style="padding: 10px">
+                    <img
+                      [src]="selectedItem.base64FilePath"
+                      (click)="onPreviewImage()"
+                      height="120"
+                      width="200"
+                      style="padding: 9px; object-fit: cover"
+                    />
+                  </div>
+                  <a
+                    (click)="fileSelector.click()"
+                    style="
+                      padding: 10px;
+                      margin-top: 50px;
+                      text-decoration: underline;
+                      color: rgb(23, 8, 110);
+                      cursor: pointer;
+                    "
+                    ><strong>Browse Image</strong></a
+                  >
+                  <mat-form-feild>
+                    <input
+                      matinput
+                      #fileSelector
+                      type="file"
+                      accept=".png, .jpg, .jpeg"
+                      (change)="handleFileInput($event)"
+                      hidden
+                    />
+                  </mat-form-feild>
+                </div>
+              </div>
+              <div fxLayout="column" fxFlex="48%">
+                <mat-form-field fxFlex="48%" appearance="outline">
+                  <mat-label>Alarm Time</mat-label>
+                  <input
+                    matInput
+                    #alarmTime="ngModel"
+                    name="alarmTime"
+                    [(ngModel)]="selectedItem.alarmTime"
+                    [ngxTimepicker]="end"
+                    readonly
+                    [format]="24"
+                  />
+                  <ngx-material-timepicker
+                    [appendToInput]="true"
+                    [disableAnimation]="true"
+                    [timepickerClass]="'custome-class'"
+                    #end
+                  ></ngx-material-timepicker>
+                </mat-form-field>
+                <mat-form-field fxFlex="48%" appearance="outline">
+                  <mat-label>Start Date</mat-label>
+                  <input
+                    matInput
+                    [matDatepicker]="datepicker1"
+                    name="startDate"
+                    #startDate="ngModel"
+                    [(ngModel)]="selectedItem.startDate"
+                  />
+                  <mat-datepicker-toggle
+                    matIconSuffix
+                    [for]="datepicker1"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #datepicker1>
+                    <mat-datepicker-actions>
+                      <button mat-button matDatepickerCancel>Cancel</button>
+                      <button
+                        mat-raised-button
+                        color="primary"
+                        matDatepickerApply
+                      >
+                        Apply
+                      </button>
+                    </mat-datepicker-actions>
+                  </mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <mat-form-field fxFlex="48%" appearance="outline">
+                <mat-label>End Date</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="datepicker"
+                  [min]="selectedItem.startDate"
+                  name="endDate"
+                  #endDate="ngModel"
+                  [(ngModel)]="selectedItem.endDate"
+                />
+                <mat-datepicker-toggle
+                  matIconSuffix
+                  [for]="datepicker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #datepicker>
+                  <mat-datepicker-actions>
+                    <button mat-button matDatepickerCancel>Cancel</button>
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      matDatepickerApply
+                    >
+                      Apply
+                    </button>
+                  </mat-datepicker-actions>
+                </mat-datepicker>
+              </mat-form-field>
+              <div fxFlex="48%">
+                <mat-checkbox
+                  fxFlex="48%"
+                  #optionalModifier="ngModel"
+                  name="optionalModifier"
+                  [(ngModel)]="selectedItem.optionalModifier"
+                >
+                  Optional Modifier
+                </mat-checkbox>
+                <mat-checkbox
+                  fxFlex="48%"
+                  #manualQty="ngModel"
+                  name="manualQty"
+                  [(ngModel)]="selectedItem.manualQty"
+                >
+                  Manual Quantity
+                </mat-checkbox>
+              </div>
+            </div>
+            <!-- <div fxLayout="row" fxLayoutAlign="space-between">
+              <mat-form-field fxFlex="48%" appearance="outline">
+                <mat-label>Current Margin</mat-label>
+                <input matInput #currentMargin="ngModel" name="currentMargin" type="number" min="0"
+                  oninput="validity.valid||(value='')" step="any" [(ngModel)]="selectedItem.currentMargin" />
+              </mat-form-field>
+              <mat-form-field fxFlex="48%" appearance="outline">
+                <mat-label>Proposed Margin</mat-label>
+                <input matInput #proposedMargin="ngModel" name="proposedMargin"
+                  [(ngModel)]="selectedItem.proposedMargin" />
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+              <mat-form-field fxFlex="48%" appearance="outline">
+                <mat-label>Proposed price </mat-label>
+                <input matInput #proposedPrice="ngModel" name="proposedPrice" type="number" min="0"
+                  oninput="validity.valid||(value='')" step="any" [(ngModel)]="selectedItem.proposedPrice" />
+              </mat-form-field>
+              <mat-form-field fxFlex="48%" appearance="outline">
+                <mat-label>Target</mat-label>
+                <input matInput #target="ngModel" name="target" [(ngModel)]="selectedItem.target" />
+              </mat-form-field>
+            </div> -->
+            <div fxLayoutAlign="end end">
+              <mat-checkbox
+                #isActive="ngModel"
+                name="isActive"
+                [(ngModel)]="selectedItem.isActive"
+              >
+                IsActive
+              </mat-checkbox>
+            </div>
+          </c-card>
+        </mat-tab>
+        <mat-tab label="Variants">
+          <c-card
+            style="margin-top: 40px; padding: 40px"
+            class="mat-elevation-z8 tab"
+          >
+            <form #proAttr="ngForm">
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-5">
+                    <mat-form-field
+                      fxFlex="100%"
+                      appearance="outline"
+                      class="form-group"
+                    >
+                      <mat-label> Select Attribute</mat-label>
+                      <mat-select
+                        name="attribId"
+                        required
+                        [(ngModel)]="selectedProductAttrib.attribId"
+                        matNativeControl
+                      >
+                        <!-- <mat-option [value]="0">--Please Select--</mat-option> -->
+                        <mat-option
+                          *ngFor="let pt of Attributes"
+                          [value]="pt.id"
+                          (click)="GetAttributeValues()"
+                        >
+                          {{ pt.name }}
+                        </mat-option>
+                      </mat-select>
+                      <!-- <div matSuffix>
+                        <button mat-icon-button style="color:#940540 ; "
+                          (click)="AttributeDialog(); $event.stopPropagation()" cTooltip="Manage Attributes ">
+                          <mat-icon>open_in_new</mat-icon>
+                        </button>
+                      </div> -->
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-5">
+                    <mat-form-field
+                      fxFlex="100%"
+                      appearance="outline"
+                      class="form-group"
+                    >
+                      <mat-label> Select Values</mat-label>
+                      <mat-select
+                        name="attribValues"
+                        required
+                        multiple
+                        [(ngModel)]="selectedProductAttrib.attribValues"
+                        matNativeControl
+                      >
+                        <!-- <mat-option [value]="0">--Please Select--</mat-option> -->
+                        <mat-option
+                          *ngFor="let val of AttribValues"
+                          [value]="val.id"
+                          [disabled]="isDisable(val)"
+                        >
+                          {{ val.name }}
+                        </mat-option>
+                      </mat-select>
+                      <div matSuffix [ngClass]="{ disabledDiv: isReadOnly }">
+                        <button
+                          mat-icon-button
+                          style="color: #940540"
+                          (click)="AttribValDialog(); $event.stopPropagation()"
+                          cTooltip="Manage Attribute Values "
+                        >
+                          <mat-icon>open_in_new</mat-icon>
+                        </button>
+                      </div>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-2 ml-2">
+                    <div class="row" [ngClass]="{ disabledDiv: isReadOnly }">
+                      <button
+                        mat-icon-button
+                        mat-sm-button
+                        style="color: rgb(97, 48, 48)"
+                        cTooltip="Submit"
+                        cTooltipPlacement="top"
+                        (click)="AddLine()"
+                        type="submit"
+                      >
+                        <mat-icon>add</mat-icon>
+                      </button>
+                      <button
+                        mat-icon-button
+                        mat-sm-button
+                        style="color: rgb(97, 48, 48)"
+                        cTooltip="Submit"
+                        cTooltipPlacement="top"
+                        (click)="refreshLine()"
+                      >
+                        <mat-icon>autorenew</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="example-table-container">
+              <section
+                class="example-container mat-elevation-z8"
+                tabindex="0"
+                style="border-radius: 5px"
+              >
+                <table
+                  mat-table
+                  [dataSource]="DataSource"
+                  class="mat-elevation-z8"
+                >
+                  <ng-container matColumnDef="Id">
+                    <th mat-header-cell *matHeaderCellDef>Sr No</th>
+                    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+                  </ng-container>
+                  <ng-container matColumnDef="attrib">
+                    <th mat-header-cell *matHeaderCellDef>Attribute</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.attribute }}
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="attribValues">
+                    <th mat-header-cell *matHeaderCellDef>Value</th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.attributeValue }}
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="actions" stickyEnd="true">
+                    <th mat-header-cell *matHeaderCellDef>
+                      <p style="font-size: 14px; text-align: center">Actions</p>
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                      <div style="text-align: center">
+                        <button
+                          mat-button
+                          style="color: rgb(3, 28, 99)"
+                          (click)="ConfigureProduct(row.id)"
+                        >
+                          <P style="font-weight: bold">CONFIGURE</P>
+                        </button>
+                        <button
+                          mat-icon-button
+                          mat-sm-button
+                          color="warn"
+                          cTooltip="Delete Product Attribute"
+                          (click)="DeleteProductAttrib(row.id)"
+                        >
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </div>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="DisplayedColumns"></tr>
+                  <tr
+                    mat-row
+                    *matRowDef="let row; columns: DisplayedColumns"
+                  ></tr>
+                </table>
+              </section>
+            </div>
+          </c-card>
+        </mat-tab>
+      </mat-tab-group>
+    </form>
+  </div>
+</div>
+<div class="gallery-lightbox-container">
+  <div *ngIf="previewImage" class="lightbox">
+    <button
+      mat-icon-button
+      *ngIf="previewImage"
+      (click)="onClosePreview()"
+      class="close-button"
+      style="color: white; margin-right: 15px"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+    <div
+      *ngIf="previewImage"
+      class="lightbox-img"
+      style="display: flex; overflow: auto"
+    >
+      <img [src]="currentLightBoxImage" style="height: 400px" />
+    </div>
+  </div>
+</div>

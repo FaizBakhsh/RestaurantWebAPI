@@ -1,0 +1,80 @@
+<div class="container-fluid page">
+    <div class="d-flex page_box p-3 mt-2 header-sticky" style="position: sticky;">
+        <div *ngIf="AddMode">Manage FiscalYear</div>
+        <div *ngIf="EditMode">Edit FiscalYear</div>
+        <div fxFlex fxLayout="row" fxLayoutAlign="end center" style="margin-top: 0; padding-top: 0;">
+            <button mat-icon-button style="color: rgb(237, 237, 242); margin-top: 0; padding-top: 0;"
+                (click)="dialogRefe.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="page_content shadow p-3 position-relative">
+    <form name="FiscalYear" #FiscalYearForm="ngForm">
+        <div fxLayout="column">
+
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                    <mat-label>YearCode</mat-label>
+                    <input matInput required #yearCode="ngModel" name="yearCode"
+                        [(ngModel)]="selectedFiscalYear.yearCode" />
+                </mat-form-field>
+                <mat-form-field fxFlex="48%" appearance="outline">
+                    <mat-label> YearDateFrom</mat-label>
+                    <input matInput [matDatepicker]="picker" name="yearDateFrom" readonly="true" required="true"
+                        #date="ngModel" [(ngModel)]="selectedFiscalYear.yearDateFrom">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                    <mat-label>YearDateTo</mat-label>
+                    <input matInput [matDatepicker]="picker2" name="yearDateTo" readonly="true" #yearDateTo="ngModel"
+                        [(ngModel)]="selectedFiscalYear.yearDateTo " required=" true">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+
+
+                <mat-form-field fxFlex="100%" appearance="outline" class="form-group">
+                    <mat-label>YearDesc</mat-label>
+
+                    <textarea matInput required #yearDesc="ngModel" name="yearDesc"
+                        [(ngModel)]="selectedFiscalYear.yearDesc"> </textarea>
+                </mat-form-field>
+
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-checkbox fxFlex="50%" name="isActiveYear" [(ngModel)]="selectedFiscalYear.isActiveYear">
+                    IsActiveYear
+                </mat-checkbox>
+                <div fxLayoutAlign="end end" fxFlex="50%">
+                    <div style="margin-top: 10px;">
+                        <button *ngIf="AddMode" mat-button type="submit" style="background-color:#1e293b ;color: white;"
+                            (click)="SaveFiscalYear();">
+                            Save
+                        </button>
+                        <button *ngIf="EditMode" cButton class="me-1" style="background-color:#1e293b ;" type="submit"
+                            (click)="SaveFiscalYear()">
+                            Update
+                        </button>
+                    </div>
+                    <div>
+                        <button mat-icon-button mat-sm-button color="primary" cTooltip="Refresh" cTooltipPlacement="top"
+                            (click)="ngOnInit()">
+                            <mat-icon>autorenew</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div>
+    <div *ngIf="catSvc.isLoading" class="spinnerBox">
+        <mat-spinner style="height: 100px; width: 100px; color: white"></mat-spinner>
+        <p class="loadingText">Please Wait, Working...</p>
+    </div>
+</div>

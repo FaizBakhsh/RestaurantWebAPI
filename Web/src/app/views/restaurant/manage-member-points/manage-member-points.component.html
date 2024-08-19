@@ -1,0 +1,95 @@
+<div class="container-fluid page">
+    <div class="d-flex page_box p-3 mt-2  header-sticky" position="sticky">
+        <div *ngIf="Add">Manage Member Points
+        </div>
+        <div *ngIf="Edit">Edit Member Points
+        </div>
+    </div>
+    <div class="page_content shadow p-3 position-relative">
+        <form #userForm="ngForm" novalidate cForm>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                    <mat-label>Minimum Sale</mat-label>
+                    <input matInput required #minSale="ngModel" name="minSale" type="number" min="0"
+                        oninput="validity.valid||(value='')" [(ngModel)]="selectedPoints.minSale" />
+                </mat-form-field>
+                <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                    <mat-label>Maximum Sale</mat-label>
+                    <input matInput required #maxSale="ngModel" name="maxSale" type="number" min="0"
+                        oninput="validity.valid||(value='')" [(ngModel)]="selectedPoints.maxSale" />
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between">
+                <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                    <mat-label>Points</mat-label>
+                    <input matInput required #points="ngModel" name="points" [(ngModel)]="selectedPoints.points" />
+                </mat-form-field>
+            </div>
+            <div fxLayoutAlign="end end">
+                <div style="margin-top: 10px;">
+                    <button *ngIf="Add" [ngClass]="{disabledBtn:isReadOnly}" class="bttn" type="submit"
+                        (click)="SavePoints();">
+                        Save
+                    </button>
+                    <button *ngIf="Edit" [ngClass]="{disabledBtn:isReadOnly}" class="bttn" type="submit"
+                        (click)="UpdatePoints()">
+                        Update
+                    </button>
+                </div>
+                <div>
+                    <button mat-icon-button mat-sm-button color="primary" cTooltip="Refresh" cTooltipPlacement="top"
+                        (click)="ngOnInit()">
+                        <mat-icon>autorenew</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <c-card style="padding: 10px; margin-top: 30px;" class="mat-elevation-z8">
+            <h5 cCardTitle>Points List</h5>
+            <c-card-body style="padding: 10px;background-color: rgb(2, 42, 75);margin: 5px;border-radius: 10px;">
+                <div class="example-table-container">
+                    <section class="example-container mat-elevation-z8" tabindex="0" style="border-radius: 5px;">
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                            <ng-container matColumnDef="Id">
+                                <th mat-header-cell *matHeaderCellDef> Sr No </th>
+                                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="minSale">
+                                <th mat-header-cell *matHeaderCellDef> Minimum Sale </th>
+                                <td mat-cell *matCellDef="let element"> {{element.minSale}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="maxSale">
+                                <th mat-header-cell *matHeaderCellDef> Maximum Sale</th>
+                                <td mat-cell *matCellDef="let element"> {{element.maxSale}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="points">
+                                <th mat-header-cell *matHeaderCellDef> Points </th>
+                                <td mat-cell *matCellDef="let element"> {{element.points}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="actions" stickyEnd="true">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <p style="width: 150px;text-align: center;">Action</p>
+                                </th>
+                                <td mat-cell *matCellDef="let row" style="width: 150px;">
+                                    <div style="width: 150px;text-align: center;" [ngClass]="{disabledDiv:isReadOnly}">
+                                        <button mat-icon-button mat-sm-button style="color:#1e293b ; "
+                                            cTooltip="Edit Points" (click)="GetPointsForEdit(row.id)">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+
+                                        <!-- <button mat-icon-button mat-sm-button color="warn" cTooltip="Delete Points"
+                                            (click)="DeletePoints(row.id)">
+                                            <mat-icon>delete</mat-icon>
+                                        </button> -->
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </section>
+                </div>
+            </c-card-body>
+        </c-card>
+    </div>
+</div>

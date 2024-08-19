@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
+<jasperReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="HourlySalesReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20"
+              rightMargin="20" topMargin="20" bottomMargin="20" uuid="b9515c88-4726-40f7-8e6b-87e23ef33bfd">
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+    <parameter name="Date" class="java.lang.String"/>
+    <parameter name="Image" class="java.lang.String"/>
+    <parameter name="cltName" class="java.lang.String"/>
+    <parameter name="cltPhoneNo" class="java.lang.String"/>
+    <parameter name="cltAddress" class="java.lang.String"/>
+    <queryString>
+        <![CDATA[]]>
+    </queryString>
+    <field name="amountStr" class="java.lang.String"/>
+    <field name="timeStr" class="java.lang.String"/>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="135" splitType="Stretch">
+            <frame>
+                <reportElement mode="Opaque" x="-20" y="92" width="595" height="40" backcolor="#044F78"
+                               uuid="c430b2e9-e796-4701-adfa-0c923fe22c58"/>
+                <staticText>
+                    <reportElement x="0" y="0" width="595" height="40" forecolor="#FFFFFF"
+                                   uuid="8dedcf7c-6a1b-43ec-b693-d158b111b4a4">
+                        <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+                    </reportElement>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font size="20" isBold="true" pdfFontName="Helvetica-Bold"/>
+                    </textElement>
+                    <text><![CDATA[Hourly Sales Report]]></text>
+                </staticText>
+            </frame>
+            <rectangle>
+                <reportElement x="-20" y="0" width="595" height="20" backcolor="#D9D9D9"
+                               uuid="7ddfca68-68a8-438e-be49-3ef56061065a"/>
+            </rectangle>
+            <image>
+                <reportElement x="0" y="27" width="70" height="60" uuid="43edc7a7-8f25-4008-8c1f-7ce7fb9b3ee9"/>
+                <imageExpression>
+                    <![CDATA[javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(Base64.getDecoder().decode($P{Image})))]]></imageExpression>
+            </image>
+            <textField isBlankWhenNull="true">
+                <reportElement x="368" y="26" width="185" height="20" uuid="812d97ac-8570-4642-847d-f902008a6ee4"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{cltName}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="368" y="46" width="185" height="20" uuid="9a21c1c3-e8a8-4155-b8d6-d88c4620bd6f"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{cltPhoneNo}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="368" y="66" width="185" height="20" uuid="a8678ba0-b146-489a-9f72-a7ef86cd6857"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{cltAddress}]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+    <pageHeader>
+        <band height="36" splitType="Stretch">
+            <textField isBlankWhenNull="true">
+                <reportElement isPrintRepeatedValues="false" x="210" y="10" width="50" height="20"
+                               uuid="8aaa6908-56d7-464b-8965-ab5e94bbeacf"/>
+                <textElement>
+                    <font size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Date: "]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement isPrintRepeatedValues="false" x="260" y="10" width="210" height="20"
+                               uuid="dc3614c0-d69a-427f-b1fc-bde551fdfa02"/>
+                <textElement>
+                    <font size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{Date}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageHeader>
+    <columnHeader>
+        <band height="39" splitType="Stretch">
+            <staticText>
+                <reportElement mode="Opaque" x="0" y="0" width="60" height="30" forecolor="#0B4361" backcolor="#E6E6E6"
+                               uuid="cdf6e68c-7a8b-46a7-a0f1-73706d13cf9b">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="f9f2a42e-ca6a-492e-8003-d5ceccd40d0c"/>
+                </reportElement>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="16" isBold="true" pdfFontName="Helvetica-Bold"/>
+                </textElement>
+                <text><![CDATA[Sr #]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Opaque" x="60" y="0" width="299" height="30" forecolor="#0B4361"
+                               backcolor="#E6E6E6" uuid="9a5fa111-a607-42a1-9e9e-93dcaa1e5eb3">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="f9f2a42e-ca6a-492e-8003-d5ceccd40d0c"/>
+                </reportElement>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="16" isBold="true" pdfFontName="Helvetica-Bold"/>
+                </textElement>
+                <text><![CDATA[Time]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Opaque" x="359" y="0" width="196" height="30" forecolor="#0F5073"
+                               backcolor="#E6E6E6" uuid="e582292c-cec4-4991-8985-caeaba246b7c">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="f9f2a42e-ca6a-492e-8003-d5ceccd40d0c"/>
+                </reportElement>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="16" isBold="true" pdfFontName="Helvetica-Bold"/>
+                </textElement>
+                <text><![CDATA[Amount]]></text>
+            </staticText>
+            <line>
+                <reportElement positionType="FixRelativeToBottom" x="2" y="30" width="553" height="1"
+                               uuid="8998cbbf-c64b-41e6-bae2-5f747a05556b"/>
+                <graphicElement>
+                    <pen lineWidth="2.0" lineColor="#0E4969"/>
+                </graphicElement>
+            </line>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="22" splitType="Stretch">
+            <textField isBlankWhenNull="true">
+                <reportElement mode="Opaque" x="60" y="0" width="300" height="20" backcolor="#DDE9ED"
+                               uuid="9957189b-31c4-4928-b894-11679a1261bc"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{timeStr}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement mode="Opaque" x="360" y="0" width="195" height="20" backcolor="#DDE9ED"
+                               uuid="591b221a-82d0-4221-8bbc-1062c8fd26d9"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{amountStr}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement mode="Opaque" x="0" y="0" width="60" height="20" backcolor="#DDE9ED"
+                               uuid="6d7b88e1-cd3f-412a-8139-c6e1e093efe0"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band height="9" splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band height="23" splitType="Stretch">
+            <textField isBlankWhenNull="true">
+                <reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6"
+                               uuid="f10d4e6c-309e-4b68-a069-e2c15ed013f3"/>
+                <textElement textAlignment="Right"/>
+                <textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6"
+                               uuid="a3c90b83-294f-49b3-b49b-1087fde4f732"/>
+                <textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+            <textField pattern="EEEEE dd MMMMM yyyy">
+                <reportElement x="0" y="4" width="100" height="13" uuid="573270e3-effe-43cc-9c98-24fbe357678d"/>
+                <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+    <summary>
+        <band height="13" splitType="Stretch"/>
+    </summary>
+</jasperReport>

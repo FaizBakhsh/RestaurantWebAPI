@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
+<jasperReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="PaymentWiseSalesRpt" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20"
+              rightMargin="20" topMargin="20" bottomMargin="20" uuid="d33eb547-e5f2-4847-a51d-cdf43cb33bac">
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+    <parameter name="Period" class="java.lang.String"/>
+    <parameter name="Image" class="java.lang.String"/>
+    <parameter name="cltName" class="java.lang.String"/>
+    <parameter name="cltPhoneNo" class="java.lang.String"/>
+    <parameter name="cltAddress" class="java.lang.String"/>
+    <queryString>
+        <![CDATA[]]>
+    </queryString>
+    <field name="type" class="java.lang.String"/>
+    <field name="qty" class="java.lang.String"/>
+    <field name="amount" class="java.lang.Float"/>
+    <variable name="totalAmount" class="java.lang.Float" calculation="Sum">
+        <variableExpression><![CDATA[$F{amount}]]></variableExpression>
+    </variable>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="140" splitType="Stretch">
+            <frame>
+                <reportElement mode="Opaque" x="-20" y="80" width="595" height="30" backcolor="#044F78"
+                               uuid="04027258-6785-43bd-a4b0-24f14b3e1591"/>
+                <staticText>
+                    <reportElement x="-1" y="0" width="595" height="30" forecolor="#FFFFFF"
+                                   uuid="7b4bf54e-dc1e-4878-989c-63db59c1b8c9">
+                        <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+                    </reportElement>
+                    <textElement textAlignment="Center" verticalAlignment="Middle">
+                        <font size="18" isBold="true" pdfFontName="Helvetica-Bold"/>
+                    </textElement>
+                    <text><![CDATA[Payment Wise Sales Report]]></text>
+                </staticText>
+            </frame>
+            <rectangle>
+                <reportElement x="-20" y="0" width="595" height="20" backcolor="#D9D9D9"
+                               uuid="ecc54d78-1f93-4cbb-93b0-d6eefdaba61f"/>
+            </rectangle>
+            <textField isBlankWhenNull="true">
+                <reportElement x="240" y="114" width="181" height="20" uuid="ceb11adb-44d8-4f5d-a123-2b045e918fdf"/>
+                <textElement textAlignment="Left" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$P{Period}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement isPrintRepeatedValues="false" x="190" y="114" width="50" height="20"
+                               uuid="26d5935a-6949-4c9a-a4c8-19965fb0d39d"/>
+                <textElement>
+                    <font size="14"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Period: "]]></textFieldExpression>
+            </textField>
+            <image>
+                <reportElement x="-1" y="21" width="70" height="60" uuid="c27e9f9e-f1a2-4ccc-a67b-c16c3af00098"/>
+                <imageExpression>
+                    <![CDATA[javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(Base64.getDecoder().decode($P{Image})))]]></imageExpression>
+            </image>
+            <textField isBlankWhenNull="true">
+                <reportElement x="367" y="20" width="185" height="20" uuid="b43c0a6a-8d55-4160-9cd5-d4cd9284ee33"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{cltName}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="367" y="40" width="185" height="20" uuid="7f39f58b-b257-4966-beb1-5aa23c493307"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{cltPhoneNo}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="367" y="60" width="185" height="20" uuid="52261be5-8c62-4376-8ff1-b251d21a812d"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{cltAddress}]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+    <pageHeader>
+        <band height="1" splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band height="38" splitType="Stretch">
+            <staticText>
+                <reportElement mode="Opaque" x="0" y="10" width="50" height="20" forecolor="#0B4361" backcolor="#E6E6E6"
+                               uuid="5ffc9104-2986-4d58-b9a9-6cba4e97c37d">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="f9f2a42e-ca6a-492e-8003-d5ceccd40d0c"/>
+                </reportElement>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="14" isBold="true" pdfFontName="Helvetica-Bold"/>
+                </textElement>
+                <text><![CDATA[Sr #]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Opaque" x="50" y="10" width="295" height="20" forecolor="#0B4361"
+                               backcolor="#E6E6E6" uuid="c6a1031c-c6ee-45f8-85d3-d8222204f3df">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="f9f2a42e-ca6a-492e-8003-d5ceccd40d0c"/>
+                </reportElement>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="14" isBold="true" pdfFontName="Helvetica-Bold"/>
+                </textElement>
+                <text><![CDATA[Type]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Opaque" x="430" y="10" width="125" height="20" forecolor="#0F5073"
+                               backcolor="#E6E6E6" uuid="6f4bf5d4-e4c6-4d7f-a17d-b64ca5d4f213">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="f9f2a42e-ca6a-492e-8003-d5ceccd40d0c"/>
+                </reportElement>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="14" isBold="true" pdfFontName="Helvetica-Bold"/>
+                </textElement>
+                <text><![CDATA[Amount]]></text>
+            </staticText>
+            <staticText>
+                <reportElement mode="Opaque" x="345" y="10" width="85" height="20" forecolor="#0F5073"
+                               backcolor="#E6E6E6" uuid="6d1ce5d9-9a45-4219-8c57-c9f4ac377116">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="f9f2a42e-ca6a-492e-8003-d5ceccd40d0c"/>
+                </reportElement>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="14" isBold="true" pdfFontName="Helvetica-Bold"/>
+                </textElement>
+                <text><![CDATA[Qty]]></text>
+            </staticText>
+            <line>
+                <reportElement positionType="FixRelativeToBottom" x="0" y="30" width="553" height="1"
+                               uuid="1454eaed-66be-47c1-87d5-a3e803f9b16c"/>
+                <graphicElement>
+                    <pen lineWidth="2.0" lineColor="#0E4969"/>
+                </graphicElement>
+            </line>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="23" splitType="Stretch">
+            <textField isBlankWhenNull="true">
+                <reportElement mode="Opaque" x="50" y="0" width="295" height="20" backcolor="#DDE9ED"
+                               uuid="10c6fcab-3b11-4153-b066-823a141a5c29">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="a48ffad7-ac33-4db4-9784-97f4b8e15da1"/>
+                </reportElement>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{type}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement mode="Opaque" x="345" y="0" width="85" height="20" backcolor="#DDE9ED"
+                               uuid="422730b2-1295-415a-9552-ffd3a5a6ae32">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="fb693535-bfa4-4c8f-a233-bce0fdb69922"/>
+                </reportElement>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement mode="Opaque" x="430" y="0" width="125" height="20" backcolor="#DDE9ED"
+                               uuid="476a43a4-71db-4254-a142-ae8b6c7f7618">
+                    <property name="com.jaspersoft.studio.spreadsheet.connectionID"
+                              value="3300d1c8-2d40-43ac-9d7d-c08df7413c39"/>
+                </reportElement>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement mode="Opaque" x="0" y="0" width="50" height="20" backcolor="#DDE9ED"
+                               uuid="9f47c19e-5d6b-48cf-9828-f71228324604"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle"/>
+                <textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <pageFooter>
+        <band height="23" splitType="Stretch">
+            <textField isBlankWhenNull="true">
+                <reportElement mode="Opaque" x="0" y="4" width="515" height="16" backcolor="#E6E6E6"
+                               uuid="9ee48f4e-b160-4778-8e8a-4121affbde44"/>
+                <textElement textAlignment="Right"/>
+                <textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+            </textField>
+            <textField evaluationTime="Report">
+                <reportElement mode="Opaque" x="515" y="4" width="40" height="16" backcolor="#E6E6E6"
+                               uuid="4426e5dc-8ad0-444d-9d7f-d276ab9a952d"/>
+                <textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+            <textField pattern="EEEEE dd MMMMM yyyy">
+                <reportElement x="0" y="4" width="100" height="16" uuid="87cdff93-42ad-4677-b391-b62535f01330"/>
+                <textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+    <summary>
+        <band height="46" splitType="Stretch">
+            <textField isBlankWhenNull="true">
+                <reportElement x="350" y="5" width="80" height="21" uuid="593360db-77e8-4572-a6a5-d46d30c61236"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font isBold="true" pdfFontName="Helvetica-Bold"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Total Amount: "]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="430" y="5" width="121" height="21" uuid="5df69843-b574-41d9-a4a6-aea1402373c1"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font isBold="true" pdfFontName="Helvetica-Bold"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{totalAmount}]]></textFieldExpression>
+            </textField>
+            <line>
+                <reportElement positionType="FixRelativeToBottom" x="0" y="0" width="555" height="1"
+                               uuid="7c6bee51-7dbe-4569-9ffd-b511cca3c6c3"/>
+                <graphicElement>
+                    <pen lineWidth="2.0" lineColor="#0E4969"/>
+                </graphicElement>
+            </line>
+        </band>
+    </summary>
+</jasperReport>

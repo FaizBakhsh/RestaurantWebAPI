@@ -1,0 +1,66 @@
+﻿<Controls:MetroWindow x:Class="Restaurant.WPF.Views.CashTender"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Restaurant.WPF.Views"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+        Title="Cash Tender" MinWidth="950" Height="500"  WindowState="Maximized" ShowDialogsOverTitleBar="False">
+    <Grid>
+        <WrapPanel  HorizontalAlignment="Center" VerticalAlignment="Center" >
+            <WrapPanel Orientation="Vertical">
+                <TextBlock FontSize="24" Margin="0,10,0,0">Total Bill</TextBlock>
+                <TextBlock FontSize="24" Margin="0,23,0,0">Cash Received</TextBlock>
+                <TextBlock FontSize="24" Margin="0,22,0,0">Remaining</TextBlock>
+                <TextBlock FontSize="24" Margin="0,25,0,0" >Advance : 0</TextBlock>
+            </WrapPanel>
+            <WrapPanel Orientation="Vertical" Margin="40,0,0,0">
+                <TextBox Width="400" Height="50" Padding="10,10,10,10" Name="TotalBill" IsReadOnly="True" ></TextBox>
+                <TextBox Width="400" Height="50" Padding="10,10,10,10" Margin="0,5,0,0" Name="CashReceived" TextChanged="CalculateRemaining"></TextBox>
+                <TextBox Width="400" Height="50" Padding="10,10,10,10" Margin="0,5,0,0" Name="Remaining" IsReadOnly="True"></TextBox>
+                <WrapPanel Margin="0,3,0,0">
+                    <Button Width="128" Height="50" FontSize="17" Background="{DynamicResource MahApps.Brushes.Accent2}">
+                        10
+                    </Button>
+                    <Button Width="132" FontSize="17" Background="{DynamicResource MahApps.Brushes.Accent2}">
+                        20
+                    </Button>
+                    <Button Width="128" FontSize="17" Background="{DynamicResource MahApps.Brushes.Accent2}">
+                        50
+                    </Button >
+                </WrapPanel>
+                <WrapPanel >
+                    <Button Width="128" Height="50" FontSize="17" Background="{DynamicResource MahApps.Brushes.Accent2}">
+                        100
+                    </Button>
+                    <Button Width="132" FontSize="17" Background="{DynamicResource MahApps.Brushes.Accent2}">
+                        300
+                    </Button>
+                    <Button Width="128" FontSize="17" Background="{DynamicResource MahApps.Brushes.Accent2}">
+                        500
+                    </Button >
+                </WrapPanel>
+                <WrapPanel >
+                    <Button Width="128" Height="50" FontSize="17" Background="{DynamicResource MahApps.Brushes.Accent2}">
+                        1000
+                    </Button>
+                    <Button Width="132" FontSize="17" Background="{DynamicResource MahApps.Brushes.Accent2}">
+                        5000
+                    </Button>
+                    <Button Width="128" FontSize="17">
+                        Clear
+                    </Button >
+                </WrapPanel>
+            </WrapPanel>
+            <WrapPanel Orientation="Vertical" Margin="90,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Background="{DynamicResource MahApps.Brushes.Accent4}">
+                <Button Padding="30,10,30,10" FontSize="18" Background="{DynamicResource MahApps.Brushes.Accent2}" Name="CashBtn" Click="Cash">Cash</Button>
+                <Button Padding="30,10,30,10" FontSize="18" Background="{DynamicResource MahApps.Brushes.Accent2}" Name="CardBtn" Click="Visa">Visa</Button>
+                <Button Padding="30,10,30,10" FontSize="18" Background="{DynamicResource MahApps.Brushes.Accent2}">Advance</Button>
+                <Button Padding="30,10,30,10" FontSize="18" Background="{DynamicResource MahApps.Brushes.Accent2}">Partial Payment</Button>
+                <Button Padding="30,10,30,10" FontSize="18" Background="{DynamicResource MahApps.Brushes.Accent2}" Click="Receivable">Receivables</Button>
+                <Button Padding="30,10,30,10" FontSize="18" Background="{DynamicResource MahApps.Brushes.Accent2}" Click="Back">Back</Button>
+            </WrapPanel>
+        </WrapPanel>
+    </Grid>
+</Controls:MetroWindow>

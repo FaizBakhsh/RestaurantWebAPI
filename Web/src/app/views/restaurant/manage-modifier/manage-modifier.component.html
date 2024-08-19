@@ -1,0 +1,151 @@
+<div class="container-fluid page">
+  <div class="d-flex page_box p-3 mt-2  header-sticky" position="sticky">
+    <div *ngIf="Add">Manage Modifier
+    </div>
+    <div *ngIf="Edit">Edit Modifier
+    </div>
+  </div>
+  <div class="page_content shadow p-3 position-relative">
+    <form #userForm="ngForm">
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+          <mat-label>Modifier Name</mat-label>
+          <input matInput required #modifierName="ngModel" maxlength="200" name="modifierName"
+            [(ngModel)]="selectedModifier.modifierName" />
+        </mat-form-field>
+        <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+          <mat-label>Price</mat-label>
+          <input matInput #price="ngModel" required="true" name="price" type="number" min="0"
+            oninput="validity.valid||(value='')" step="any" [(ngModel)]="selectedModifier.price" />
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+          <mat-label>Qty</mat-label>
+          <input matInput #qty="ngModel" name="qty" type="number" min="0" oninput="validity.valid||(value='')"
+            [(ngModel)]="selectedModifier.qty" required="true" />
+        </mat-form-field>
+        <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+          <mat-label> Select RawItem</mat-label>
+          <mat-select name="rawItemId" required="true" matNativeControl #rawItemId="ngModel"
+            [(ngModel)]="selectedModifier.rawItemId">
+            <mat-option [value]="0">--Please Select--</mat-option>
+            <mat-option *ngFor="let pt of rawItems" [value]=" pt.id">
+              {{ pt.itemName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+          <mat-label> Select KDS</mat-label>
+          <mat-select name="kdsId" matNativeControl #kdsId="ngModel" [(ngModel)]="selectedModifier.kdsId">
+            <mat-option [value]="0">--Please Select--</mat-option>
+            <mat-option *ngFor="let pt of KDSs" [value]=" pt.id">
+              {{ pt.name}}
+            </mat-option>
+          </mat-select>
+          <div matSuffix>
+            <button mat-icon-button style="color:#940540;"
+                (click)="OpenKDSDialog(); $event.stopPropagation()">
+                <mat-icon cTooltip="Explore City">add</mat-icon>
+            </button>
+        </div>
+        </mat-form-field>
+        <mat-form-field fxFlex="48%" appearance="outline">
+          <mat-label> Select 2nd KDS</mat-label>
+          <mat-select name="kdsId2" matNativeControl #kdsId2="ngModel" [(ngModel)]="selectedModifier.kdsId2">
+            <mat-option [value]="0">--Please Select--</mat-option>
+            <mat-option *ngFor="let pt of KDSs" [value]=" pt.id">
+              {{ pt.name}}
+            </mat-option>
+          </mat-select>
+          <div matSuffix>
+            <button mat-icon-button style="color:#940540;"
+                (click)="OpenKDSDialog(); $event.stopPropagation()">
+                <mat-icon cTooltip="Explore City">add</mat-icon>
+            </button>
+        </div>
+        </mat-form-field>
+      </div>
+      <div fxLayoutAlign="end end">
+        <mat-checkbox #isActive="ngModel" name="isActive" [(ngModel)]="selectedModifier.isActive">
+          IsActive
+        </mat-checkbox>
+      </div>
+      <div fxLayoutAlign="end end">
+        <c-spinner *ngIf="proccessing" style="height: 50px;width: 50px;color: rgb(3, 71, 102);"></c-spinner>
+        <div style="margin-top: 10px;" *ngIf="!proccessing">
+          <button *ngIf="Add" [ngClass]="{disabledBtn:isReadOnly}" class="bttn"  type="submit"
+            (click)="SaveModifier();">
+            Save
+          </button>
+          <button *ngIf="Edit" [ngClass]="{disabledBtn:isReadOnly}" class="bttn"  type="submit"
+            (click)="SaveModifier()">
+            Update
+          </button>
+        </div>
+        <div>
+          <button mat-icon-button mat-sm-button color="primary" cTooltip="Refresh" cTooltipPlacement="top"
+            (click)="ngOnInit()">
+            <mat-icon>autorenew</mat-icon>
+          </button>
+        </div>
+      </div>
+    </form>
+    <c-card style="padding: 10px; margin-top: 30px;" class="mat-elevation-z8">
+      <h5 cCardTitle>Modifier List</h5>
+      <c-card-body style="padding: 10px;background-color: rgb(2, 42, 75);margin: 5px;border-radius: 10px;">
+        <div class="example-table-container">
+          <section class="example-container mat-elevation-z8" tabindex="0" style="border-radius: 5px;">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+              <ng-container matColumnDef="Id">
+                <th mat-header-cell *matHeaderCellDef> Sr No </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+              </ng-container>
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Modifier Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.modifierName}} </td>
+              </ng-container>
+              <ng-container matColumnDef="price">
+                <th mat-header-cell *matHeaderCellDef> Price </th>
+                <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+              </ng-container>
+              <ng-container matColumnDef="isActive">
+                <th mat-header-cell *matHeaderCellDef> IsActive </th>
+                <td mat-cell *matCellDef="let element"> {{element.isActive?'Yes':'No'}} </td>
+              </ng-container>
+              <ng-container matColumnDef="qty">
+                <th mat-header-cell *matHeaderCellDef> QTY</th>
+                <td mat-cell *matCellDef="let element"> {{element.qty}} </td>
+              </ng-container>
+              <ng-container matColumnDef="rawItem">
+                <th mat-header-cell *matHeaderCellDef> Raw Item </th>
+                <td mat-cell *matCellDef="let element"> {{element.rawItem}} </td>
+              </ng-container>
+              <ng-container matColumnDef="actions" stickyEnd="true">
+                <th mat-header-cell *matHeaderCellDef>
+                  <p style="font-size: 14px;text-align: center;">Action</p>
+                </th>
+                <td mat-cell *matCellDef="let row">
+                  <div style="text-align: center;" [ngClass]="{disabledDiv:isReadOnly}">
+                    <button mat-icon-button mat-sm-button style=" color:#1e293b ; " cTooltip=" Edit Modifier"
+                      (click)="GetModifierForEdit(row.id)">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                    <!-- <button mat-icon-button mat-sm-button color="warn" cTooltip="Delete Modifier"
+                      (click)="DeleteModifier(row.id)">
+                      <mat-icon>delete</mat-icon>
+                    </button> -->
+                  </div>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </section>
+        </div>
+      </c-card-body>
+    </c-card>
+  </div>
+</div>

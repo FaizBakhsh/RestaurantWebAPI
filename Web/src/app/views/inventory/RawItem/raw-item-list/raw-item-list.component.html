@@ -1,0 +1,172 @@
+<div class="container-fluid page">
+    <div class="d-flex page_box p-3 mt-2">Raw Item List</div>
+    <div class="page_content shadow p-3 position-relative">
+        <div class="pull-right" style="text-align:end; margin-top: 20px;">
+            <button [ngClass]="{disabledBtn:isReadOnly}" class="bttn"  [routerLink]="['/inventory/rawItem']">Add New</button>
+        </div>
+        <div style="padding: 20px; margin-bottom: -20px;">
+            <mat-form-field fxFlex="100%">
+                <mat-label>Search</mat-label>
+                <input matInput (keyup)="applyFilter($event)" #input>
+            </mat-form-field>
+        </div>
+        <c-card-body class="mat-elevation-z10">
+            <div class="mat-elevation-z8"
+                style="padding: 8px; background-color: rgb(238, 235, 236);border-radius: 10px;">
+                <div class="mat-elevation-z8"
+                    style="padding: 10px; border-radius: 10px;background-color: rgb(2, 42, 75);">
+                    <section class="example-container mat-elevation-z8" tabindex="0" style="border-radius: 5px;">
+                        <table mat-table [dataSource]="dataSource" matSort>
+                            <ng-container matColumnDef="id">
+                                <th mat-header-cell *matHeaderCellDef> Sr No </th>
+                                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="isActive">
+                                <th mat-header-cell *matHeaderCellDef> IsActive </th>
+                                <td mat-cell *matCellDef="let element"> {{element.isActive}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="name" sticky>
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Item Name </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">
+                                        {{element.itemName}}
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="subCategory">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Sub Category </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">
+                                        {{element.subCategory}}
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="category">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Category </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">
+                                        {{element.category}}
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="code">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Item Code </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">
+                                        {{element.itemCode}}
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="price">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Item Price </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">
+                                        {{element.price}}
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="vendor">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Supplier </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">
+                                        {{element.supplier}}
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="uom">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">UOM </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">
+                                        {{element.uom}}
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="minOrderLevel">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Min Order Level </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">
+                                        {{element.minOrderLevel}}
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="maxOrderLevel">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Max Order Level</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">
+                                        {{element.maxOrderLevel}}
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="packingName">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Packing Name</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">
+                                        {{element.packingName}}
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="packingQty">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Loose Packing Qty </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">
+                                        {{element.packingQty}}
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="group">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Group </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">
+                                        {{element.group}}
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Action" stickyEnd>
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center;width: 100px;">
+                                    <p>Action</p>
+                                </th>
+                                <td mat-cell *matCellDef="let row" style="text-align: center;width: 100px;">
+                                    <div [ngClass]="{disabledDiv:isReadOnly}">
+                                        <button mat-icon-button mat-sm-button color="primary" (click)="EditItem(row)"
+                                            matTooltip="Edit" style="cursor: pointer;">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <!-- <button mat-icon-button mat-sm-button color="warn" matTooltip="Delete"
+                                            (click)="DeleteItem(row.id)"><mat-icon>delete</mat-icon></button> -->
+                                    </div>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </section>
+                </div>
+            </div>
+        </c-card-body>
+    </div>
+</div>

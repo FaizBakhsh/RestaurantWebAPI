@@ -1,0 +1,97 @@
+﻿<Controls:MetroWindow x:Class="Restaurant.WPF.Views.DeliveryStatus"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Restaurant.WPF.Views"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+        Title="Delivery Status" MinHeight="500" MinWidth="1000" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow">
+    <Grid>
+        <Border  Background="{DynamicResource MahApps.Brushes.Highlight}" HorizontalAlignment="Left" VerticalAlignment="Stretch"
+                      Margin="25,25,25,25" >
+            <DataGrid Foreground="Black" 
+                                BorderBrush="{DynamicResource MahApps.Brushes.Accent4}"
+                                CanUserDeleteRows="True" CanUserAddRows="True"
+                               AutoGenerateColumns="False"  BorderThickness="1" 
+                      Name="dispatchedOrders"
+                              VerticalAlignment="Stretch" Padding="2,10,2,2"  
+                            CanUserResizeColumns="True" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden"  
+                              CanUserSortColumns="True" Margin="10,10,10,10" >
+                <DataGrid.Columns   >
+                    <DataGridTemplateColumn Header="Bill_No"  Width="50">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <Label  Background="White" Foreground="Black" Content="{Binding Id}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="OnlineId"  Width="70">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <Label  Background="White" Foreground="Black" Content="{Binding OnlineId}"  />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Net Bill"  Width="70">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <Label  Background="White" Foreground="Black" Content="{Binding NetTotal}"  />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="DispatchedTime"  Width="70">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <Label  Background="White" Foreground="Black" Content="{Binding DispatchedTime}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="DeliveredTime"  Width="70">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <Label  Background="White" Foreground="Black" Content="{Binding DeliveryTime}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Name"  Width="70">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <Label  Background="White" Foreground="Black" Content="{Binding Name}"  />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="PhoneNo"  Width="70">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <Label  Background="White" Foreground="Black" Content="{Binding PhoneNo}"  />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Address"  Width="70">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <Label  Background="White" Foreground="Black" Content="{Binding Address}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="RiderId"  Width="70">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <Label  Background="White" Foreground="Black" Content="{Binding RiderId}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        <WrapPanel VerticalAlignment="Stretch" HorizontalAlignment="Right" Orientation="Vertical" Margin="25,25,25,25" >
+            <TextBlock FontSize="22">Transfer Selected Bill To</TextBlock>
+            <Button Padding="30,10,30,10" FontSize="18" Margin="0,40,0,0" Click="Delivered">Delivered</Button>
+            <Button Padding="30,10,30,10" FontSize="18" Margin="0,10,0,0" Click="AssignRider">Assign Rider</Button>
+            <Button Padding="30,10,30,10" FontSize="18" Margin="0,10,0,0">Synchronize</Button>
+            <Button   Padding="30,10,30,10" FontSize="18" Margin="0,50,0,0" Click="Exit">Exit</Button>
+
+        </WrapPanel>
+    </Grid>
+</Controls:MetroWindow>

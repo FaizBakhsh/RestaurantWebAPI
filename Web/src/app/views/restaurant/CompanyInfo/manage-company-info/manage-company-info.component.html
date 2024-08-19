@@ -1,0 +1,70 @@
+<div class="container-fluid page">
+    <div class="d-flex page_box p-3 mt-2  header-sticky" position="sticky">
+        <div *ngIf="Add">Manage Company Info
+        </div>
+        <div *ngIf="Edit">Edit Company Info
+        </div>
+    </div>
+    <div class="page_content shadow p-3 position-relative">
+        <mat-card style="padding: 10px;">
+            <form name="eventForm" #userForm="ngForm">
+                <div fxLayout="row" fxLayoutAlign="space-between">
+                    <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                        <mat-label>Company Name</mat-label>
+                        <input matInput #name="ngModel" maxlength="200" name="Name" type="text"
+                            [(ngModel)]="this.selectedCompanyInfo.name" required>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="48%" appearance="outline">
+                        <mat-label> Phone No</mat-label>
+                        <input type="tel" #phoneNo="ngModel" maxlength="200" matInput required required name="phoneNo"
+                            [(ngModel)]="this.selectedCompanyInfo.phoneNo">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between">
+                    <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                        <mat-label>Enter Adrress</mat-label>
+                        <textarea matInput #address="ngModel" maxlength="5000" name="Address"
+                            [(ngModel)]="this.selectedCompanyInfo.address" placeholder="Address" required></textarea>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="48%" appearance="outline">
+                        <mat-label>Bill Note</mat-label>
+                        <textarea #billNote="ngModel" maxlength="5000" matInput name="billNote"
+                            [(ngModel)]="this.selectedCompanyInfo.billNote"></textarea>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between">
+                    <div fxFlex="48%">
+                        <div fxLayout="row">
+                            <div class="gallery-img" style="padding: 10px">
+                                <img [src]="selectedCompanyInfo.logoBase64Path" (click)="onPreviewImage()" height="120"
+                                    width="200" style="padding: 9px; object-fit: cover" />
+                            </div>
+                            <a (click)="fileSelector.click()" style="
+                                                      padding: 10px;
+                                                      margin-top: 50px;
+                                                      text-decoration: underline;
+                                                      color: rgb(23, 8, 110);
+                                                      cursor: pointer;
+                                                    "><strong>Browse Logo</strong></a>
+                            <mat-form-feild>
+                                <input matinput #fileSelector type="file" accept=".png, .jpg, .JFIF"
+                                    (change)="handleFileInput($event)" hidden />
+                            </mat-form-feild>
+                        </div>
+                    </div>
+                </div>
+                <div fxLayoutAlign="end end"><c-spinner *ngIf="proccessing"
+                        style="height: 50px;width: 50px;color: rgb(3, 71, 102);"></c-spinner></div>
+                <div style="margin-top: 10px;" *ngIf="!proccessing" fxLayoutAlign="end end">
+                    <button [ngClass]="{disabledBtn:isReadOnly}" class="bttn" *ngIf=" !Edit"
+                        [disabled]="userForm.invalid" style=" margin-top: 20px;" (click)="SaveCompanyInfo()">Submit
+                    </button>
+                    <button [ngClass]="{disabledBtn:isReadOnly}" class="bttn" *ngIf="!Add" [disabled]="userForm.invalid"
+                        style=" margin-top: 20px;" (click)="SaveCompanyInfo()">Update </button>
+                    <button mat-raised-button color="warn" (click)="Back()"
+                        style="margin-left: 5px; margin-top: 20x;">Back </button>
+                </div>
+            </form>
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,352 @@
+<div class="container-fluid page">
+  <div class="d-flex page_box p-3 mt-2 header-sticky" position="sticky">
+    <div fxLayout="row" fxLayoutAlign="space-between" fxFlex="100%">
+      <div fxFlex="50%">Configure Product</div>
+      <!-- <div *ngIf="Add">Manage Flavor Size
+        </div>
+        <div *ngIf="Edit">Edit Flavor Size
+        </div> -->
+      <div fxFlex="7%">
+        <button
+          mat-icon-button
+          fxLayoutAlign="end end"
+          (click)="dialogRef.close()"
+          style="color: white"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="page_content shadow p-3 position-relative">
+    <mat-card style="padding: 10px">
+      <form #userForm="ngForm">
+        <div fxLayout="row" style="margin: 10px">
+          <div fxLayout="column">
+            <p class="pStyle" style="font-weight: bold">Product Name</p>
+            <p class="pStyle" style="font-weight: bold">Attribute</p>
+            <p class="pStyle" style="font-weight: bold">Attribute Value</p>
+          </div>
+          <div fxLayout="column">
+            <p class="pStyle">{{ selectedSize?.item }}</p>
+            <p class="pStyle">{{ selectedSize?.attribute }}</p>
+            <p class="pStyle">{{ selectedSize?.attributeValue }}</p>
+          </div>
+        </div>
+        <!-- <div fxLayout="row" fxLayoutAlign="space-between">
+                    <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                        <mat-label> Select Group</mat-label>
+                        <mat-select name="groupId" #groupId="ngModel" [(ngModel)]="selectedSize.groupId" required>
+                            <mat-option [value]="0">--Please Select--</mat-option>
+                            <mat-option *ngFor="let pt of Groups" [value]=" pt.id" (click)="SearchItem()">
+                                {{ pt.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                        <mat-label> Select Item</mat-label>
+                        <mat-select name="itemId" #itemId="ngModel" [(ngModel)]="selectedSize.itemId" required>
+                            <mat-option [value]="0">--Please Select--</mat-option>
+                            <mat-option *ngFor="let pt of Items" [value]=" pt.id" (click)="GetSize()">
+                                {{ pt.itemName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between">
+                    <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                        <mat-label>Enter Size</mat-label>
+                        <input matInput required #sizeName="ngModel" name="sizeName"
+                            [(ngModel)]="selectedSize.sizeName" />
+                    </mat-form-field>
+                    <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                        <mat-label> Select KDS</mat-label>
+                        <mat-select name="kdsId" matNativeControl #kdsId="ngModel"
+                            [(ngModel)]="selectedSize.kdsId">
+                            <mat-option [value]="0">--Please Select--</mat-option>
+                            <mat-option *ngFor="let pt of KDS" [value]=" pt.id">
+                                {{ pt.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div> -->
+        <div fxLayout="row" fxLayoutAlign="space-between">
+          <div
+            fxLayout="column"
+            fxLayoutAlign="space-between"
+            fxFlex="100%"
+            appearance="outline"
+          >
+            <div
+              fxLayout="row"
+              fxLayoutAlign="space-around"
+              fxFlex="100%"
+              appearance="outline"
+            >
+              <div fxFlex="49%">
+                <mat-checkbox
+                  #inclusiveTax="ngModel"
+                  name="inclusiveTax"
+                  [(ngModel)]="selectedSize.inclusiveTax"
+                  >Inclusive Tax</mat-checkbox
+                >
+              </div>
+              <mat-form-field
+                class="form-group"
+                appearance="outline"
+                fxFlex="49%"
+              >
+                <mat-label>Price with Tax</mat-label>
+                <input
+                  matInput
+                  #price="ngModel"
+                  name="price"
+                  (input)="PriceChange($event)"
+                  [readonly]="!selectedSize.inclusiveTax"
+                  type="number"
+                  min="0"
+                  oninput="validity.valid||(value='')"
+                  step="any"
+                  [(ngModel)]="selectedSize.price"
+                />
+              </mat-form-field>
+            </div>
+            <div
+              fxLayout="row"
+              fxLayoutAlign="space-between"
+              fxFlex="100%"
+              appearance="outline"
+            >
+              <mat-form-field
+                class="form-group"
+                fxFlex="49%"
+                appearance="outline"
+              >
+                <mat-label>Actual Price</mat-label>
+                <input
+                  matInput
+                  #actualPrice="ngModel"
+                  name="actualPrice"
+                  type="number"
+                  min="0"
+                  oninput="validity.valid||(value='')"
+                  step="any"
+                  (input)="PriceChange($event)"
+                  [readonly]="selectedSize.inclusiveTax"
+                  [(ngModel)]="selectedSize.actualPrice"
+                />
+              </mat-form-field>
+              <mat-form-field
+                class="form-group"
+                fxFlex="49%"
+                appearance="outline"
+              >
+                <mat-label>Tax</mat-label>
+                <input
+                  matInput
+                  #tax="ngModel"
+                  name="tax"
+                  readonly="true"
+                  [(ngModel)]="selectedSize.tax"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <!-- <div fxLayout="column" fxLayoutAlign="space-between" fxFlex="48%" appearance="outline">
+                        <div fxLayout="row" fxLayoutAlign="space-between" fxFlex="48%">
+                            <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                                <mat-label>Cost</mat-label>
+                                <input matInput #cost="ngModel" name="cost" [(ngModel)]="selectedSize.cost"
+                                    type="number" min="0" oninput="validity.valid||(value='')" step="any" />
+                            </mat-form-field>
+                            <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                                <mat-label>Suggested Price</mat-label>
+                                <input matInput #suggestedPrice="ngModel" name="suggestedPrice"
+                                    [(ngModel)]="selectedSize.suggestedPrice" type="number" min="0"
+                                    oninput="validity.valid||(value='')" step="any" />
+                            </mat-form-field>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="space-between" fxFlex="48%">
+                            <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                                <mat-label>Current Margin</mat-label>
+                                <input matInput #currentMargin="ngModel" name="currentMargin" type="number" min="0"
+                                    oninput="validity.valid||(value='')" step="any"
+                                    [(ngModel)]="selectedSize.currentMargin" />
+                            </mat-form-field>
+                            <mat-form-field fxFlex="48%" appearance="outline" class="form-group">
+                                <mat-label>Suggested Margin</mat-label>
+                                <input matInput #suggestedMargin="ngModel" name="suggestedMargin" type="number" min="0"
+                                    oninput="validity.valid||(value='')" step="any"
+                                    [(ngModel)]="selectedSize.suggestedMargin" />
+                            </mat-form-field>
+                        </div>
+                    </div> -->
+        </div>
+        <!-- <div fxLayoutAlign="end end">
+                    <mat-checkbox #isActive="ngModel" name="isActive" [(ngModel)]="selectedSize.isActive">
+                        IsActive
+                    </mat-checkbox>
+                </div> -->
+        <div fxLayoutAlign="end end">
+          <c-spinner
+            *ngIf="proccessing"
+            style="height: 50px; width: 50px; color: rgb(3, 71, 102)"
+          ></c-spinner>
+        </div>
+        <div
+          style="margin-top: 10px"
+          *ngIf="!proccessing"
+          fxLayoutAlign="end end"
+        >
+          <button
+            cButton
+            color="dark"
+            *ngIf="!Edit"
+            style="margin-top: 20px"
+            type="submit"
+            (click)="PutSize()"
+          >
+            Submit
+          </button>
+          <button
+            cButton
+            color="dark"
+            *ngIf="!Add"
+            style="margin-top: 20px"
+            type="submit"
+            (click)="PutSize()"
+          >
+            Update
+          </button>
+          <!-- <button cButton color="warning" (click)="Back()" style="margin-left: 5px; margin-top: 20x;">Back
+                    </button> -->
+          <div>
+            <!-- <button *ngIf="Add" mat-icon-button mat-sm-button color="primary" cTooltip="Refresh"
+                            cTooltipPlacement="top" (click)="ngOnInit()">
+                            <mat-icon>autorenew</mat-icon>
+                        </button> -->
+          </div>
+        </div>
+      </form>
+    </mat-card>
+    <!-- <c-card style="padding: 10px; margin-top: 30px;" class="mat-elevation-z8"
+            *ngIf="searchedSizes!=undefined && searchedSizes?.length!=0">
+            <c-card-body style="padding: 10px;background-color: rgb(2, 42, 75);margin: 5px;border-radius: 10px;">
+                <div class="example-table-container">
+                    <section class="example-container mat-elevation-z8" tabindex="0" style="border-radius: 5px;">
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                            <ng-container matColumnDef="Id">
+                                <th mat-header-cell *matHeaderCellDef> Sr No </th>
+                                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Group">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;"> Group </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;"> {{element.group}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Item">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Item</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;"> {{element.item}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="SizeName">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;"> Size Name </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.sizeName}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="KDS">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;"> KDS </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.kds}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Price">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;"> Price</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;"> {{element.price}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="ActualPrice">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Actual Price</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.actualPrice}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Tax">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Tax</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.tax}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Cost">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Cost</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.cost}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="SuggestedPrice">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Suggested Price</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.suggestedPrice}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="CurrentMargin">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Current Margin</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.currentMargin}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="SuggestedMargin">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Suggested Margin</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.suggestedMargin}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Action" stickyEnd="true">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <p style="font-size: 14px;margin-left: 27px;width: 100px;">Actions</p>
+                                </th>
+                                <td mat-cell *matCellDef="let cust">
+                                    <div style="width: 100px;">
+                                        <button mat-icon-button mat-sm-button color="primary"
+                                            (click)="EditSize(cust)" matTooltip="Edit"
+                                            style="cursor: pointer;"><mat-icon>edit</mat-icon></button>
+                                        <button mat-icon-button mat-sm-button color="warn" matTooltip="Delete"
+                                            (click)="DeleteSize(cust)"><mat-icon>delete</mat-icon></button>
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </section>
+                </div>
+            </c-card-body>
+        </c-card> -->
+  </div>
+</div>

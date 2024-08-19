@@ -1,0 +1,122 @@
+<div class="container-fluid page">
+    <div class="d-flex page_box p-3 mt-2">Recipe List</div>
+    <div class="page_content shadow p-3 position-relative">
+        <div class="pull-right" style="text-align:end; margin-top: 20px;">
+            <button mat-raised-button color="primary" [routerLink]="['/restaurant/recipe']">Add New</button>
+        </div>
+        <div style="padding: 20px; margin-bottom: -20px;">
+            <mat-form-field fxFlex="100%">
+                <mat-label>Search</mat-label>
+                <input matInput (keyup)="applyFilter($event)" #input>
+            </mat-form-field>
+        </div>
+        <c-card style="padding: 10px; margin-top: 30px;" class="mat-elevation-z8">
+            <c-card-body style="padding: 10px;background-color: rgb(2, 42, 75);margin: 5px;border-radius: 10px;">
+                <div class="example-table-container">
+                    <section class="example-container mat-elevation-z8" tabindex="0" style="border-radius: 5px;">
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                            <ng-container matColumnDef="Id">
+                                <th mat-header-cell *matHeaderCellDef> Sr No </th>
+                                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Group">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;"> Group </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;"> {{element.group}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="MenuItem">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Menu Item</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;"> {{element.menuItem}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="FlavorSize">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;"> Flavor Size </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.sizeName}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="RawItem">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;"> Raw Item </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.rawItem}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="UOM">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;"> UOM</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;"> {{element.uom}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="QTY">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">QTY</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.qty}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="OrderType">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Order Type</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.orderType}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Price">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Price</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.price}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Amount">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Amount</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.amount}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Action" stickyEnd="true">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <p style="font-size: 14px;margin-left: 27px;width: 100px;">Actions</p>
+                                </th>
+                                <td mat-cell *matCellDef="let cust">
+                                    <div style="width: 100px;">
+                                        <button mat-icon-button mat-sm-button color="primary" (click)="EditRecipe(cust)"
+                                            matTooltip="Edit"
+                                            style="cursor: pointer;"><mat-icon>edit</mat-icon></button>
+                                        <button mat-icon-button mat-sm-button color="warn" matTooltip="Delete"
+                                            (click)="DeleteRecipe(cust.id)"><mat-icon>delete</mat-icon></button>
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </section>
+                </div>
+            </c-card-body>
+        </c-card>
+        <div style="text-align:end; margin-top: 20px;">
+            <button cButton color="dark" [routerLink]="['/restaurant/subRecipe']">
+                Add Sub Recipe</button>
+            <button cButton color="warning" style="margin-left: 5px;"
+                [routerLink]="['/restaurant/itemList']">Back</button>
+        </div>
+    </div>
+</div>

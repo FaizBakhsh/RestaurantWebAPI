@@ -1,0 +1,79 @@
+<div class="container-fluid page">
+  <div class="d-flex page_box p-3 mt-2  header-sticky" position="sticky">
+    <div *ngIf="Add">Manage Category
+    </div>
+    <div *ngIf="Edit">Edit Category
+    </div>
+  </div>
+  <div class="page_content shadow p-3 position-relative">
+    <form #userForm="ngForm" [validated]="validFields" novalidate cForm>
+      <c-row>
+        <c-col [xs]>
+          <div [cFormFloating]="true">
+            <input cFormControl required id="floatingInput" placeholder="category" #CategoryName="ngModel"
+              name="categoryName" [(ngModel)]="resSvc.selectedCategory.categoryName" />
+            <label cLabel for="floatingInput">Enter Category</label>
+            <c-form-feedback [valid]="false">Please provide category.</c-form-feedback>
+          </div>
+        </c-col>
+        <c-col [xs]>
+          <div fxLayout="row">
+            <div style="margin-top: 10px;">
+              <button *ngIf="Add" size="sm" cButton class="me-1" style="background-color:#1e293b ;" type="submit"
+                (click)="SaveCategory();">
+                Add Ctegory
+              </button>
+              <button *ngIf="Edit" size="sm" cButton class="me-1" style="background-color:#1e293b ;" type="submit"
+                (click)="UpdateCategory()">
+                Update
+              </button>
+            </div>
+            <div>
+              <button mat-icon-button mat-sm-button color="primary" cTooltip="Refresh " cTooltipPlacement="right"
+                *ngIf="Edit" (click)="Refresh()">
+                <mat-icon>autorenew</mat-icon>
+              </button>
+            </div>
+          </div>
+        </c-col>
+      </c-row>
+    </form>
+    <c-card style="padding: 10px; margin-top: 30px;">
+      <h5 cCardTitle>Category List</h5>
+      <c-card-body>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <ng-container matColumnDef="Id">
+            <th mat-header-cell *matHeaderCellDef> Sr No </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+          <ng-container matColumnDef="categoryName">
+            <th mat-header-cell *matHeaderCellDef> Category Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.categoryName}} </td>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>
+              <p style="font-size: 14px;margin-left: 43px;width: 40%;">Actions</p>
+            </th>
+            <td mat-cell *matCellDef="let row" style="width: 20%;">
+              <div>
+                <button mat-icon-button mat-sm-button style="color:#1e293b ; " cTooltip="Edit Category"
+                  (click)="GetCategoryForEdit(row.id)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button mat-sm-button style="color: rgb(236, 143, 2);"
+                  cTooltip="Category Possible Values" (click)="FPValue(row)">
+                  <mat-icon>more</mat-icon>
+                </button>
+                <button mat-icon-button mat-sm-button color="warn" cTooltip="Delete" (click)="DeleteCategory(row.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </c-card-body>
+    </c-card>
+  </div>
+</div>

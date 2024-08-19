@@ -1,0 +1,28 @@
+﻿<Controls:MetroWindow x:Class="Restaurant.WPF.Views.DiscountKeys"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Restaurant.WPF.Views"
+        mc:Ignorable="d"
+        Title="Discount Keys" Width="650" Height="290" ResizeMode="NoResize"  BorderBrush="{DynamicResource MahApps.Brushes.Accent}"
+                    BorderThickness="1" WindowStartupLocation="CenterScreen">
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50" ></RowDefinition>
+            <RowDefinition Height="50" ></RowDefinition>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0" x:Name="MyScrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <WrapPanel HorizontalAlignment="Center" MaxWidth="{Binding ElementName=MyScrollViewer, Path=ViewportWidth}" VerticalAlignment="Stretch" Orientation="Horizontal" Margin="10,10,10,10" Name="discountKeys">
+            </WrapPanel>
+        </ScrollViewer>
+        <DockPanel Grid.Row="1" VerticalAlignment="Bottom" Margin="30,0,30,0">
+            <TextBlock Margin="5,5,5,5" FontSize="20">Comments:</TextBlock>
+            <TextBox Name="commentBox" Margin="5,5,5,5" Padding="5,5,5,5" TextWrapping="Wrap"></TextBox>
+        </DockPanel>
+        <Button Grid.Row="2" Padding="20,5,20,5" Width="100" Margin="5,5,5,5" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="Exit">Exit</Button>
+
+    </Grid>
+</Controls:MetroWindow>

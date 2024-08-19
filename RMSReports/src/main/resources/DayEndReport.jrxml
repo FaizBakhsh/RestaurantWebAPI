@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
+<jasperReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="EndRpt" pageWidth="223" pageHeight="842" columnWidth="183" leftMargin="20" rightMargin="20"
+              topMargin="20" bottomMargin="20" uuid="d7f5e099-abb2-4c46-90ae-636964d0bcc6">
+    <parameter name="PrintingDate" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="Time" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="Shift" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="Day" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="Terminal" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="TotalNetSales" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="CashNet" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="CardNet" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="CashGST" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="CardGST" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="CashDiscount" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="CardDiscount" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="TotalGross" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="SvcChrgs" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="Comp" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="Void" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="Refund" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="TotalCashIn" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="Banks" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="Receivables" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="CalCash" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="CashIn" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="Float" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="DeclCash" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="Expenses" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="Over/Short" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="DIO" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="DOrders" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="DAPO" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="DGuests" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="DAPG" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="TAO" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="DeliveryO" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="TotalGSTSales" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="TotalDiscSales" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="User" class="java.lang.String" isForPrompting="false"/>
+    <parameter name="bankReport" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="bankRptParams" class="java.util.Map"/>
+    <parameter name="sourceReport" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="sourceRptParams" class="java.util.Map"/>
+    <parameter name="receivableReport" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="receivableRptParams" class="java.util.Map"/>
+    <parameter name="groupReport" class="net.sf.jasperreports.engine.JasperReport"/>
+    <parameter name="groupRptParams" class="java.util.Map"/>
+    <background>
+        <band/>
+    </background>
+    <title>
+        <band height="660" splitType="Stretch">
+            <rectangle>
+                <reportElement x="0" y="0" width="180" height="11" uuid="8439f34a-6465-4804-b6a1-860e0eafe336"/>
+            </rectangle>
+            <rectangle>
+                <reportElement x="0" y="11" width="90" height="11" uuid="9fb80c48-cdba-4fef-9b1d-e4ca537081be"/>
+            </rectangle>
+            <rectangle>
+                <reportElement x="90" y="11" width="90" height="11" uuid="8eff1ebf-38a6-42e7-9b3f-066f699295c7"/>
+            </rectangle>
+            <textField>
+                <reportElement x="0" y="11" width="90" height="11" uuid="93df676b-2bfe-4beb-a9e8-5a91550733ea"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Printing Date & Time"]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="90" y="11" width="50" height="11" uuid="e5668ab2-c11d-4df2-ad4f-517d80b38dc9"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{PrintingDate}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="140" y="11" width="40" height="11" uuid="65c3a8cf-f8a6-48c3-8cd5-ecc03eedc906"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{Time}]]></textFieldExpression>
+            </textField>
+            <rectangle>
+                <reportElement x="0" y="22" width="180" height="18" uuid="3d6522ae-626d-4a8c-a234-4cf5b16a7656"/>
+            </rectangle>
+            <textField>
+                <reportElement x="0" y="22" width="180" height="18" uuid="4d9a810c-d3dd-4568-a619-5767fe2e6e24"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="11" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Cash Drawer Checkout"]]></textFieldExpression>
+            </textField>
+            <rectangle>
+                <reportElement x="0" y="40" width="180" height="22" uuid="7c0f3e4a-5a50-44ee-9729-ab057ffbee26"/>
+            </rectangle>
+            <textField>
+                <reportElement x="0" y="40" width="40" height="22" uuid="26d88c4c-b1e1-40c0-a9c5-2dcdc19a6721"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" User"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="90" y="40" width="40" height="11" uuid="7007095b-2602-41fd-a0d5-036ec33a7b99"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" Day"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="90" y="51" width="40" height="11" uuid="b6e56a8c-66e6-46e1-94a2-8b929d9270a5"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Left" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" Terminal"]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="130" y="40" width="50" height="11" uuid="816255aa-e404-4370-b4fd-e4b113385874"/>
+                <box leftPadding="1" rightPadding="1"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{Day}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="130" y="51" width="50" height="11" uuid="a51377c4-c248-4d28-9eed-63ad6ac8dd7d"/>
+                <box leftPadding="1" rightPadding="1"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{Terminal}]]></textFieldExpression>
+            </textField>
+            <rectangle>
+                <reportElement x="0" y="62" width="180" height="11" uuid="5e0369d4-1cef-4651-8e8d-15ef3cc7915c"/>
+            </rectangle>
+            <textField>
+                <reportElement x="0" y="62" width="180" height="11" uuid="976c7593-2d1d-44cc-9a9c-c65ccd35b444"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Net Sales"]]></textFieldExpression>
+            </textField>
+            <rectangle>
+                <reportElement x="0" y="73" width="180" height="11" uuid="81dd0b60-c887-4bfe-9508-67590e7fe87b"/>
+            </rectangle>
+            <rectangle>
+                <reportElement x="0" y="84" width="180" height="22" uuid="a09c843a-2965-4998-a1f8-d511f949888a"/>
+            </rectangle>
+            <textField>
+                <reportElement x="0" y="73" width="60" height="11" uuid="c91784c9-e171-4a14-904c-c674ecf10a56"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" Total Net Sales"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="84" width="90" height="11" uuid="0679835f-680a-49b8-80ab-4bedcf9f24ba"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Cash Net"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="95" width="90" height="11" uuid="f94f01c1-ea91-47cd-91a2-cdba37cdee7c"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Card Net"]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="90" y="73" width="90" height="11" uuid="a1e120d0-a0d9-480d-888f-a3291f36119b"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{TotalNetSales}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="90" y="84" width="90" height="11" uuid="a010584a-4d4d-48da-bca5-20666c13615b"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{CashNet}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="90" y="95" width="90" height="11" uuid="68da518b-25e0-46b0-9f5f-dbc4fa3c53b1"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{CardNet}]]></textFieldExpression>
+            </textField>
+            <rectangle>
+                <reportElement x="0" y="106" width="180" height="11" uuid="d011c3a1-fb38-4060-8e42-2aee6c503912"/>
+            </rectangle>
+            <rectangle>
+                <reportElement x="0" y="117" width="180" height="22" uuid="0dcd5d9e-b1f2-4155-9d38-820086c98b1a"/>
+            </rectangle>
+            <textField>
+                <reportElement x="0" y="106" width="60" height="11" uuid="ba758547-8f97-4202-86cc-312584799e44"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["GST"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="117" width="90" height="11" uuid="f34ee8bb-3721-4748-947b-b6efb6a5f82d"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Cash GST"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="128" width="90" height="11" uuid="ce398348-2e4c-4e95-ba65-eadecacc5825"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Card GST"]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="90" y="117" width="90" height="11" uuid="4527c1ff-fce0-407a-b543-9d9cb841c030"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{CashGST}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="90" y="128" width="90" height="11" uuid="da574752-e2b8-4d88-af5c-8e558712bbb9"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{CardGST}]]></textFieldExpression>
+            </textField>
+            <rectangle>
+                <reportElement x="0" y="139" width="180" height="11" uuid="982b8d54-4ee8-4920-beb4-606a4ed78701"/>
+            </rectangle>
+            <rectangle>
+                <reportElement x="0" y="150" width="180" height="22" uuid="9f52b05c-b9dc-445d-81dd-d0f3f8d972f7"/>
+            </rectangle>
+            <textField>
+                <reportElement x="0" y="139" width="60" height="11" uuid="0f07ffb9-5045-49bd-a4ae-c7e46f3dc373"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" Discount"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="150" width="90" height="11" uuid="17db9913-c574-47a7-84e8-68a7875971a9"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Cash Discount"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="161" width="90" height="11" uuid="f73b0175-3c6f-43f4-ba01-4b269b0cd4c2"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Card Discount"]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="90" y="150" width="90" height="11" uuid="8fac647a-580b-4ae4-9733-37f2331304c1"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{CashDiscount}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="90" y="161" width="90" height="11" uuid="4475f9f5-f1da-47c5-9c56-88eeb37565ad"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{CardDiscount}]]></textFieldExpression>
+            </textField>
+            <rectangle>
+                <reportElement x="0" y="172" width="180" height="11" uuid="1ec5b8a4-be18-4c8e-bf7c-acc795a0a745"/>
+            </rectangle>
+            <textField>
+                <reportElement x="0" y="172" width="90" height="11" uuid="1b623dc1-df0c-442f-88ae-c086c2653593"/>
+                <textElement verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" Total Gross"]]></textFieldExpression>
+            </textField>
+            <rectangle>
+                <reportElement x="0" y="183" width="180" height="44" uuid="0b064baf-bfb2-4b88-bf61-34f30bcc17af"/>
+            </rectangle>
+            <textField>
+                <reportElement x="0" y="183" width="90" height="11" uuid="06800c9c-304c-473f-86f5-102c3d97aba0"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Service Charges"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="194" width="90" height="11" uuid="024499fa-2db0-436e-b273-09d7f2a8080e"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Complimentary"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="205" width="90" height="11" uuid="b4f7f80a-65d3-4135-8b68-5975061e866f"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Void"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="216" width="90" height="11" uuid="d9bcd2ac-3b53-4cf1-853b-d5cbebc55e25"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Refund"]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="90" y="172" width="90" height="11" uuid="9914e911-3f38-460c-bed3-02c1d57f085f"/>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{TotalGross}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="90" y="183" width="90" height="11" uuid="ee70a0d7-dde3-48b3-857a-a726309acec6"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{SvcChrgs}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="90" y="194" width="90" height="11" uuid="13062a36-9e28-413e-8b2c-bae0d0f32e11"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{Comp}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="90" y="205" width="90" height="11" uuid="fa0baa4c-7d61-4699-9a0a-eefc49756c83"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{Void}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="90" y="216" width="90" height="11" uuid="b119fdc2-e9c5-4a64-b1b6-23e9f7943c4b"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{Refund}]]></textFieldExpression>
+            </textField>
+            <rectangle>
+                <reportElement x="0" y="227" width="180" height="11" uuid="8e8a74c5-84ee-4258-b280-319c86560c86"/>
+            </rectangle>
+            <textField>
+                <reportElement x="0" y="227" width="180" height="11" uuid="b481f2da-69ef-4cf0-90d1-4ceec3300d78"/>
+                <textElement textAlignment="Center">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Sales Break Up"]]></textFieldExpression>
+            </textField>
+            <rectangle>
+                <reportElement x="0" y="249" width="180" height="11" uuid="43a77d2f-d8c7-42a6-a53b-036dbb714e07"/>
+            </rectangle>
+            <textField>
+                <reportElement x="0" y="249" width="90" height="11" uuid="561eff56-f168-464e-9f63-aad1cc445cc5"/>
+                <textElement>
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" Total Banks"]]></textFieldExpression>
+            </textField>
+            <rectangle>
+                <reportElement x="0" y="238" width="180" height="11" uuid="b5f35bc2-6d75-46fd-a7e6-ca7e2a294224"/>
+            </rectangle>
+            <textField>
+                <reportElement x="0" y="238" width="90" height="11" uuid="b061eab0-e6a9-47bb-8184-1b3cae12142d"/>
+                <textElement>
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" Total Cash In"]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="90" y="238" width="90" height="11" uuid="1ecbc690-bd5b-4adc-9124-1f73c969d6fc"/>
+                <textElement textAlignment="Right">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{TotalCashIn}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="90" y="249" width="90" height="11" uuid="87ac3bf8-c599-4da2-97de-a02aa3d76c54"/>
+                <textElement textAlignment="Right">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{Banks}]]></textFieldExpression>
+            </textField>
+            <subreport>
+                <reportElement positionType="Float" x="0" y="260" width="180" height="9"
+                               uuid="0acf8d3f-5958-45c6-bd43-aac5ea34c7b4"/>
+                <parametersMapExpression><![CDATA[$P{bankRptParams}]]></parametersMapExpression>
+                <dataSourceExpression><![CDATA[new JREmptyDataSource()]]></dataSourceExpression>
+                <subreportExpression><![CDATA[$P{bankReport}]]></subreportExpression>
+            </subreport>
+            <subreport>
+                <reportElement positionType="Float" x="0" y="280" width="180" height="10"
+                               uuid="43ca7e31-27ee-433a-a33b-62d50000b653"/>
+                <parametersMapExpression><![CDATA[$P{receivableRptParams}]]></parametersMapExpression>
+                <dataSourceExpression><![CDATA[new JREmptyDataSource()]]></dataSourceExpression>
+                <subreportExpression><![CDATA[$P{receivableReport}]]></subreportExpression>
+            </subreport>
+            <rectangle>
+                <reportElement positionType="Float" x="0" y="290" width="180" height="11"
+                               uuid="ebab5405-9df9-4bd5-9a29-590fdde47b3f"/>
+            </rectangle>
+            <textField>
+                <reportElement positionType="Float" x="0" y="290" width="180" height="11"
+                               uuid="cae18b03-46a1-4a30-8b55-119f096b58e2"/>
+                <textElement textAlignment="Center">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Cashier Audit"]]></textFieldExpression>
+            </textField>
+            <rectangle>
+                <reportElement positionType="Float" x="0" y="311" width="180" height="22"
+                               uuid="68a8ceed-4089-4052-9d81-f6dece37d8f4"/>
+            </rectangle>
+            <rectangle>
+                <reportElement positionType="Float" x="0" y="300" width="180" height="11"
+                               uuid="ba4c66ff-0c56-4172-be57-bd87acbfea29"/>
+            </rectangle>
+            <textField>
+                <reportElement positionType="Float" x="0" y="300" width="90" height="11"
+                               uuid="0b72620d-74df-4647-9a05-2ed539c07608"/>
+                <textElement>
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" Calculated Cash"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement positionType="Float" x="0" y="311" width="90" height="11"
+                               uuid="2da69517-8f46-408e-9d54-a67bdadbe865"/>
+                <textElement textAlignment="Center">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["CashIn"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement positionType="Float" x="0" y="322" width="90" height="11"
+                               uuid="2ca6a675-c62d-4aa1-a801-e614ed68ab7a"/>
+                <textElement textAlignment="Center">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Float"]]></textFieldExpression>
+            </textField>
+            <rectangle>
+                <reportElement positionType="Float" x="0" y="333" width="180" height="11"
+                               uuid="f6bc9cae-7b3f-4bd6-a688-c0a6a92d378d"/>
+            </rectangle>
+            <rectangle>
+                <reportElement positionType="Float" x="0" y="344" width="180" height="11"
+                               uuid="5645a083-e737-4f29-bbd4-1f07d048f14f"/>
+            </rectangle>
+            <rectangle>
+                <reportElement positionType="Float" x="0" y="355" width="180" height="11"
+                               uuid="fee52a9a-d8a4-462f-a99c-94a18f90a7b8"/>
+            </rectangle>
+            <textField>
+                <reportElement positionType="Float" x="0" y="333" width="90" height="11"
+                               uuid="5cdc1eb4-013b-44fb-81b4-0e30764a42d7"/>
+                <textElement>
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" Declared Cash"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement positionType="Float" x="0" y="344" width="90" height="11"
+                               uuid="25e5901f-dc78-4d5c-85d2-90daa845923c"/>
+                <textElement>
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" Expenses"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement positionType="Float" x="0" y="355" width="90" height="11"
+                               uuid="bedc9047-761f-4266-ab3a-195eb1cbb7cd"/>
+                <textElement>
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" Over / Short"]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement positionType="Float" x="90" y="300" width="90" height="11"
+                               uuid="e1758019-7aab-4835-92ba-0e94377e0059"/>
+                <textElement textAlignment="Right">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{CalCash}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement positionType="Float" x="90" y="311" width="90" height="11"
+                               uuid="8f8b3edd-a36b-49b6-b58c-cd00cdf405dd"/>
+                <textElement textAlignment="Center">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{CashIn}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement positionType="Float" x="90" y="322" width="90" height="11"
+                               uuid="0b01033b-21d0-42da-9e8f-18c88540e446"/>
+                <textElement textAlignment="Center">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{Float}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement positionType="Float" x="90" y="333" width="90" height="11"
+                               uuid="230a7084-bb8e-4c50-9d00-8df43ed3e45a"/>
+                <textElement textAlignment="Right">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{DeclCash}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement positionType="Float" x="90" y="344" width="90" height="11"
+                               uuid="06360d7c-d040-4c21-af35-7b0bc13d64eb"/>
+                <textElement textAlignment="Right">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{Expenses}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement positionType="Float" x="90" y="355" width="90" height="11"
+                               uuid="69dbf1d1-0599-4a5d-aaef-0f2766bb5369"/>
+                <textElement textAlignment="Right">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{Over/Short}]]></textFieldExpression>
+            </textField>
+            <rectangle>
+                <reportElement positionType="Float" x="0" y="366" width="180" height="11"
+                               uuid="cffa41cb-2198-409d-84f5-0b4e25574a85"/>
+            </rectangle>
+            <textField>
+                <reportElement positionType="Float" x="0" y="366" width="180" height="11"
+                               uuid="3930beec-c670-4a11-abe0-6a2ed1c39ec7"/>
+                <textElement textAlignment="Center">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Sales Audit"]]></textFieldExpression>
+            </textField>
+            <rectangle>
+                <reportElement positionType="Float" x="0" y="377" width="180" height="11"
+                               uuid="5de4311f-7724-44d7-aeb0-36dea638b1d1"/>
+            </rectangle>
+            <textField>
+                <reportElement positionType="Float" x="0" y="377" width="90" height="11"
+                               uuid="36cad86e-b61e-4537-a40d-aebc89ddc98b"/>
+                <textElement>
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" Dine In"]]></textFieldExpression>
+            </textField>
+            <rectangle>
+                <reportElement positionType="Float" x="0" y="388" width="180" height="44"
+                               uuid="17c920da-8185-4c83-a6d6-4a827ea6d7ee"/>
+            </rectangle>
+            <textField>
+                <reportElement positionType="Float" x="0" y="388" width="90" height="11"
+                               uuid="e082f4ba-fd1e-4afd-b992-810a38566d41"/>
+                <textElement textAlignment="Center">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Orders"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement positionType="Float" x="0" y="399" width="90" height="11"
+                               uuid="56098f93-30bc-436d-ac52-f9e65d8b9540"/>
+                <textElement textAlignment="Center">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Avg Per Order"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement positionType="Float" x="0" y="410" width="90" height="11"
+                               uuid="46b0547a-64fa-4ef4-882f-be15ea6985f8"/>
+                <textElement textAlignment="Center">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Guests"]]></textFieldExpression>
+            </textField>
+            <rectangle>
+                <reportElement positionType="Float" x="0" y="432" width="180" height="11"
+                               uuid="bbb25400-53a4-41fc-aed7-de4429cea0e6"/>
+            </rectangle>
+            <rectangle>
+                <reportElement positionType="Float" x="0" y="443" width="180" height="11"
+                               uuid="9f05d55f-0bde-4e18-bb32-e16d795050a7"/>
+            </rectangle>
+            <textField>
+                <reportElement positionType="Float" x="0" y="421" width="90" height="11"
+                               uuid="b9d262a6-cc46-47b0-9d6c-d5fa1c0b53d5"/>
+                <textElement textAlignment="Center">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Avg Per Guest"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement positionType="Float" x="0" y="432" width="90" height="11"
+                               uuid="f696f11a-6733-4575-9587-432781ce4ada"/>
+                <textElement>
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" Take Away"]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement positionType="Float" x="0" y="443" width="90" height="11"
+                               uuid="8919d845-0325-4139-8280-6702c28b56a6"/>
+                <textElement>
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" Delivery"]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement positionType="Float" x="90" y="443" width="90" height="11"
+                               uuid="d01a9b42-9912-4cee-b235-d4aa51239e52"/>
+                <textElement textAlignment="Right">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{DeliveryO}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement positionType="Float" x="90" y="432" width="90" height="11"
+                               uuid="25c281d9-5551-4e53-acf1-c696392adbb7"/>
+                <textElement textAlignment="Right">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{TAO}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement positionType="Float" x="90" y="421" width="90" height="11"
+                               uuid="a841dafb-b4ac-49b0-8a52-9b7b6ddbeeca"/>
+                <textElement textAlignment="Center">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{DAPG}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement positionType="Float" x="90" y="410" width="90" height="11"
+                               uuid="ea832faa-71c8-4bdd-b2d9-8f57e80fd10c"/>
+                <textElement textAlignment="Center">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{DGuests}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement positionType="Float" x="90" y="399" width="90" height="11"
+                               uuid="2fd9eac5-2c49-47ec-9d2e-8da465ea3b8a"/>
+                <textElement textAlignment="Center">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{DAPO}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement positionType="Float" x="90" y="388" width="90" height="11"
+                               uuid="94a948f8-e41d-4fdc-826b-f4e691febd5f"/>
+                <textElement textAlignment="Center">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{DOrders}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement positionType="Float" x="90" y="377" width="90" height="11"
+                               uuid="a9f41b09-6b39-401d-b050-65ec37d0663a"/>
+                <textElement textAlignment="Right">
+                    <font size="8" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{DIO}]]></textFieldExpression>
+            </textField>
+            <subreport>
+                <reportElement positionType="Float" x="0" y="454" width="180" height="16"
+                               uuid="5fc2d4aa-7546-49f0-ba14-b2de9e9c09f8"/>
+                <parametersMapExpression><![CDATA[$P{sourceRptParams}]]></parametersMapExpression>
+                <dataSourceExpression><![CDATA[new JREmptyDataSource()]]></dataSourceExpression>
+                <subreportExpression><![CDATA[$P{sourceReport}]]></subreportExpression>
+            </subreport>
+            <textField isBlankWhenNull="true">
+                <reportElement x="90" y="106" width="90" height="11" uuid="5f11304f-941a-43bc-bc62-49bf983e7466"/>
+                <textElement textAlignment="Right">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{TotalGSTSales}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="90" y="139" width="90" height="11" uuid="d9916575-40b9-40af-9821-e9a9288f0626"/>
+                <textElement textAlignment="Right">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{TotalDiscSales}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="40" y="40" width="50" height="22" uuid="4f0c2bbe-bb35-4240-b336-242d4b2a7924"/>
+                <box>
+                    <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                    <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+                    <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{User}]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement x="0" y="0" width="180" height="11" uuid="870bd8da-1f8f-4ea0-b0a6-4acec38df775"/>
+                <textElement textAlignment="Center">
+                    <font size="8"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{User}]]></textFieldExpression>
+            </textField>
+            <rectangle>
+                <reportElement positionType="Float" x="0" y="269" width="180" height="11"
+                               uuid="3101afc9-67fd-4735-a2f1-72ced15dc1f3"/>
+            </rectangle>
+            <textField>
+                <reportElement positionType="Float" x="0" y="269" width="90" height="11"
+                               uuid="e181c364-9a96-4316-8a30-65d2e3ef98dc"/>
+                <textElement textAlignment="Left">
+                    <font size="8" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[" Receivables"]]></textFieldExpression>
+            </textField>
+            <textField isBlankWhenNull="true">
+                <reportElement positionType="Float" x="90" y="269" width="90" height="11"
+                               uuid="d29e38a2-4944-4637-ab06-d95dea915665"/>
+                <textElement textAlignment="Right">
+                    <font size="8" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$P{Receivables}]]></textFieldExpression>
+            </textField>
+        </band>
+    </title>
+    <pageHeader>
+        <band/>
+    </pageHeader>
+    <columnHeader>
+        <band/>
+    </columnHeader>
+    <detail>
+        <band/>
+    </detail>
+    <columnFooter>
+        <band/>
+    </columnFooter>
+    <pageFooter>
+        <band/>
+    </pageFooter>
+    <summary>
+        <band height="25"/>
+    </summary>
+</jasperReport>

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "fTso7AJcIfQbL9FWpCc6oRrcQvj1zGF2P8MYJfUNqlh/8far5Sdw1b42jgdHaRcziF0Y6fQ7NOULQWDVp1PAmw==",
+  "success": true,
+  "projectFilePath": "D:\\QST\\Projects\\Git\\Restaurant\\Back-End\\QST.Sync\\QST.Sync.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\AU TRADERS\\.nuget\\packages\\microsoft.syncframework\\2.1.0.2\\microsoft.syncframework.2.1.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}

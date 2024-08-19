@@ -1,0 +1,72 @@
+<div class="container-fluid page">
+    <div class="d-flex page_box p-3 mt-2">Company Info List</div>
+    <div class="page_content shadow p-3 position-relative">
+        <div class="pull-right" style="text-align:end; margin-top: 20px;" *ngIf="CompanyInfo.length==0">
+            <button [ngClass]="{disabledBtn:isReadOnly}" class="bttn"
+                [routerLink]="['/restaurant/comProfile/mngCInfo']">Add
+                New</button>
+        </div>
+        <c-card style="padding: 10px; margin-top: 30px;" class="mat-elevation-z8">
+            <c-card-body style="padding: 10px;background-color: rgb(2, 42, 75);margin: 5px;border-radius: 10px;">
+                <div class="example-table-container">
+                    <section class="example-container mat-elevation-z8" tabindex="0" style="border-radius: 5px;">
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                            <ng-container matColumnDef="Id">
+                                <th mat-header-cell *matHeaderCellDef> Sr No </th>
+                                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Name">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;"> Name </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;"> {{element.name}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="PhoneNo">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;">Phone No</div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;"> {{element.phoneNo}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Address">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;"> Address </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.address}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="BillNote">
+                                <th mat-header-cell *matHeaderCellDef>
+                                    <div style="min-width: 150px;"> Bill Note </div>
+                                </th>
+                                <td mat-cell *matCellDef="let element">
+                                    <div style="min-width: 150px;">{{element.billNote}}</div>
+                                </td>
+                            </ng-container>
+                            <ng-container matColumnDef="Action" stickyEnd="true">
+                                <th mat-header-cell *matHeaderCellDef style="text-align: center;width: 100px;">
+                                    <div style="font-size: 14px;">Action</div>
+                                </th>
+                                <td mat-cell *matCellDef="let cust" style="text-align: center;width: 100px;">
+                                    <div [ngClass]="{disabledDiv:isReadOnly}">
+                                        <button mat-icon-button mat-sm-button color="primary"
+                                            (click)="EditCompanyInfo(cust)" matTooltip="Edit"
+                                            style="cursor: pointer;"><mat-icon>edit</mat-icon></button>
+                                        <!-- <button mat-icon-button mat-sm-button color="warn" matTooltip="Delete"
+                                            (click)="DeleteCompanyInfo(cust.id)"><mat-icon>delete</mat-icon></button> -->
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                    </section>
+                </div>
+            </c-card-body>
+        </c-card>
+    </div>
+</div>

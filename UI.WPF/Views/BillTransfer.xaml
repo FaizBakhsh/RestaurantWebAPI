@@ -1,0 +1,59 @@
+﻿<Controls:MetroWindow x:Class="Restaurant.WPF.Views.BillTransfer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Restaurant.WPF.Views"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+        Title="Bill Transfer" MinHeight="500" MinWidth="1000" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Border  Background="{DynamicResource MahApps.Brushes.Highlight}" HorizontalAlignment="Left" VerticalAlignment="Stretch"
+                      Margin="25,25,25,25" >
+            <DataGrid Foreground="Black"
+                                BorderBrush="{DynamicResource MahApps.Brushes.Accent4}"
+                                CanUserDeleteRows="True" CanUserAddRows="True"
+                               AutoGenerateColumns="False"  BorderThickness="1" Name="orderList"
+                              VerticalAlignment="Stretch" Padding="2,10,2,2"  
+                            CanUserResizeColumns="True" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Hidden"  
+                              CanUserSortColumns="True" Margin="10,10,10,10" >
+                <DataGrid.Columns   >
+                    <DataGridTemplateColumn Header="Bill_No"  Width="150">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <Label  Background="White" Foreground="Black" Content="{Binding Id}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Bill_Title"  Width="150">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <Label  Background="White" Foreground="Black" Content="{Binding BillTitle}"  />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Net Bill"  Width="150">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <Label  Background="White" Foreground="Black" Content="{Binding NetTotal}"  />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Bill Type"  Width="150">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <Label  Background="White" Foreground="Black" Content="{Binding PaymentMethod}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        <WrapPanel VerticalAlignment="Stretch" HorizontalAlignment="Right" Orientation="Vertical" Margin="25,35,25,25">
+            <TextBlock FontSize="22" >Transfer Selected Bill To</TextBlock>
+            <Button Padding="30,10,30,10" FontSize="18" Margin="0,40,0,0" Click="Update" Name="Cash_btn">Cash</Button>
+            <Button Padding="30,10,30,10" FontSize="18" Margin="0,10,0,0" Click="Update" Name="Card_btn">Visa Card</Button>
+            <Button Padding="30,10,30,10" FontSize="18" Margin="0,120,0,0" Click="Exit">Exit</Button>
+        </WrapPanel>
+    </Grid>
+</Controls:MetroWindow>

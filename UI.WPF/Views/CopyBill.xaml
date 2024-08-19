@@ -1,0 +1,159 @@
+﻿<Controls:MetroWindow x:Class="Restaurant.WPF.Views.CopyBill"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Restaurant.WPF.Views"
+        mc:Ignorable="d"
+         Title="Copy Bill" WindowState="Maximized" MinHeight="300" MinWidth="1000"  Background="{DynamicResource MahApps.Brushes.Highlight}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="500"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <WrapPanel Grid.Row="0" Grid.Column="0"  VerticalAlignment="Center" HorizontalAlignment="Left">
+            <WrapPanel >
+                <TextBlock Margin="45,0,10,0" FontSize="17" VerticalAlignment="Center" Foreground="White"> Bill No</TextBlock>
+                <TextBox Padding="5,7,5,5" Width="200" Height="35" Name="SearchBox"></TextBox>
+            </WrapPanel>
+            <Button Width="70" Height="30" FontSize="17" Margin="10,0,0,0" Background="Snow" Foreground="{DynamicResource MahApps.Brushes.Highlight}" Click="SearchButton_OnClick">Search</Button>
+            <Button Width="70" Height="30" FontSize="17" Margin="5,0,0,0" Click="ViewAll" Background="Snow" Foreground="{DynamicResource MahApps.Brushes.Highlight}">View All</Button>
+        </WrapPanel>
+        <WrapPanel Grid.Row="0" Grid.Column="1"   VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <TextBlock Margin="0,0,10,0" FontSize="22" VerticalAlignment="Center" Foreground="White"> Sale Details</TextBlock>
+            <Button Click="Duplicate" Width="140" Height="30" FontSize="17" Margin="30,0,0,0" Background="Snow" Foreground="{DynamicResource MahApps.Brushes.Highlight}" >Duplicate Bill</Button>
+            <Button Width="70" Height="30"  FontSize="17" Margin="10,0,0,0" Background="Snow" Foreground="{DynamicResource MahApps.Brushes.Highlight}" Click="Exit">Exit</Button>
+        </WrapPanel>
+        <Border  Background="Gainsboro" Grid.Row="1"
+                     Name="DataTable" Margin="10,0,0,10" >
+            <DataGrid Foreground="Black"  HorizontalAlignment="Stretch"
+                                BorderBrush="{DynamicResource MahApps.Brushes.Accent4}"
+                                CanUserDeleteRows="True"
+                             CanUserAddRows="True" 
+                              x:Name="OrderList" AutoGenerateColumns="False"  BorderThickness="1" 
+                              VerticalAlignment="Stretch" Padding="10,10,10,10"  
+                            CanUserResizeColumns="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"  
+                              CanUserSortColumns="True" Margin="10,10,10,10" >
+                <DataGrid.ItemContainerStyle>
+                    <Style TargetType="DataGridRow">
+                        <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick">
+                        </EventSetter>
+                    </Style>
+                </DataGrid.ItemContainerStyle>
+                <DataGrid.Columns   >
+                    <DataGridTemplateColumn Header="Bill No"  Width="50">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <Label  Background="White" Foreground="Black" Content="{Binding Id}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Created On"  Width="150">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <Label  Background="White" Foreground="Black" Content="{Binding CreatedOn}"  />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Net Bill"  Width="150">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <Label  Background="White" Foreground="Black" Content="{Binding NetTotal}"  />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Order Type"  Width="120">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <Label  Background="White" Foreground="Black" Content="{Binding OrderType}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Payment Method"  Width="120">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <Label  Background="White" Foreground="Black" Content="{Binding PaymentMethod}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="BillTitle "  Width="120">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <Label  Background="White" Foreground="Black" Content="{Binding BillTitle}"  />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Discount "  Width="90">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <Label  Background="White" Foreground="Black" Content="{Binding Discount}"  />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        <Border  Background="Gainsboro" Grid.Row="1" Grid.Column="1" Margin="10,0,10,10" >
+            <DataGrid Foreground="Black" 
+                                BorderBrush="{DynamicResource MahApps.Brushes.Accent4}"
+                                CanUserDeleteRows="True"
+                             CanUserAddRows="True" 
+                              x:Name="LineTable" AutoGenerateColumns="False"  BorderThickness="1" 
+                              VerticalAlignment="Stretch" Padding="10,10,10,10" HorizontalAlignment="Stretch" 
+                            CanUserResizeColumns="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"  
+                              CanUserSortColumns="True" Margin="10,10,10,10" >
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsRMod}" Value="true">
+                                <Setter Property="Background" Value="RosyBrown" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsDealItem}" Value="true">
+                                <Setter Property="FontWeight" Value="Bold" />
+                                <Setter Property="Background" Value="RosyBrown" />
+                            </DataTrigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="LightBlue" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns   >
+                    <DataGridTemplateColumn Header="Item"  Width="150">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <Label  Background="White" Foreground="Black" Content="{Binding ItemName}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Quantity"  Width="100">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <Label  Background="White" Foreground="Black" Content="{Binding QTY}"  />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Price"  Width="100">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <Label  Background="White" Foreground="Black" Content="{Binding Price}"  />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="LineTotal"  Width="100">
+                        <DataGridTemplateColumn.CellTemplate >
+                            <DataTemplate >
+                                <Label  Background="White" Foreground="Black" Content="{Binding LineTotal}"  />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+    </Grid>
+</Controls:MetroWindow>
