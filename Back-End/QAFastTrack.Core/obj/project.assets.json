@@ -3943,11 +3943,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\QST\\Projects\\Git\\Restaurant\\Back-End\\QAFastTrack.Core\\Restaurant.Core.csproj",
+      "projectUniqueName": "D:\\QST\\Projects\\Git\\Common\\Back-End\\QAFastTrack.Core\\Restaurant.Core.csproj",
       "projectName": "Restaurant.Core",
-      "projectPath": "D:\\QST\\Projects\\Git\\Restaurant\\Back-End\\QAFastTrack.Core\\Restaurant.Core.csproj",
+      "projectPath": "D:\\QST\\Projects\\Git\\Common\\Back-End\\QAFastTrack.Core\\Restaurant.Core.csproj",
       "packagesPath": "C:\\Users\\AU TRADERS\\.nuget\\packages\\",
-      "outputPath": "D:\\QST\\Projects\\Git\\Restaurant\\Back-End\\QAFastTrack.Core\\obj\\",
+      "outputPath": "D:\\QST\\Projects\\Git\\Common\\Back-End\\QAFastTrack.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

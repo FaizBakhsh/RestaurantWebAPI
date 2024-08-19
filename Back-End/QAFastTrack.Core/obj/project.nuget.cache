@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "6Cje/BHDNrv1sX6dBCO9kD/ifEeDHeviWiTZTUoaEDrYkhzJJRbcNN8rTUhuq+vQW6wika9nbHYrXd8hcwqCDQ==",
+  "dgSpecHash": "0SqRmb1slHVTU0cpIdMF5ECGMyX31fTB7ciCEDjMxpm+SjWGIUHdkFwIWKp+1rPgRP6tP1+hRY201V2bi8ghVg==",
   "success": true,
-  "projectFilePath": "D:\\QST\\Projects\\Git\\Restaurant\\Back-End\\QAFastTrack.Core\\Restaurant.Core.csproj",
+  "projectFilePath": "D:\\QST\\Projects\\Git\\Common\\Back-End\\QAFastTrack.Core\\Restaurant.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\AU TRADERS\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\AU TRADERS\\.nuget\\packages\\bouncycastle.netcore\\1.8.5\\bouncycastle.netcore.1.8.5.nupkg.sha512",
